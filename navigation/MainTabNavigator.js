@@ -6,9 +6,15 @@ import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import Page1 from '../screens/Page1';
+import Page2 from '../screens/Page2';
+import Page3 from '../screens/Page3';
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
+  Page1: Page1,
+  Page2: Page2,
+  Page3: Page3,
 });
 
 HomeStack.navigationOptions = {
