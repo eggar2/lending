@@ -7,13 +7,13 @@ import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import LoginScreen from '../screens/LoginScreen';
-import Page2 from '../screens/Page2';
+import RegisterScreen from '../screens/RegisterScreen';
 import Page3 from '../screens/Page3';
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
   Login: LoginScreen,
-  Page2: Page2,
+  Register: RegisterScreen,
   Page3: Page3,
 });
 
