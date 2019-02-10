@@ -7,16 +7,17 @@ import HomeScreen from '../screens/HomeScreen';
 import SavedScreen from '../screens/SavedScreen';
 import LoansScreen from '../screens/LoansScreen';
 import LoginScreen from '../screens/LoginScreen';
+import InboxScreen from '../screens/InboxScreen';
 import RegisterScreen from '../screens/RegisterScreen';
-import Page3 from '../screens/Page3';
+import ProfileScreen from '../screens/ProfileScreen';
+import IdScreen from '../screens/IdScreen';
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
   Login: LoginScreen,
   Register: RegisterScreen,
-  Page3: Page3,
+  Identification: IdScreen,
 });
-
 
 // EXPLORE
 HomeStack.navigationOptions = {
