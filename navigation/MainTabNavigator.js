@@ -4,8 +4,8 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
-import SettingsScreen from '../screens/SettingsScreen';
+import SavedScreen from '../screens/SavedScreen';
+import LoansScreen from '../screens/LoansScreen';
 import LoginScreen from '../screens/LoginScreen';
 import RegisterScreen from '../screens/RegisterScreen';
 import VerificationScreen from '../screens/VerificationScreen';
@@ -23,50 +23,90 @@ const HomeStack = createStackNavigator({
   Page3: Page3,
 });
 
+
+// EXPLORE
 HomeStack.navigationOptions = {
-  tabBarLabel: 'Home Test',
+  tabBarLabel: 'EXPLORE',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
       name={
         Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
+          ? `ios-search${focused ? '' : '-outline'}`
+          : 'md-search'
       }
     />
   ),
 };
 
-const LinksStack = createStackNavigator({
-  Links: LinksScreen,
+// SAVED
+const SavedStack = createStackNavigator({
+  Saved: SavedScreen,
 });
 
-LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
+SavedStack.navigationOptions = {
+  tabBarLabel: 'SAVED',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'}
+      name={
+        Platform.OS === 'ios'
+          ? `ios-heart${focused ? '' : '-outline'}`
+          : 'md-heart'
+      }
     />
   ),
 };
 
-const SettingsStack = createStackNavigator({
-  Settings: SettingsScreen,
+// LOANS
+const LoansStack = createStackNavigator({
+  Loans: LoansScreen,
 });
 
-SettingsStack.navigationOptions = {
-  tabBarLabel: 'Settings',
+LoansStack.navigationOptions = {
+  tabBarLabel: 'LOANS',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}
+      name={Platform.OS === 'ios' ? 'ios-disc' : 'md-disc'}
+    />
+  ),
+};
+
+// INBOX 
+const InboxStack = createStackNavigator({
+  Inbox: InboxScreen,
+});
+
+InboxStack.navigationOptions = {
+  tabBarLabel: 'INBOX',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={Platform.OS === 'ios' ? 'ios-mail' : 'md-mail'}
+    />
+  ),
+};
+
+// PROFILE 
+const ProfileStack = createStackNavigator({
+  Profile: ProfileScreen,
+});
+
+ProfileStack.navigationOptions = {
+  tabBarLabel: 'PROFILE',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={Platform.OS === 'ios' ? 'ios-contact' : 'md-contact'}
     />
   ),
 };
 
 export default createBottomTabNavigator({
   HomeStack,
-  LinksStack,
-  SettingsStack,
+  SavedStack,
+  LoansStack,
+  InboxStack,
+  ProfileStack
 });

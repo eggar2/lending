@@ -4,14 +4,14 @@ import {
     View
 } from 'react-native';
 
-class Page3 extends Component {
+class InboxScreen extends Component {
     render() {
         return (
             <View style={{ padding: 50 }}>
-                <Text>Page 3</Text>
+                <Text>Inbox</Text>
             </View>
         );
     }
 }
 
-export default Page3;
+export default InboxScreen;

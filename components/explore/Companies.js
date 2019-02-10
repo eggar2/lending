@@ -1,0 +1,105 @@
+import React, { Component } from 'react';
+import {
+    ScrollView,
+    StyleSheet,
+    TouchableOpacity,
+    Image,
+    View,
+    Text,
+} from 'react-native';
+import colors from '../../assets/colors';
+import HeartButton from '../buttons/HeartButton';
+import Stars from '../Stars';
+
+export default class Companies extends Component {
+
+    get Companies() {
+        const { companies } = this.props;
+        return companies.map((company, index) => (
+            <TouchableOpacity
+                key={index}
+                style={styles.companyWrapper}
+            >
+                <View>
+                    <View style={styles.addToFavoriteBtn}>
+                        <HeartButton
+                            color={colors.white}
+                            selectedColor={colors.pink}
+                        />
+                    </View>
+                    <Image
+                        style={styles.image}
+                        resizeMode="contain"
+                        source={company.photo}
+                    />
+                    <View style={styles.listingDetail}>
+                        <Text style={styles.listingTitle} numberOfLines={2} >
+                            {company.name}
+                        </Text>
+                        <Text numberOfLines={2}>
+                            Up to Php {company.offer}
+                            {"\n"}
+                            Interest rate {company.interest}
+                        </Text>
+                        <Stars 
+                            votes={company.stars} 
+                            host={company.host} 
+                            reviews={company.reviews}
+                            size={10} 
+                            color={colors.green02} />
+                    </View>
+                </View>
+            </TouchableOpacity>
+        ));
+    }
+
+    render() {
+        return (
+            <View style={styles.companiesWrapper}>
+                {this.Companies}
+            </View>
+        );
+    }
+}
+
+const styles = StyleSheet.create({
+    companiesWrapper: {
+        flex: 1,
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        alignItems: 'flex-start',
+    },
+    companyWrapper: {
+        height: undefined,
+        width: '50%',
+        marginBottom: 20
+    },
+    addToFavoriteBtn: {
+        position: 'absolute',
+        right: 20,
+        top: 7,
+        zIndex: 2,
+    },
+    image: {
+        width: '100%',
+        height: 100,
+        marginBottom: 7,
+    },
+    listingDetail: {
+        paddingHorizontal: 15,
+        paddingBottom: 10
+    },  
+    listingTitle: {
+        fontSize: 16,
+        fontWeight: '700',
+        color: colors.gray04,
+        marginTop: 2,
+    },
+    listingPrice: {
+        color: colors.gray04,
+        marginTop: 4,
+        marginBottom: 2,
+        fontSize: 12,
+        fontWeight: '300',
+    },
+});
