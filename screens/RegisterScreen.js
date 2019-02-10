@@ -38,6 +38,7 @@ export default class RegisterScreen extends React.Component {
                     name='mobile'
                     type='font-awesome'
                     color='#fff'
+                    size={22}
                 />
                 <TextInput
                     style={styles.input}
@@ -50,6 +51,7 @@ export default class RegisterScreen extends React.Component {
                     name='shield'
                     type='font-awesome'
                     color='#fff'
+                    size={18}
                 />
                 <TextInput
                     style={styles.input}
@@ -58,14 +60,13 @@ export default class RegisterScreen extends React.Component {
                     placeholder="Password"
                 />
             </View>
-			<Text style={{color: '#fff'}}>Forgot Password</Text>
 		  </View>
 		  <View style={styles.buttonContainer}>
 		  	<TouchableOpacity
          		style={styles.buttonStyle}
          		onPress={this.signIn}
        		>
-         		<Text style={styles.buttonText}>Sign In</Text>
+         		<Text style={styles.buttonText}>Register</Text>
        		</TouchableOpacity>
 			<View style={styles.regContainer}>
 				<Text style={styles.regText}>Already have an account? </Text>
@@ -114,7 +115,7 @@ const styles = StyleSheet.create({
   },
   loginText: {
 	  color: '#fff',
-	  fontSize: 30,
+	  fontSize: 35,
 	  fontWeight: 'bold',
 	  marginBottom: 15
   },
@@ -125,8 +126,9 @@ const styles = StyleSheet.create({
 	  borderRadius: 10
   },
   buttonText: {
-	color: '#008489',
-	fontSize: 20
+	  color: '#008489',
+    fontSize: 20,
+    fontWeight: 'bold'
   },
   regContainer: {
 	  flex: 1,

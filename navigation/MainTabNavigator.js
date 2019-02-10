@@ -8,12 +8,18 @@ import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import LoginScreen from '../screens/LoginScreen';
 import RegisterScreen from '../screens/RegisterScreen';
+import VerificationScreen from '../screens/VerificationScreen';
+import VerifiedScreen from '../screens/VerifiedScreen';
+import ProfileScreen from '../screens/ProfileScreen';
 import Page3 from '../screens/Page3';
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
   Login: LoginScreen,
   Register: RegisterScreen,
+  Verification: VerificationScreen,
+  Verified: VerifiedScreen,
+  Profile: ProfileScreen,
   Page3: Page3,
 });
 

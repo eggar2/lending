@@ -21,7 +21,6 @@ export default class LoginScreen extends React.Component {
   constructor(props) {
 	super(props);
 	this.state = {
-	  name: "",
 	  email: "",
 	  password: ""
 	}
@@ -38,6 +37,7 @@ export default class LoginScreen extends React.Component {
                     name='mobile'
                     type='font-awesome'
                     color='#fff'
+                    size={22}
                 />
                 <TextInput
                     style={styles.input}
@@ -50,6 +50,7 @@ export default class LoginScreen extends React.Component {
                     name='shield'
                     type='font-awesome'
                     color='#fff'
+                    size={18}
                 />
                 <TextInput
                     style={styles.input}
@@ -114,7 +115,7 @@ const styles = StyleSheet.create({
   },
   loginText: {
 	  color: '#fff',
-	  fontSize: 30,
+	  fontSize: 35,
 	  fontWeight: 'bold',
 	  marginBottom: 15
   },
@@ -125,8 +126,9 @@ const styles = StyleSheet.create({
 	  borderRadius: 10
   },
   buttonText: {
-	color: '#008489',
-	fontSize: 20
+	  color: '#008489',
+    fontSize: 20,
+    fontWeight: 'bold'
   },
   regContainer: {
 	  flex: 1,
