@@ -4,14 +4,14 @@ import {
     View
 } from 'react-native';
 
-class Page3 extends Component {
+class ProfileScreen extends Component {
     render() {
         return (
             <View style={{ padding: 50 }}>
-                <Text>Page 3</Text>
+                <Text>Profile</Text>
             </View>
         );
     }
 }
 
-export default Page3;
+export default ProfileScreen;
