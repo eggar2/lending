@@ -99,7 +99,17 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginHorizontal: 20,
     marginBottom: 20,
-    elevation: 2,
+    ...Platform.select({
+      ios: {
+        shadowColor: '#666',
+        shadowOffset: { height: -3 },
+        shadowOpacity: 0.1,
+        shadowRadius: 3,
+      },
+      android: {
+        elevation: 2,
+      },
+    })
   },
   buttonText: {
     color: '#008489',

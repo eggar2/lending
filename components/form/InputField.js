@@ -125,7 +125,7 @@ export default class InputField extends Component {
 }
 
 InputField.propTypes = {
-  labelText: PropTypes.string.isRequired,
+  labelText: PropTypes.string,
   labelTextSize: PropTypes.number,
   labelColor: PropTypes.string,
   textColor: PropTypes.string,
