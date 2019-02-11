@@ -13,7 +13,6 @@ import ProfileScreen from '../screens/ProfileScreen';
 import IdScreen from '../screens/IdScreen';
 import VerificationScreen from '../screens/VerificationScreen';
 import VerifiedScreen from '../screens/VerifiedScreen';
-import ProfileScreen from '../screens/ProfileScreen';
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
