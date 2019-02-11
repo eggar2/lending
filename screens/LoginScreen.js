@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import { WebBrowser } from 'expo';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { MonoText } from '../components/StyledText';
+import { NavigationActions } from 'react-navigation';
 
 export default class LoginScreen extends React.Component {
   static navigationOptions = {
@@ -25,6 +25,13 @@ export default class LoginScreen extends React.Component {
 	  password: ""
 	}
   }
+
+	navigateToScreen = (route) => () => {
+		const navigateAction = NavigationActions.navigate({
+			routeName: route
+		});
+		this.props.navigation.dispatch(navigateAction);
+	}
 
   render(){
 	return (
@@ -70,7 +77,7 @@ export default class LoginScreen extends React.Component {
        		</TouchableOpacity>
 			<View style={styles.regContainer}>
 				<Text style={styles.regText}>Don't have an account? </Text>
-				<Text style={[styles.regText, styles.regLink]}>Register</Text>
+				<Text style={[styles.regText, styles.regLink]} onPress={this.navigateToScreen('Register')}>Register</Text>
 			</View>
 		  </View>
 		</View>
