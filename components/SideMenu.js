@@ -53,6 +53,11 @@ class SideMenu extends Component {
                                 Profile
                             </Text>
                         </View>
+                        <View style={styles.navSectionStyle}>
+                            <Text style={styles.navItemStyle} onPress={this.navigateToScreen('LendingDetails')}>
+                                Lending Details
+                            </Text>
+                        </View>
                         <View style={styles.navSectionStyle}></View>
                     </View>
                 </ScrollView>
