@@ -12,10 +12,18 @@
   },
   "dependencies": {
     "@expo/samples": "2.1.1",
+    "@expo/vector-icons": "^9.0.0",
     "expo": "^32.0.0",
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
-    "react-navigation": "^3.0.9"
+    "react-native-auto-height-image": "^1.0.5",
+    "react-native-datepicker": "^1.7.2",
+    "react-native-nested-scroll-view": "^8.0.0",
+    "react-native-paper": "^2.11.0",
+    "react-native-progress": "^3.5.0",
+    "react-native-vector-icons": "^6.2.0",
+    "react-navigation": "^3.0.9",
+    "react-number-format": "^4.0.6"
   },
   "devDependencies": {
     "babel-preset-expo": "^5.0.0",
