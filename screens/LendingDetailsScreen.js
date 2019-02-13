@@ -29,48 +29,28 @@ export default class LendingDetailsScreen extends React.Component {
             <TouchableHighlight
                 onPress={() => { navigation.navigate('Home'); }}
                 underlayColor={colors.gray01}
-                style={{marginLeft: 10, paddingHorizontal: 10}}
-            >
+                style={{marginLeft: 10, paddingHorizontal: 10}} >
                 <Icon.Ionicons
                     name={Platform.OS === 'ios' ? 'ios-arrow-round-back' : 'md-arrow-round-back'}
-                    size={26}
-                />
+                    size={26} />
             </TouchableHighlight>
         ),
         headerRight: (
-            <View style={[columns.twoColumnWrapper, 
-                {
-                    width: 70,
-                    marginHorizontal: 0,
-                    marginTop: 0,
-                    marginRight: 20,
-                }]}
-            >
-                <View style={[columns.twoColumnWrapperItem, 
-                    {
-                        paddingRight: 10,
-                    }]}
-                >
+            <View style={[columns.twoColumnWrapper, { width: 70, marginHorizontal: 0, marginTop: 0, marginRight: 20, }]} >
+                <View style={[columns.twoColumnWrapperItem, { paddingRight: 10, }]} >
                     <TouchableHighlight
                         onPress={() => { console.log('share'); }}
-                        underlayColor={colors.gray01}
-                    >
+                        underlayColor={colors.gray01} >
                         <Icon.Ionicons
                             name={Platform.OS === 'ios' ? 'ios-share' : 'md-share'}
-                            size={26}
-                        />
+                            size={26} />
                     </TouchableHighlight>
                 </View>
-                <View style={[columns.twoColumnWrapperItem,
-                    {
-                        alignItems: 'flex-end'
-                    }]}
-                >
+                <View style={[columns.twoColumnWrapperItem, { alignItems: 'flex-end' }]} >
                     <HeartButton
                         color={colors.black}
                         size={26}
-                        selectedColor={colors.pink}
-                    />
+                        selectedColor={colors.pink} />
                 </View>
             </View>
         ),
@@ -363,7 +343,7 @@ const styles = StyleSheet.create({
         paddingTop: 10
     },
     applyNowButton: {
-        backgroundColor: '#FF5A5F',
+        backgroundColor: colors.pink,
         width: '100%',
         padding: 10,
         borderRadius: 5
