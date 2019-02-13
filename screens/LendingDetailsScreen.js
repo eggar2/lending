@@ -25,6 +25,18 @@ import NumberFormat from 'react-number-format';
 export default class LendingDetailsScreen extends React.Component {
 
     static navigationOptions = ({ navigation }) => ({
+        headerLeft: (
+            <TouchableHighlight
+                onPress={() => { navigation.navigate('Home'); }}
+                underlayColor={colors.gray01}
+                style={{marginLeft: 10, paddingHorizontal: 10}}
+            >
+                <Icon.Ionicons
+                    name={Platform.OS === 'ios' ? 'ios-arrow-round-back' : 'md-arrow-round-back'}
+                    size={26}
+                />
+            </TouchableHighlight>
+        ),
         headerRight: (
             <View style={[columns.twoColumnWrapper, 
                 {
@@ -101,111 +113,181 @@ export default class LendingDetailsScreen extends React.Component {
     render() {
         const dimensions = Dimensions.get('window');
         return (
-            <ScrollView style={styles.container}>
-                <View style={[columns.twoColumnWrapper, {marginHorizontal: 0}, styles.bottomDivider]}>
-                    <View style={[columns.twoColumnWrapperItem, styles.lenderImageWrapper]}>
-                        <AutoHeightImage
-                            width={80}
-                            source={require('../assets/data/photos/jewel.jpg')}
-                            style={styles.lenderImage}
-                        />
-                    </View>
-                    <View style={[columns.twoColumnWrapperItem, styles.lenderDetailWrapper]}>
-                        <Text style={styles.headerTitle}>3 Jewels Lending Corp</Text>
-                        <Stars
-                            votes={5}
-                            host={''}
-                            reviews={0}
-                            size={15}
-                            color={colors.green02}
-                        />
-                        <Text style={[styles.textDetail, {paddingTop: 5}]}>1Km away</Text>
-                        <Text style={styles.textDetail}>$10,000.00 Lended</Text>
-                    </View>
-                </View>
-                <View style={styles.bottomDivider}>
-                    <Text style={styles.headerTitle}>LOAN AMOUNT</Text>
-                    <Text style={styles.textDetail}>Repeat borrowing will increase your limit.</Text>
-                    <Text style={[styles.headerTitleBold, { textAlign: 'center' }]}>
-                        <NumberFormat 
-                            value={this.state.amountValue} 
-                            displayType={'text'} 
-                            thousandSeparator={true} 
-                            prefix={'PHP '} 
-                            suffix={'.00'}
-                            renderText={value => <Text>{value}</Text>}
-                        />
-                    </Text>
-                    <View>
-                        <Slider
-                            value={this.state.amountValue}
-                            onValueChange={this._handleSliderAmount}
-                            thumbTintColor={colors.green02}
-                            maximumValue={20000}
-                            minimumValue={2000}
-                            step={100}
-                        />
-                        <View style={[columns.twoColumnWrapper, {marginHorizontal: 0, marginTop: -20}]}>
-                            <Text style={[columns.twoColumnWrapper, { color: colors.green01 }]}>2,000.00</Text>
-                            <Text style={[columns.twoColumnWrapper, {color: colors.green01, textAlign: 'right'}]}>20,000.00</Text>
-                        </View>
-                    </View>
-                </View>
-                <View style={styles.bottomDivider}>
-                    <Text style={styles.headerTitle}>LOAN TERM</Text>
-                    <View style={[columns.twoColumnWrapper,{marginTop: 10}]}>
-                        <View style={[columns.threeColumnWrapperItem, {alignItems: 'flex-end'}]}>
-                            <Text style={[styles.textMedium, {marginRight: -10}]}>Days</Text>
-                        </View>
-                        <View style={[columns.threeColumnWrapperItem, {alignItems: 'center'}]}>
-                            <Switch
-                                onValueChange={this._handleToggleSwitch}
-                                value={this.state.switchTermValue == 'Months' ? true : false }
-                                thumbColor={colors.green02}
+            <View style={{ flex: 1 }}>
+                <ScrollView style={styles.container}>
+                    <View style={[columns.twoColumnWrapper, {marginHorizontal: 0}, styles.bottomDivider]}>
+                        <View style={[columns.twoColumnWrapperItem, styles.lenderImageWrapper]}>
+                            <AutoHeightImage
+                                width={80}
+                                source={require('../assets/data/photos/jewel.jpg')}
+                                style={styles.lenderImage}
                             />
                         </View>
-                        <View style={columns.threeColumnWrapperItem}>
-                            <Text style={[styles.textMedium, { marginLeft: -10 }]}>Months</Text>
+                        <View style={[columns.twoColumnWrapperItem, styles.lenderDetailWrapper]}>
+                            <Text style={styles.headerTitle}>3 Jewels Lending Corp</Text>
+                            <Stars
+                                votes={5}
+                                host={''}
+                                reviews={0}
+                                size={15}
+                                color={colors.green02}
+                            />
+                            <Text style={[styles.textDetail, {paddingTop: 5}]}>1Km away</Text>
+                            <Text style={styles.textDetail}>$10,000.00 Lended</Text>
                         </View>
                     </View>
-                    <Text style={[styles.headerTitleBold, { textAlign: 'center' }]}>
-                        {this.state.termValue} {this.state.switchTermValue}
-                    </Text>
-                    <View>
-                        <Slider
-                            value={this.state.termValue}
-                            onValueChange={this._handleSliderTerms}
-                            thumbTintColor={colors.green02}
-                            maximumValue={this.state.termMax}
-                            minimumValue={this.state.termMin}
-                            step={1}
+                    <View style={styles.bottomDivider}>
+                        <Text style={styles.headerTitle}>LOAN AMOUNT</Text>
+                        <Text style={styles.textDetail}>Repeat borrowing will increase your limit.</Text>
+                        <Text style={[styles.headerTitleBold, { textAlign: 'center' }]}>
+                            <NumberFormat 
+                                value={this.state.amountValue} 
+                                displayType={'text'} 
+                                thousandSeparator={true} 
+                                prefix={'PHP '} 
+                                suffix={'.00'}
+                                renderText={value => <Text>{value}</Text>}
+                            />
+                        </Text>
+                        <View>
+                            <Slider
+                                value={this.state.amountValue}
+                                onValueChange={this._handleSliderAmount}
+                                thumbTintColor={colors.green02}
+                                maximumValue={20000}
+                                minimumValue={2000}
+                                step={100}
+                            />
+                            <View style={[columns.twoColumnWrapper, {marginHorizontal: 0, marginTop: -20}]}>
+                                <Text style={[columns.twoColumnWrapper, { color: colors.green01 }]}>2,000.00</Text>
+                                <Text style={[columns.twoColumnWrapper, {color: colors.green01, textAlign: 'right'}]}>20,000.00</Text>
+                            </View>
+                        </View>
+                    </View>
+                    <View style={styles.bottomDivider}>
+                        <Text style={styles.headerTitle}>LOAN TERM</Text>
+                        <View style={[columns.twoColumnWrapper,{marginTop: 10}]}>
+                            <View style={[columns.threeColumnWrapperItem, {alignItems: 'flex-end'}]}>
+                                <Text style={[styles.textMedium, {marginRight: -10}]}>Days</Text>
+                            </View>
+                            <View style={[columns.threeColumnWrapperItem, {alignItems: 'center'}]}>
+                                <Switch
+                                    onValueChange={this._handleToggleSwitch}
+                                    value={this.state.switchTermValue == 'Months' ? true : false }
+                                    thumbColor={colors.green02}
+                                />
+                            </View>
+                            <View style={columns.threeColumnWrapperItem}>
+                                <Text style={[styles.textMedium, { marginLeft: -10 }]}>Months</Text>
+                            </View>
+                        </View>
+                        <Text style={[styles.headerTitleBold, { textAlign: 'center' }]}>
+                            {this.state.termValue} {this.state.switchTermValue}
+                        </Text>
+                        <View>
+                            <Slider
+                                value={this.state.termValue}
+                                onValueChange={this._handleSliderTerms}
+                                thumbTintColor={colors.green02}
+                                maximumValue={this.state.termMax}
+                                minimumValue={this.state.termMin}
+                                step={1}
+                            />
+                            <View style={[columns.twoColumnWrapper, { marginHorizontal: 0, marginTop: -20 }]}>
+                                <Text style={[columns.twoColumnWrapper, { color: colors.green01 }]}>
+                                    {this.state.termMin} {this.state.switchTermValue}
+                                </Text>
+                                <Text style={[columns.twoColumnWrapper, { color: colors.green01, textAlign: 'right' }]}>
+                                    {this.state.termMax} {this.state.switchTermValue}
+                                </Text>
+                            </View>
+                        </View>
+                    </View>
+                    <View style={styles.bottomDivider}>
+                        <Text style={[styles.textMedium]}>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vel ante eget metus luctus aliquam. Cras eget pellentesque diam. Sed porttitor porttitor enim eu faucibus.
+                        </Text>
+                        <AutoHeightImage
+                            width={dimensions.width}
+                            source={require('../assets/data/photos/map.jpg')}
+                            style={{marginTop: 20}}
                         />
-                        <View style={[columns.twoColumnWrapper, { marginHorizontal: 0, marginTop: -20 }]}>
-                            <Text style={[columns.twoColumnWrapper, { color: colors.green01 }]}>
-                                {this.state.termMin} {this.state.switchTermValue}
+                        <View style={columns.twoColumnWrapper}>
+                            <View style={[columns.twoColumnWrapperItem, {alignItems: 'flex-start'}]}>
+                                <TouchableOpacity style={styles.rawButton} >
+                                    <Text style={[styles.rawButtonText, ]}>Get Direction</Text>
+                                </TouchableOpacity>
+                            </View>
+                            <View style={[columns.twoColumnWrapperItem, {alignItems: 'flex-end'}]}>
+                                <TouchableOpacity style={styles.rawButton} >
+                                    <Text style={styles.rawButtonText}>Contact Now!</Text>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                    </View>
+
+                    <View>
+                        <Text style={styles.headerTitle}>REVIEWS</Text>
+                        <View style={[columns.twoColumnWrapper, styles.reviewsWrapper]}>
+                            <View style={[columns.twoColumnWrapperItem, styles.reviewsAvatar]}>
+                                <Icon.Ionicons
+                                    name={Platform.OS === 'ios' ? 'ios-contact' : 'md-contact'}
+                                    size={80}
+                                    color={colors.gray02}
+                                />
+                            </View>
+                            <View style={[columns.twoColumnWrapperItem, styles.reviewsDetails]}>
+                                <Text style={styles.headerTitle}>Claudia</Text>
+                                <Text>Oct 2018</Text>
+                            </View>
+                        </View>
+                        <View>
+                            <Text style={[styles.textMedium]}>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vel ante eget metus luctus aliquam. Cras eget pellentesque diam. Sed porttitor porttitor enim eu faucibus 
+                                <Text style={styles.rawButtonText}>...read more</Text>
                             </Text>
-                            <Text style={[columns.twoColumnWrapper, { color: colors.green01, textAlign: 'right' }]}>
-                                {this.state.termMax} {this.state.switchTermValue}
+                        </View>
+                        <View style={[columns.twoColumnWrapper, {marginHorizontal: 0, marginBottom: 30}]}>
+                            <View style={[columns.twoColumnWrapperItem, {width: '60%'}]}>
+                                <TouchableOpacity style={[styles.rawButton, {alignItems: 'flex-start'}]} >
+                                    <Text style={styles.rawButtonText}>Read all 200 reviews</Text>
+                                </TouchableOpacity>
+                            </View>
+                            <View style={[columns.twoColumnWrapperItem, {width: '40%', alignItems: 'flex-end'}]}>
+                                <Stars
+                                    votes={5}
+                                    host={''}
+                                    reviews={0}
+                                    size={12}
+                                    color={colors.green02}
+                                />
+                            </View>
+                        </View>
+                    </View>
+                </ScrollView>
+                <View style={styles.fixedFooter}>
+                    <View style={[columns.twoColumnWrapper, { marginHorizontal: 0, marginTop: 0 }]}>
+                        <View style={[columns.twoColumnWrapperItem, {width: '65%', paddingTop: 8}]}>
+                            <Text>
+                                <NumberFormat
+                                    value={this.state.amountValue}
+                                    displayType={'text'}
+                                    thousandSeparator={true}
+                                    prefix={'PHP '}
+                                    suffix={'.00'}
+                                    renderText={value => <Text style={[styles.headerTitleBold]}>{value}</Text>}
+                                />
+                                <Text style={{ fontSize: 16 }}>{' - '}{this.state.termValue} {this.state.switchTermValue}</Text>
                             </Text>
+                        </View>
+                        <View style={[columns.twoColumnWrapperItem, { width: '35%' }]}>
+                            <TouchableOpacity style={[styles.rawButton, styles.applyNowButton]} >
+                                <Text style={[styles.rawButtonText, {color: colors.white}]}>Apply Now!</Text>
+                            </TouchableOpacity>
                         </View>
                     </View>
                 </View>
-                <View style={styles.bottomDivider}>
-                    <Text style={[styles.textMedium]}>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vel ante eget metus luctus aliquam. Cras eget pellentesque diam. Sed porttitor porttitor enim eu faucibus.
-                    </Text>
-                    <AutoHeightImage
-                        width={dimensions.width}
-                        source={require('../assets/data/photos/map.jpg')}
-                        style={{marginTop: 20}}
-                    />
-                </View>
-
-                <View style={styles.stickyFooter}>
-
-                </View>
-
-            </ScrollView>
+            </View>
         )
     }
 
@@ -255,4 +337,35 @@ const styles = StyleSheet.create({
         paddingBottom: 20,
         marginBottom: 10
     },
+    rawButton: {
+        alignItems: 'center',
+    },
+    rawButtonText: {
+        color: colors.green02,
+        fontSize: 16,
+        fontWeight: '500'
+    },
+    reviewsWrapper: {
+        marginHorizontal: 0,
+        marginTop: 10
+    },
+    reviewsAvatar: {
+        width: 80,
+    },
+    reviewsDetails: {
+        paddingTop: 20,
+    },
+    fixedFooter: {
+        height: 60,
+        borderTopWidth: 1,
+        borderTopColor: colors.gray07,
+        paddingHorizontal: 20,
+        paddingTop: 10
+    },
+    applyNowButton: {
+        backgroundColor: '#FF5A5F',
+        width: '100%',
+        padding: 10,
+        borderRadius: 5
+    }
 });

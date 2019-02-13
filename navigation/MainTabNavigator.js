@@ -4,7 +4,6 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
-import LendingDetailsScreen from '../screens/LendingDetailsScreen';
 import SavedScreen from '../screens/SavedScreen';
 import LoansScreen from '../screens/LoansScreen';
 import LoginScreen from '../screens/LoginScreen';
@@ -23,7 +22,6 @@ const HomeStack = createStackNavigator({
   Verification: VerificationScreen,
   Verified: VerifiedScreen,
   Profile: ProfileScreen,
-  LendingDetails: LendingDetailsScreen,
 });
 
 // EXPLORE

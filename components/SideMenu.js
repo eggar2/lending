@@ -13,6 +13,14 @@ class SideMenu extends Component {
         this.props.navigation.dispatch(navigateAction);
     }
 
+    navigatePush = (route) => () => {
+        const navigateAction = NavigationActions.navigate({
+                routeName: route,
+                tabBar: { visible: false, drawBehind: true, animate: true }
+            });
+        this.props.navigation.dispatch(navigateAction);
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -54,7 +62,7 @@ class SideMenu extends Component {
                             </Text>
                         </View>
                         <View style={styles.navSectionStyle}>
-                            <Text style={styles.navItemStyle} onPress={this.navigateToScreen('LendingDetails')}>
+                            <Text style={styles.navItemStyle} onPress={this.navigatePush('LendingDetails')}>
                                 Lending Details
                             </Text>
                         </View>

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { PropTypes } from 'prop-types';
 import {
     ScrollView,
     StyleSheet,
@@ -13,12 +14,17 @@ import Stars from '../Stars';
 
 export default class Companies extends Component {
 
+    handlePressCompany = () => {
+        this.props.onPress();
+    }
+
     get Companies() {
         const { companies } = this.props;
         return companies.map((company, index) => (
             <TouchableOpacity
                 key={index}
                 style={styles.companyWrapper}
+                onPress={this.handlePressCompany}
             >
                 <View>
                     <View style={styles.addToFavoriteBtn}>
@@ -61,6 +67,10 @@ export default class Companies extends Component {
         );
     }
 }
+
+Companies.propTypes = {
+    onPress: PropTypes.func.isRequired,
+};
 
 const styles = StyleSheet.create({
     companiesWrapper: {
