@@ -4,11 +4,29 @@ import {
     Text,
     View,
     ScrollView,
-    Image
+    Image,
+    TouchableHighlight,
+    Platform
 } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/Ionicons';
+import colors from '../assets/colors';
 
 export default class PersonalInfoScreen extends Component {
+
+    static navigationOptions = ({ navigation }) => ({
+        headerLeft: (
+            <TouchableHighlight
+                onPress={() => { navigation.navigate('Home'); }}
+                underlayColor={colors.gray01}
+                style={{marginLeft: 10, paddingHorizontal: 10}} >
+                <Icon
+                    name={Platform.OS === 'ios' ? 'ios-arrow-round-back' : 'md-arrow-round-back'}
+                    size={26} />
+            </TouchableHighlight>
+            
+        ),
+
+    });
 
     constructor(props) {
         super(props);
@@ -41,51 +59,33 @@ export default class PersonalInfoScreen extends Component {
                     <View style={styles.stepsContainer}>
                         <View style={[styles.profileMenu, styles.profileMenuFirst]}>
                             <View style={{flex: 3}}>
-                                <Text style={styles.profileMenuText}>Identification</Text>
+                                <Text style={styles.profileMenuText}>Education</Text>
                             </View>
-                            <Icon
-                                name='check'
-                                type='font-awesome'
-                                color='#827F80'
-                                size={25}
-                                iconStyle={{marginBottom: 15, flex: 1}}
-                            />
                         </View>
                         <View style={styles.profileMenu}>
                             <View style={{flex: 3}}>
-                                <Text style={styles.profileMenuText}>Personal Information</Text>
+                                <Text style={styles.profileMenuText}>Marital Status</Text>
                             </View>
-                            <Icon
-                                name='check'
-                                type='font-awesome'
-                                color='#827F80'
-                                size={25}
-                                iconStyle={{marginBottom: 15, flex: 1}}
-                            />
                         </View>
                         <View style={styles.profileMenu}>
                             <View style={{flex: 3}}>
-                                <Text style={styles.profileMenuText}>Work Information</Text>
+                                <Text style={styles.profileMenuText}>Birthday</Text>
                             </View>
-                            <Icon
-                                name='check'
-                                type='font-awesome'
-                                color='#827F80'
-                                size={25}
-                                iconStyle={{marginBottom: 15, flex: 1}}
-                            />
                         </View>
                         <View style={styles.profileMenu}>
                             <View style={{flex: 3}}>
-                                <Text style={styles.profileMenuText}>Contact Information</Text>
+                                <Text style={styles.profileMenuText}>Religion</Text>
                             </View>
-                            <Icon
-                                name='check'
-                                type='font-awesome'
-                                color='#827F80'
-                                size={25}
-                                iconStyle={{marginBottom: 15, flex: 1}}
-                            />
+                        </View>
+                        <View style={styles.profileMenu}>
+                            <View style={{flex: 3}}>
+                                <Text style={styles.profileMenuText}>Current Address</Text>
+                            </View>
+                        </View>
+                        <View style={styles.profileMenu}>
+                            <View style={{flex: 3}}>
+                                <Text style={styles.profileMenuText}>Detailed Address</Text>
+                            </View>
                         </View>
                     </View>
                 </View>
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
         
     },
     stepsContainer: {
-        paddingHorizontal: 15,
+        paddingHorizontal: 20,
         marginTop: 15
     },
     name: {
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
     profileMenuText: {
         fontSize: 20,
         fontWeight: '400',
-        color: '#444'
+        color: colors.gray04
     },
     descText: {
         fontSize: 18,
