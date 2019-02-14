@@ -24,9 +24,6 @@ export default class Stars extends Component {
                 />,
             );
         }
-        // starElements.push(
-        //     <Text> {reviews} - {host}</Text>
-        // );
         return starElements;
     }
 
@@ -37,7 +34,7 @@ export default class Stars extends Component {
                 <View style={styles.stars}>
                     {this.stars}
                     <Text style={styles.votesNumber}>
-                        {reviews} - {host}
+                        {reviews ? reviews : ''} {host ? '- ' + host : ''}
                     </Text>
                 </View>
             </View>

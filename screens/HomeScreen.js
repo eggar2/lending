@@ -20,6 +20,10 @@ export default class HomeScreen extends React.Component {
     header: null,
   };
 
+  selectCompany = async () => {
+    this.props.navigation.navigate('LendingDetails');
+  }
+
   render() {
     const dimensions = Dimensions.get('window');
     return (
@@ -46,7 +50,7 @@ export default class HomeScreen extends React.Component {
 
           <Text style={styles.heading}>Lending Companies around the world</Text>
           <View style={styles.companiesWrapper}>
-            <Companies companies={companiesList} />
+            <Companies companies={companiesList} onPress={this.selectCompany} />
           </View>
 
           <TouchableOpacity style={styles.buttonStyle} >

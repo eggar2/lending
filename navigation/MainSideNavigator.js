@@ -5,6 +5,7 @@ import { createStackNavigator, createDrawerNavigator, createAppContainer } from 
 import SideMenu from '../components/SideMenu';
 import HomeScreen from '../screens/HomeScreen';
 import MainTabNavigator from './MainTabNavigator';
+import LendingDetailsScreen from '../screens/LendingDetailsScreen';
 
 const RootStack = createStackNavigator(
     {   
@@ -12,9 +13,16 @@ const RootStack = createStackNavigator(
     },
 );
 
+const LendingStack = createStackNavigator(
+    {
+        LendingDetails: LendingDetailsScreen,
+    },
+);
+
 const MyDrawerNavigator = createDrawerNavigator({
     Tab: MainTabNavigator,
     Main: RootStack,
+    Lending: LendingStack
 }, {
     contentComponent: SideMenu,
     drawerWidth: 300,
