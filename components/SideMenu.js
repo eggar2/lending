@@ -53,6 +53,16 @@ class SideMenu extends Component {
                                 Profile
                             </Text>
                         </View>
+                        <View style={styles.navSectionStyle}>
+                            <Text style={styles.navItemStyle} onPress={this.navigateToScreen('ProfileInfo')}>
+                                Profile Info
+                            </Text>
+                        </View>
+                        <View style={styles.navSectionStyle}>
+                            <Text style={styles.navItemStyle} onPress={this.navigateToScreen('PersonalInfo')}>
+                                Personal Info
+                            </Text>
+                        </View>
                         <View style={styles.navSectionStyle}></View>
                     </View>
                 </ScrollView>
