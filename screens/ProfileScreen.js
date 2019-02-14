@@ -4,12 +4,16 @@ import {
     Text,
     View,
     Image,
-    ScrollView
+    ScrollView,
+    TouchableHighlight,
+    Platform
 } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from "react-native-vector-icons/Ionicons";
+import colors from '../assets/colors';
 import * as Progress from 'react-native-progress';
 
 export default class ProfileScreen extends Component {
+
     static navigationOptions = {
         header: null,
     };
@@ -31,20 +35,17 @@ export default class ProfileScreen extends Component {
         if(this.state.profImg) {
             profImage = <Image 
                 style={{width: 64, height: 64}}
-                source={{uri: this.state.profImg}}
-            />
+                source={{uri: this.state.profImg}} />
         } else {
             profImage = <Icon
-                name='user-circle'
-                type='font-awesome'
-                color='#e2e2e2'
+                name={Platform.OS === 'ios' ? 'ios-contact' : 'md-contact'}
+                color='#827F80'
                 size={80}
-                iconStyle={{marginBottom: 15, flex: 1}}
-            />
+                iconStyle={{marginBottom: 15, flex: 1}} />
         }
         return (
             <ScrollView style={styles.mainContainer}>
-                <View>
+                <View style={styles.content}>
                     <View style={styles.nameImageContainer}>
                         <View style={{flex: 3}}>
                             <Text style={styles.name}>{this.state.profName}</Text>
@@ -76,60 +77,45 @@ export default class ProfileScreen extends Component {
                                 <Text style={styles.profileMenuText}>Notifications</Text>
                             </View>
                             <Icon
-                                name='bell'
-                                type='font-awesome'
+                                name={Platform.OS === 'ios' ? 'ios-notifications-outline' : 'md-notifications-outline'}
                                 color='#827F80'
-                                size={25}
-                                iconStyle={{marginBottom: 15, flex: 1}}
-                            />
+                                size={26} />
                         </View>
                         <View style={styles.profileMenu}>
                             <View style={{flex: 3}}>
                                 <Text style={styles.profileMenuText}>Loan Record</Text>
                             </View>
                             <Icon
-                                name='folder-open'
-                                type='font-awesome'
+                                name={Platform.OS === 'ios' ? 'ios-folder-open' : 'md-folder-open'}
                                 color='#827F80'
-                                size={25}
-                                iconStyle={{marginBottom: 15, flex: 1}}
-                            />
+                                size={26} />
                         </View>
                         <View style={styles.profileMenu}>
                             <View style={{flex: 3}}>
                                 <Text style={styles.profileMenuText}>Invite Your Fiends</Text>
                             </View>
                             <Icon
-                                name='gift'
-                                type='font-awesome'
+                                name={Platform.OS === 'ios' ? 'ios-gift' : 'md-gift'}
                                 color='#827F80'
-                                size={25}
-                                iconStyle={{marginBottom: 15, flex: 1}}
-                            />
+                                size={26} />
                         </View>
                         <View style={styles.profileMenu}>
                             <View style={{flex: 3}}>
                                 <Text style={styles.profileMenuText}>Settings</Text>
                             </View>
                             <Icon
-                                name='cog'
-                                type='font-awesome'
+                                name={Platform.OS === 'ios' ? 'ios-settings' : 'md-settings'}
                                 color='#827F80'
-                                size={25}
-                                iconStyle={{marginBottom: 15, flex: 1}}
-                            />
+                                size={26} />
                         </View>
                         <View style={styles.profileMenu}>
                             <View style={{flex: 3}}>
                                 <Text style={styles.profileMenuText}>About Us</Text>
                             </View>
                             <Icon
-                                name='question-circle'
-                                type='font-awesome'
+                                name={Platform.OS === 'ios' ? 'ios-help-circle-outline' : 'md-help-circle-outline'}
                                 color='#827F80'
-                                size={25}
-                                iconStyle={{marginBottom: 15, flex: 1}}
-                            />
+                                size={26} />
                         </View>
                     </View>
                 </View>
@@ -141,21 +127,21 @@ export default class ProfileScreen extends Component {
 const styles = StyleSheet.create({
     mainContainer: {
         backgroundColor: '#fff',
-        padding: 30,
+        padding: 20,
+    },
+    content: {
+        paddingBottom: 40
     },
     nameImageContainer: {
-        flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
         paddingBottom: 20,
         paddingTop: 20
     },
     progress: {
-        flex: 1,
         marginBottom: 30
     },
     stepsContainer: {
-        flex: 3,
         borderTopWidth: 1,
         borderColor: '#bbb',
     },
@@ -173,7 +159,8 @@ const styles = StyleSheet.create({
     },
     profileMenuText: {
         fontSize: 20,
-        fontWeight: '500'
+        fontWeight: '400',
+        color: colors.gray04
     },
     defaultText: {
         fontSize: 16,
