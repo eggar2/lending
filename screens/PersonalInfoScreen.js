@@ -6,7 +6,8 @@ import {
     ScrollView,
     Image,
     TouchableHighlight,
-    Platform
+    Platform,
+    TouchableOpacity
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import colors from '../assets/colors';
@@ -14,6 +15,14 @@ import colors from '../assets/colors';
 export default class PersonalInfoScreen extends Component {
 
     static navigationOptions = ({ navigation }) => ({
+        title: 'Personal Information',
+        headerStyle: {
+            shadowOpacity: 0
+        },
+        headerTitleStyle: {
+            alignSelf: 'center',
+            textAlign: 'center',
+        },
         headerLeft: (
             <TouchableHighlight
                 onPress={() => { navigation.navigate('Home'); }}
@@ -54,10 +63,10 @@ export default class PersonalInfoScreen extends Component {
         }
 
         return (
-            <ScrollView>
+            <View style={styles.mainContainer}>
                 <View style={styles.content}>
                     <View style={styles.stepsContainer}>
-                        <View style={[styles.profileMenu, styles.profileMenuFirst]}>
+                        <View style={styles.profileMenu}>
                             <View style={{flex: 3}}>
                                 <Text style={styles.profileMenuText}>Education</Text>
                             </View>
@@ -88,8 +97,16 @@ export default class PersonalInfoScreen extends Component {
                             </View>
                         </View>
                     </View>
+                    <View style={styles.buttonContainer2}>
+                    <TouchableOpacity
+                        style={styles.buttonStyle2}
+                        onPress={this.confirm}  >
+
+                        <Text style={styles.buttonText}>Confirm</Text>
+                    </TouchableOpacity>
+                    </View>
                 </View>
-            </ScrollView>
+            </View>
         );
     }
 }
@@ -97,17 +114,18 @@ export default class PersonalInfoScreen extends Component {
 const styles = StyleSheet.create({
     mainContainer: {
         backgroundColor: '#fff',
-        padding: 30,
+        flex: 1
     },
     content: {
+        flex: 1,
         paddingBottom: 30
     },
     profContainer: {
         
     },
     stepsContainer: {
+        flex: 1,
         paddingHorizontal: 20,
-        marginTop: 15
     },
     name: {
         fontSize: 30,
@@ -137,5 +155,32 @@ const styles = StyleSheet.create({
     descText: {
         fontSize: 18,
         color: '#444'
-    }
+    },
+    buttonContainer2: {
+        paddingHorizontal: 20,
+        marginTop: 50
+    },
+    buttonStyle2: {
+        backgroundColor: '#1B9AF7',
+        alignItems: 'center',
+	    padding: 10,
+        borderRadius: 10,
+        ...Platform.select({
+            ios: {
+              shadowColor: '#666',
+              shadowOffset: { height: -3 },
+              shadowOpacity: 0.1,
+              shadowRadius: 3,
+            },
+            android: {
+              elevation: 2,
+            },
+          })
+    },
+    buttonText: {
+	    color: '#fff',
+        fontSize: 20,
+        fontWeight: 'bold'
+    },
+    
 })
