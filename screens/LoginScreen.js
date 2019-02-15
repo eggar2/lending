@@ -14,17 +14,17 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { NavigationActions } from 'react-navigation';
 
 export default class LoginScreen extends React.Component {
-  static navigationOptions = {
-    header: null,
-  };
+    static navigationOptions = {
+        header: null,
+    };
 
-  constructor(props) {
-	super(props);
-	this.state = {
-	  email: "",
-	  password: ""
-	}
-  }
+    constructor(props) {
+        super(props);
+        this.state = {
+        email: "",
+        password: ""
+        }
+    }
 
 	navigateToScreen = (route) => () => {
 		const navigateAction = NavigationActions.navigate({
@@ -71,8 +71,7 @@ export default class LoginScreen extends React.Component {
 		  <View style={styles.buttonContainer}>
 		  	<TouchableOpacity
          		style={styles.buttonStyle}
-         		onPress={this.signIn}
-       		>
+         		onPress={this.signIn} >
          		<Text style={styles.buttonText}>Sign In</Text>
        		</TouchableOpacity>
 			<View style={styles.regContainer}>

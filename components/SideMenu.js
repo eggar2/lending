@@ -76,6 +76,16 @@ class SideMenu extends Component {
                                 Lending Details
                             </Text>
                         </View>
+                        <View style={styles.navSectionStyle}>
+                            <Text style={styles.navItemStyle} onPress={this.navigatePush('About')}>
+                                About Us
+                            </Text>
+                        </View>
+                        <View style={styles.navSectionStyle}>
+                            <Text style={styles.navItemStyle} onPress={this.navigatePush('Settings')}>
+                                Settings
+                            </Text>
+                        </View>
                         <View style={styles.navSectionStyle}></View>
                     </View>
                 </ScrollView>

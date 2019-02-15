@@ -6,6 +6,7 @@ import {
     Image,
     ScrollView,
     TouchableHighlight,
+    TouchableOpacity,
     Platform
 } from 'react-native';
 import Icon from "react-native-vector-icons/Ionicons";
@@ -28,6 +29,13 @@ export default class ProfileScreen extends Component {
           profImg: ''
         }
     }
+
+    navigateToScreen = (route) => () => {
+		const navigateAction = NavigationActions.navigate({
+			routeName: route
+		});
+		this.props.navigation.dispatch(navigateAction);
+	}
 
     render() {
         let profImage;
@@ -110,7 +118,10 @@ export default class ProfileScreen extends Component {
                         </View>
                         <View style={styles.profileMenu}>
                             <View style={{flex: 3}}>
-                                <Text style={styles.profileMenuText}>About Us</Text>
+                                <TouchableOpacity
+                                    onPress={this.navigateToScreen('About')}>
+                                    <Text style={styles.profileMenuText}>About Us</Text>
+                                </TouchableOpacity>                                                                                                          
                             </View>
                             <Icon
                                 name={Platform.OS === 'ios' ? 'ios-help-circle-outline' : 'md-help-circle-outline'}
