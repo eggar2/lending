@@ -13,6 +13,8 @@ import ProfileScreen from '../screens/ProfileScreen';
 import IdScreen from '../screens/IdScreen';
 import VerificationScreen from '../screens/VerificationScreen';
 import VerifiedScreen from '../screens/VerifiedScreen';
+import LoanDetailScreen from '../screens/LoanDetailScreen';
+import PaymentGatewayScreen from '../screens/PaymentGatewayScreen';
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
@@ -61,6 +63,8 @@ SavedStack.navigationOptions = {
 // LOANS
 const LoansStack = createStackNavigator({
   Loans: LoansScreen,
+  LoanDetail: LoanDetailScreen,
+  PaymentGateway: PaymentGatewayScreen,
 });
 
 LoansStack.navigationOptions = {

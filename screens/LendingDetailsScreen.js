@@ -89,6 +89,10 @@ export default class LendingDetailsScreen extends React.Component {
     _handleSliderTerms = (termValue) => {
         this.setState({ termValue });
     }
+
+    onPressApplyNow = () => {
+        this.props.navigation.navigate('LoanReview');
+    }
     
     render() {
         const dimensions = Dimensions.get('window');
@@ -261,7 +265,9 @@ export default class LendingDetailsScreen extends React.Component {
                             </Text>
                         </View>
                         <View style={[columns.twoColumnWrapperItem, { width: '35%' }]}>
-                            <TouchableOpacity style={[styles.rawButton, styles.applyNowButton]} >
+                            <TouchableOpacity 
+                                onPress={this.onPressApplyNow}
+                                style={[styles.rawButton, styles.applyNowButton]} >
                                 <Text style={[styles.rawButtonText, {color: colors.white}]}>Apply Now!</Text>
                             </TouchableOpacity>
                         </View>
