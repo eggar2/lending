@@ -26,6 +26,9 @@ workflows:
   build_and_test:
     jobs:
       - build
+      - docker:
+        - image: circleci/node:4.8.2-jessie
+        - image: mongo:3.4.4-jessie
       - test:
           requires:
             - build
