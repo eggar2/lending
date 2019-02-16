@@ -1,4 +1,6 @@
-general:
-  branches:
-    only:
-     - stage # list of branches to build
+version: 2.1
+jobs:
+  build:
+    branches:
+      only:
+        - stage
