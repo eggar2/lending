@@ -77,6 +77,11 @@ class SideMenu extends Component {
                             </Text>
                         </View>
                         <View style={styles.navSectionStyle}>
+                            <Text style={styles.navItemStyle} onPress={this.navigatePush('LoanReview')}>
+                                Loan Review
+                            </Text>
+                        </View>
+                        <View style={styles.navSectionStyle}>
                             <Text style={styles.navItemStyle} onPress={this.navigatePush('About')}>
                                 About Us
                             </Text>

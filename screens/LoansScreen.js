@@ -39,7 +39,8 @@ export default class LoanScreen extends React.Component {
   });
 
   selectLoanDetails = () => {
-    console.log('select loan details');
+    // go to single loan detail
+    this.props.navigation.navigate('LoanDetail');
   }
 
   render() {

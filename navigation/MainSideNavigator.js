@@ -6,6 +6,7 @@ import SideMenu from '../components/SideMenu';
 import HomeScreen from '../screens/HomeScreen';
 import MainTabNavigator from './MainTabNavigator';
 import LendingDetailsScreen from '../screens/LendingDetailsScreen';
+import LoanReviewScreen from '../screens/LoanReviewScreen';
 import LoginScreen from '../screens/LoginScreen';
 import RegisterScreen from '../screens/RegisterScreen';
 import VerificationScreen from '../screens/VerificationScreen';
@@ -25,6 +26,7 @@ const RootStack = createStackNavigator(
 const LendingStack = createStackNavigator(
     {
         LendingDetails: LendingDetailsScreen,
+        LoanReview: LoanReviewScreen,
         Login: LoginScreen,
         Register: RegisterScreen,
         Verification: VerificationScreen,

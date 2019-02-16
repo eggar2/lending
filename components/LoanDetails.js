@@ -58,7 +58,7 @@ export default class LoanDetails extends Component {
                                 <Text style={styles.detailText}>Status</Text>
                             </View>
                             <View style={[columns.twoColumnWrapperItem, styles.detailValue]}>
-                                <Text style={[styles.detailText, { textAlign: 'right' }]}>{loan.status}</Text>
+                                <Text style={[styles.detailText, styles.statusText]}>{loan.status.toUpperCase()}</Text>
                             </View>
                         </View>
                     </View>
@@ -113,6 +113,10 @@ const styles = StyleSheet.create({
     },  
     detailText: {
         fontSize: 12
+    },  
+    statusText: {
+        textAlign: 'right',
+        color: colors.darkOrange,
     },  
     headerTitle: {
         fontSize: 16,
