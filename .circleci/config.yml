@@ -1,6 +1,11 @@
-version: 2.1
-jobs:
-  build:
-    branches:
-      only:
-        - stage
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+          filters:
+            branches:
+              only: stage
