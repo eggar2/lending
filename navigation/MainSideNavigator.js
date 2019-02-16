@@ -11,14 +11,18 @@ import LoginScreen from '../screens/LoginScreen';
 import RegisterScreen from '../screens/RegisterScreen';
 import VerificationScreen from '../screens/VerificationScreen';
 import VerifiedScreen from '../screens/VerifiedScreen';
-import ProfileInfoScreen from '../screens/ProfileInfoScreen';
 import PersonalInfoScreen from '../screens/PersonalInfoScreen';
 import AboutScreen from '../screens/AboutScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import ShareLinksScreen from '../screens/ShareLinksScreen';
+import IdScreen from '../screens/IdScreen';
+import ProfileInfoScreen from '../screens/ProfileInfoScreen';
+import WorkInfoScreen from '../screens/WorkInfoScreen';
 
 const RootStack = createStackNavigator(
     {   
         Home: HomeScreen,
+        ShareLinks: ShareLinksScreen,
     },
 );
 
@@ -30,17 +34,26 @@ const LendingStack = createStackNavigator(
         Register: RegisterScreen,
         Verification: VerificationScreen,
         Verified: VerifiedScreen,
-        ProfileInfo: ProfileInfoScreen,
         PersonalInfo: PersonalInfoScreen,
         About: AboutScreen,
         Settings: SettingsScreen,
     },
 );
 
+// PROFILE 
+const ProfileInfoStack = createStackNavigator(
+    {
+        ProfileInfo: ProfileInfoScreen,
+        Identification: IdScreen,
+        WorkInfo: WorkInfoScreen,
+    },
+);
+
 const MyDrawerNavigator = createDrawerNavigator({
     Tab: MainTabNavigator,
     Main: RootStack,
-    Lending: LendingStack
+    Lending: LendingStack,
+    ProfileInfo: ProfileInfoStack
 }, {
     contentComponent: SideMenu,
     drawerWidth: 300,

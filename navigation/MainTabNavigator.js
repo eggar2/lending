@@ -8,14 +8,11 @@ import SavedScreen from '../screens/SavedScreen';
 import LoansScreen from '../screens/LoansScreen';
 import InboxScreen from '../screens/InboxScreen';
 import ProfileScreen from '../screens/ProfileScreen';
-import IdScreen from '../screens/IdScreen';
 import LoanDetailScreen from '../screens/LoanDetailScreen';
 import PaymentGatewayScreen from '../screens/PaymentGatewayScreen';
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
-  Identification: IdScreen,
-  Profile: ProfileScreen,
 });
 
 // EXPLORE

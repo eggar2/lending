@@ -61,7 +61,9 @@ export default class ProfileScreen extends Component {
                             <Text style={styles.viewProf}>{this.state.profDetails}</Text>
                         </View>
 
-                        {profImage}
+                        <TouchableOpacity onPress={this.navigateToScreen('ProfileInfo')} >
+                            {profImage}
+                        </TouchableOpacity>
 
                     </View>
                     <View style={styles.progress}>

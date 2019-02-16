@@ -18,6 +18,13 @@ export default {
         fontWeight: '700',
         color: colors.gray04,
     },
+    textNormal: {
+        fontSize: 15
+    },
+    textSmall: {
+        fontSize: 12,
+        color: colors.gray04
+    },
     textAlignCenter: {
         textAlign: 'center'
     },

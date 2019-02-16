@@ -4,9 +4,12 @@ import {
     Text,
     View,
     ScrollView,
-    Image
+    Image,
+    TouchableOpacity
 } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { NavigationActions } from 'react-navigation';
+import { Icon } from 'expo';
+import FAIcon from 'react-native-vector-icons/FontAwesome';
 
 export default class ProfileInfoScreen extends Component {
 
@@ -17,6 +20,34 @@ export default class ProfileInfoScreen extends Component {
           profInfoDesc: 'Member since June 2018',
           profInfoImg: ''
         }
+    }
+    
+    static navigationOptions = ({ navigation }) => ({
+        headerLeft: (
+            <TouchableOpacity
+                onPress={() => { navigation.navigate('Profile'); }}
+                style={{ marginLeft: 10, paddingHorizontal: 10 }} >
+                <Icon.Ionicons
+                    name={'md-arrow-back'}
+                    size={26} />
+            </TouchableOpacity>
+        ),
+        headerRight: (
+            <TouchableOpacity
+                onPress={() => { navigation.navigate('Profile'); }}
+                style={{ marginLeft: 10, paddingHorizontal: 10 }} >
+                <Icon.Ionicons
+                    name={'ios-create'}
+                    size={26} />
+            </TouchableOpacity>
+        ),
+    });
+
+    navigateToScreen = (route) => () => {
+        const navigateAction = NavigationActions.navigate({
+            routeName: route
+        });
+        this.props.navigation.dispatch(navigateAction);
     }
 
     render() {
@@ -48,9 +79,11 @@ export default class ProfileInfoScreen extends Component {
                     <View style={styles.stepsContainer}>
                         <View style={[styles.profileMenu, styles.profileMenuFirst]}>
                             <View style={{flex: 3}}>
-                                <Text style={styles.profileMenuText}>Identification</Text>
+                                <TouchableOpacity onPress={this.navigateToScreen('Identification')} >
+                                    <Text style={styles.profileMenuText}>Identification</Text>
+                                </TouchableOpacity>
                             </View>
-                            <Icon
+                            <FAIcon
                                 name='check'
                                 type='font-awesome'
                                 color='#827F80'
@@ -62,7 +95,7 @@ export default class ProfileInfoScreen extends Component {
                             <View style={{flex: 3}}>
                                 <Text style={styles.profileMenuText}>Personal Information</Text>
                             </View>
-                            <Icon
+                            <FAIcon
                                 name='check'
                                 type='font-awesome'
                                 color='#827F80'
@@ -72,9 +105,11 @@ export default class ProfileInfoScreen extends Component {
                         </View>
                         <View style={styles.profileMenu}>
                             <View style={{flex: 3}}>
-                                <Text style={styles.profileMenuText}>Work Information</Text>
+                                <TouchableOpacity onPress={this.navigateToScreen('WorkInfo')} >
+                                    <Text style={styles.profileMenuText}>Work Information</Text>
+                                </TouchableOpacity>
                             </View>
-                            <Icon
+                            <FAIcon
                                 name='check'
                                 type='font-awesome'
                                 color='#827F80'
@@ -86,7 +121,7 @@ export default class ProfileInfoScreen extends Component {
                             <View style={{flex: 3}}>
                                 <Text style={styles.profileMenuText}>Contact Information</Text>
                             </View>
-                            <Icon
+                            <FAIcon
                                 name='check'
                                 type='font-awesome'
                                 color='#827F80'
