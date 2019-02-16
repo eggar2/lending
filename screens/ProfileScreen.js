@@ -4,11 +4,18 @@ import {
     Text,
     View,
     Image,
+    ScrollView,
+    TouchableHighlight,
+    TouchableOpacity,
+    Platform
 } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { NavigationActions } from 'react-navigation';
+import Icon from "react-native-vector-icons/Ionicons";
+import colors from '../assets/colors';
 import * as Progress from 'react-native-progress';
 
 export default class ProfileScreen extends Component {
+
     static navigationOptions = {
         header: null,
     };
@@ -24,138 +31,129 @@ export default class ProfileScreen extends Component {
         }
     }
 
+    navigateToScreen = (route) => () => {
+		const navigateAction = NavigationActions.navigate({
+			routeName: route
+		});
+		this.props.navigation.dispatch(navigateAction);
+	}
+
     render() {
         let profImage;
 
         if(this.state.profImg) {
             profImage = <Image 
                 style={{width: 64, height: 64}}
-                source={{uri: this.state.profImg}}
-            />
+                source={{uri: this.state.profImg}} />
         } else {
             profImage = <Icon
-                name='user-circle'
-                type='font-awesome'
-                color='#e2e2e2'
+                name={Platform.OS === 'ios' ? 'ios-contact' : 'md-contact'}
+                color='#827F80'
                 size={80}
-                iconStyle={{marginBottom: 15, flex: 1}}
-            />
+                iconStyle={{marginBottom: 15, flex: 1}} />
         }
         return (
-            <View style={styles.mainContainer}>
-                <View style={styles.nameImageContainer}>
-                    <View style={{flex: 3}}>
-                        <Text style={styles.name}>{this.state.profName}</Text>
-                        <Text style={styles.viewProf}>{this.state.profDetails}</Text>
-                    </View>
+            <ScrollView style={styles.mainContainer}>
+                <View style={styles.content}>
+                    <View style={styles.nameImageContainer}>
+                        <View style={{flex: 3}}>
+                            <Text style={styles.name}>{this.state.profName}</Text>
+                            <Text style={styles.viewProf}>{this.state.profDetails}</Text>
+                        </View>
 
-                    {profImage}
+                        {profImage}
 
-                </View>
-                <View style={styles.progress}>
-                    <View style={styles.incContainer}>
-                        <Text style={styles.incInfoHeader}>Just 4 steps</Text>
-                        <Text style={styles.incInfo}>{this.state.incInfo}</Text>
                     </View>
-                    <Progress.Bar 
-                        progress={0.25} 
-                        borderWidth={0} 
-                        borderRadius={0} 
-                        width={null} 
-                        height={10}
-                        color='#429cf4'
-                        unfilledColor='#c6e0fb'
-                    />
-                    <Text style={styles.defaultText}>{this.state.profSteps}</Text>
-                </View>
-                <View style={styles.stepsContainer}>
-                    <View style={styles.profileMenu}>
-                        <View style={{flex: 3}}>
-                            <Text style={styles.profileMenuText}>Notifications</Text>
+                    <View style={styles.progress}>
+                        <View style={styles.incContainer}>
+                            <Text style={styles.incInfoHeader}>Just 4 steps</Text>
+                            <Text style={styles.incInfo}>{this.state.incInfo}</Text>
                         </View>
-                        <Icon
-                            name='bell'
-                            type='font-awesome'
-                            color='#827F80'
-                            size={25}
-                            iconStyle={{marginBottom: 15, flex: 1}}
+                        <Progress.Bar 
+                            progress={0.25} 
+                            borderWidth={0} 
+                            borderRadius={0} 
+                            width={null} 
+                            height={10}
+                            color='#429cf4'
+                            unfilledColor='#c6e0fb'
                         />
+                        <Text style={styles.defaultText}>{this.state.profSteps}</Text>
                     </View>
-                    <View style={styles.profileMenu}>
-                        <View style={{flex: 3}}>
-                            <Text style={styles.profileMenuText}>Loan Record</Text>
+                    <View style={styles.stepsContainer}>
+                        <View style={styles.profileMenu}>
+                            <View style={{flex: 3}}>
+                                <Text style={styles.profileMenuText}>Notifications</Text>
+                            </View>
+                            <Icon
+                                name={Platform.OS === 'ios' ? 'ios-notifications-outline' : 'md-notifications-outline'}
+                                color='#827F80'
+                                size={26} />
                         </View>
-                        <Icon
-                            name='folder-open'
-                            type='font-awesome'
-                            color='#827F80'
-                            size={25}
-                            iconStyle={{marginBottom: 15, flex: 1}}
-                        />
-                    </View>
-                    <View style={styles.profileMenu}>
-                        <View style={{flex: 3}}>
-                            <Text style={styles.profileMenuText}>Invite Your Fiends</Text>
+                        <View style={styles.profileMenu}>
+                            <View style={{flex: 3}}>
+                                <Text style={styles.profileMenuText}>Loan Record</Text>
+                            </View>
+                            <Icon
+                                name={Platform.OS === 'ios' ? 'ios-folder-open' : 'md-folder-open'}
+                                color='#827F80'
+                                size={26} />
                         </View>
-                        <Icon
-                            name='gift'
-                            type='font-awesome'
-                            color='#827F80'
-                            size={25}
-                            iconStyle={{marginBottom: 15, flex: 1}}
-                        />
-                    </View>
-                    <View style={styles.profileMenu}>
-                        <View style={{flex: 3}}>
-                            <Text style={styles.profileMenuText}>Settings</Text>
+                        <View style={styles.profileMenu}>
+                            <View style={{flex: 3}}>
+                                <Text style={styles.profileMenuText}>Invite Your Fiends</Text>
+                            </View>
+                            <Icon
+                                name={Platform.OS === 'ios' ? 'ios-gift' : 'md-gift'}
+                                color='#827F80'
+                                size={26} />
                         </View>
-                        <Icon
-                            name='cog'
-                            type='font-awesome'
-                            color='#827F80'
-                            size={25}
-                            iconStyle={{marginBottom: 15, flex: 1}}
-                        />
-                    </View>
-                    <View style={styles.profileMenu}>
-                        <View style={{flex: 3}}>
-                            <Text style={styles.profileMenuText}>About Us</Text>
+                        <View style={styles.profileMenu}>
+                            <View style={{flex: 3}}>
+                                <Text style={styles.profileMenuText}>Settings</Text>
+                            </View>
+                            <Icon
+                                name={Platform.OS === 'ios' ? 'ios-settings' : 'md-settings'}
+                                color='#827F80'
+                                size={26} />
                         </View>
-                        <Icon
-                            name='question-circle'
-                            type='font-awesome'
-                            color='#827F80'
-                            size={25}
-                            iconStyle={{marginBottom: 15, flex: 1}}
-                        />
+                        <View style={styles.profileMenu}>
+                            <View style={{flex: 3}}>
+                                <TouchableOpacity
+                                    onPress={this.navigateToScreen('About')}>
+                                    <Text style={styles.profileMenuText}>About Us</Text>
+                                </TouchableOpacity>                                                                                                          
+                            </View>
+                            <Icon
+                                name={Platform.OS === 'ios' ? 'ios-help-circle-outline' : 'md-help-circle-outline'}
+                                color='#827F80'
+                                size={26} />
+                        </View>
                     </View>
                 </View>
-            </View>
+            </ScrollView>
         );
     }
 }
 
 const styles = StyleSheet.create({
     mainContainer: {
-        flex: 1,
         backgroundColor: '#fff',
-        paddingTop: 30,
-        paddingRight: 30,
-        paddingLeft: 30
+        padding: 20,
+    },
+    content: {
+        paddingBottom: 40
     },
     nameImageContainer: {
-        flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
         paddingBottom: 20,
         paddingTop: 20
     },
     progress: {
-        flex: 1,
         marginBottom: 30
     },
     stepsContainer: {
-        flex: 3,
         borderTopWidth: 1,
         borderColor: '#bbb',
     },
@@ -173,7 +171,8 @@ const styles = StyleSheet.create({
     },
     profileMenuText: {
         fontSize: 20,
-        fontWeight: '600'
+        fontWeight: '400',
+        color: colors.gray04
     },
     defaultText: {
         fontSize: 16,
@@ -186,12 +185,12 @@ const styles = StyleSheet.create({
     },  
     incInfoHeader: {
         fontSize: 20,
-        fontWeight: '600'
+        fontWeight: '500'
     },
     incInfo: {
         color: '#f86e7b',
         fontSize: 18,
-        fontWeight: '600'
+        fontWeight: '500'
     },
     viewProf: {
         fontSize: 18

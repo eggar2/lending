@@ -9,11 +9,11 @@ import {
   View,
   TextInput,
 } from 'react-native';
-import { WebBrowser } from 'expo';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { NavigationActions } from 'react-navigation';
 
 export default class RegisterScreen extends React.Component {
+    
   static navigationOptions = {
     header: null,
   };

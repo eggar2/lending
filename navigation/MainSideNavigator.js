@@ -7,6 +7,14 @@ import HomeScreen from '../screens/HomeScreen';
 import MainTabNavigator from './MainTabNavigator';
 import LendingDetailsScreen from '../screens/LendingDetailsScreen';
 import LoanReviewScreen from '../screens/LoanReviewScreen';
+import LoginScreen from '../screens/LoginScreen';
+import RegisterScreen from '../screens/RegisterScreen';
+import VerificationScreen from '../screens/VerificationScreen';
+import VerifiedScreen from '../screens/VerifiedScreen';
+import ProfileInfoScreen from '../screens/ProfileInfoScreen';
+import PersonalInfoScreen from '../screens/PersonalInfoScreen';
+import AboutScreen from '../screens/AboutScreen';
+import SettingsScreen from '../screens/SettingsScreen';
 
 const RootStack = createStackNavigator(
     {   
@@ -18,6 +26,14 @@ const LendingStack = createStackNavigator(
     {
         LendingDetails: LendingDetailsScreen,
         LoanReview: LoanReviewScreen,
+        Login: LoginScreen,
+        Register: RegisterScreen,
+        Verification: VerificationScreen,
+        Verified: VerifiedScreen,
+        ProfileInfo: ProfileInfoScreen,
+        PersonalInfo: PersonalInfoScreen,
+        About: AboutScreen,
+        Settings: SettingsScreen,
     },
 );
 

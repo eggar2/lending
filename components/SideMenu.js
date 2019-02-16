@@ -62,6 +62,16 @@ class SideMenu extends Component {
                             </Text>
                         </View>
                         <View style={styles.navSectionStyle}>
+                            <Text style={styles.navItemStyle} onPress={this.navigateToScreen('ProfileInfo')}>
+                                Profile Info
+                            </Text>
+                        </View>
+                        <View style={styles.navSectionStyle}>
+                            <Text style={styles.navItemStyle} onPress={this.navigateToScreen('PersonalInfo')}>
+                                Personal Info
+                            </Text>
+                        </View>
+                        <View style={styles.navSectionStyle}>
                             <Text style={styles.navItemStyle} onPress={this.navigatePush('LendingDetails')}>
                                 Lending Details
                             </Text>
@@ -69,6 +79,16 @@ class SideMenu extends Component {
                         <View style={styles.navSectionStyle}>
                             <Text style={styles.navItemStyle} onPress={this.navigatePush('LoanReview')}>
                                 Loan Review
+                            </Text>
+                        </View>
+                        <View style={styles.navSectionStyle}>
+                            <Text style={styles.navItemStyle} onPress={this.navigatePush('About')}>
+                                About Us
+                            </Text>
+                        </View>
+                        <View style={styles.navSectionStyle}>
+                            <Text style={styles.navItemStyle} onPress={this.navigatePush('Settings')}>
+                                Settings
                             </Text>
                         </View>
                         <View style={styles.navSectionStyle}></View>
