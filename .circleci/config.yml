@@ -1,3 +1,26 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/lending
+    # The primary container is an instance of the first image listed. The job's commands run in this container.
+    steps:
+      - checkout
+      - run:
+          name: Update yarn
+          command: 'sudo npm install -g yarn'
+      - run:
+          name: Install yarn wee
+          command: yarn
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+    test:
+      requires:
+        - build
+      filters:
+        branches:
+          only: stage
 workflows:
   version: 2
   build_and_test:
