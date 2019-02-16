@@ -14,6 +14,7 @@ import ProfileInfoScreen from '../screens/ProfileInfoScreen';
 import PersonalInfoScreen from '../screens/PersonalInfoScreen';
 import AboutScreen from '../screens/AboutScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import ContactInfoScreen from '../screens/ContactInfoScreen';
 
 const RootStack = createStackNavigator(
     {   
@@ -32,6 +33,7 @@ const LendingStack = createStackNavigator(
         PersonalInfo: PersonalInfoScreen,
         About: AboutScreen,
         Settings: SettingsScreen,
+        Contact: ContactInfoScreen,
     },
 );
 

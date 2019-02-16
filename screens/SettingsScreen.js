@@ -25,7 +25,7 @@ export default class PersonalInfoScreen extends Component {
         },
         headerLeft: (
             <TouchableHighlight
-                onPress={() => { navigation.navigate('Home'); }}
+                onPress={() => { navigation.navigate('Profile'); }}
                 underlayColor={colors.gray01}
                 style={{marginLeft: 10, paddingHorizontal: 10}} >
                 <Icon

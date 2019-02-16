@@ -4,20 +4,34 @@ import {
     Text,
     View,
     ScrollView,
-    Image
+    Image,
+    TouchableOpacity
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import colors from '../assets/colors';
+import { NavigationActions } from 'react-navigation';
 
 export default class ProfileInfoScreen extends Component {
+
+    static navigationOptions = {
+        header: null,
+    };
 
     constructor(props) {
         super(props);
         this.state = {
           profInfoName: 'Richard Illescas',
-          profInfoDesc: 'Member since June 2018',
+          profInfoDesc: 'June 2018',
           profInfoImg: ''
         }
     }
+
+    navigateToScreen = (route) => () => {
+		const navigateAction = NavigationActions.navigate({
+			routeName: route
+		});
+		this.props.navigation.dispatch(navigateAction);
+	}
 
     render() {
 
@@ -42,57 +56,38 @@ export default class ProfileInfoScreen extends Component {
                         {profImage}
                         <View style={{padding: 15}}>
                             <Text style={styles.name}>{this.state.profInfoName}</Text>
-                            <Text style={styles.descText}>{this.state.profInfoDesc}</Text>
+                            <Text style={styles.descText}>Member since {this.state.profInfoDesc}</Text>
                         </View>
                     </View>
                     <View style={styles.stepsContainer}>
                         <View style={[styles.profileMenu, styles.profileMenuFirst]}>
                             <View style={{flex: 3}}>
-                                <Text style={styles.profileMenuText}>Identification</Text>
+                                <TouchableOpacity
+                                    onPress={this.navigateToScreen('Identification')}>
+                                    <Text style={styles.profileMenuText}>Identification</Text>
+                                </TouchableOpacity>
                             </View>
-                            <Icon
-                                name='check'
-                                type='font-awesome'
-                                color='#827F80'
-                                size={25}
-                                iconStyle={{marginBottom: 15, flex: 1}}
-                            />
                         </View>
                         <View style={styles.profileMenu}>
                             <View style={{flex: 3}}>
-                                <Text style={styles.profileMenuText}>Personal Information</Text>
+                                <TouchableOpacity
+                                    onPress={this.navigateToScreen('PersonalInfo')}>
+                                    <Text style={styles.profileMenuText}>Personal Information</Text>
+                                </TouchableOpacity>
                             </View>
-                            <Icon
-                                name='check'
-                                type='font-awesome'
-                                color='#827F80'
-                                size={25}
-                                iconStyle={{marginBottom: 15, flex: 1}}
-                            />
                         </View>
                         <View style={styles.profileMenu}>
                             <View style={{flex: 3}}>
                                 <Text style={styles.profileMenuText}>Work Information</Text>
                             </View>
-                            <Icon
-                                name='check'
-                                type='font-awesome'
-                                color='#827F80'
-                                size={25}
-                                iconStyle={{marginBottom: 15, flex: 1}}
-                            />
                         </View>
                         <View style={styles.profileMenu}>
                             <View style={{flex: 3}}>
-                                <Text style={styles.profileMenuText}>Contact Information</Text>
+                                <TouchableOpacity
+                                    onPress={this.navigateToScreen('Contact')}>
+                                    <Text style={styles.profileMenuText}>Contact Information</Text>
+                                </TouchableOpacity>                            
                             </View>
-                            <Icon
-                                name='check'
-                                type='font-awesome'
-                                color='#827F80'
-                                size={25}
-                                iconStyle={{marginBottom: 15, flex: 1}}
-                            />
                         </View>
                     </View>
                 </View>
@@ -110,7 +105,6 @@ const styles = StyleSheet.create({
         paddingBottom: 30
     },
     profContainer: {
-        
     },
     stepsContainer: {
         paddingHorizontal: 15,
@@ -118,7 +112,8 @@ const styles = StyleSheet.create({
     },
     name: {
         fontSize: 30,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        color: colors.black
     },
     profileMenuFirst: {
         borderTopWidth: 1,
@@ -134,7 +129,7 @@ const styles = StyleSheet.create({
     },
     profImage: {
         height: 240,
-        maxWidth: '100%'
+        maxWidth: '100%',
     },
     profileMenuText: {
         fontSize: 20,
