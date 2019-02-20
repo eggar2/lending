@@ -25,7 +25,7 @@ export default class PersonalInfoScreen extends Component {
         },
         headerLeft: (
             <TouchableHighlight
-                onPress={() => { navigation.navigate('Home'); }}
+                onPress={() => { navigation.navigate('ProfileInfo'); }}
                 underlayColor={colors.gray01}
                 style={{marginLeft: 10, paddingHorizontal: 10}} >
                 <Icon
@@ -98,12 +98,12 @@ export default class PersonalInfoScreen extends Component {
                         </View>
                     </View>
                     <View style={styles.buttonContainer2}>
-                    <TouchableOpacity
-                        style={styles.buttonStyle2}
-                        onPress={this.confirm}  >
+                        <TouchableOpacity
+                            style={styles.buttonStyle2}
+                            onPress={this.confirm}  >
 
-                        <Text style={styles.buttonText}>Confirm</Text>
-                    </TouchableOpacity>
+                            <Text style={styles.buttonText}>Confirm</Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
             </View>

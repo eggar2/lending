@@ -10,14 +10,19 @@ import {
 import { NavigationActions } from 'react-navigation';
 import { Icon } from 'expo';
 import FAIcon from 'react-native-vector-icons/FontAwesome';
+import colors from '../assets/colors';
 
 export default class ProfileInfoScreen extends Component {
+
+    static navigationOptions = {
+        header: null,
+    };
 
     constructor(props) {
         super(props);
         this.state = {
           profInfoName: 'Richard Illescas',
-          profInfoDesc: 'Member since June 2018',
+          profInfoDesc: 'June 2018',
           profInfoImg: ''
         }
     }
@@ -50,6 +55,13 @@ export default class ProfileInfoScreen extends Component {
         this.props.navigation.dispatch(navigateAction);
     }
 
+    navigateToScreen = (route) => () => {
+		const navigateAction = NavigationActions.navigate({
+			routeName: route
+		});
+		this.props.navigation.dispatch(navigateAction);
+	}
+
     render() {
 
         let profImage;
@@ -73,7 +85,7 @@ export default class ProfileInfoScreen extends Component {
                         {profImage}
                         <View style={{padding: 15}}>
                             <Text style={styles.name}>{this.state.profInfoName}</Text>
-                            <Text style={styles.descText}>{this.state.profInfoDesc}</Text>
+                            <Text style={styles.descText}>Member since {this.state.profInfoDesc}</Text>
                         </View>
                     </View>
                     <View style={styles.stepsContainer}>
@@ -93,7 +105,10 @@ export default class ProfileInfoScreen extends Component {
                         </View>
                         <View style={styles.profileMenu}>
                             <View style={{flex: 3}}>
-                                <Text style={styles.profileMenuText}>Personal Information</Text>
+                                <TouchableOpacity
+                                    onPress={this.navigateToScreen('PersonalInfo')}>
+                                    <Text style={styles.profileMenuText}>Personal Information</Text>
+                                </TouchableOpacity>
                             </View>
                             <FAIcon
                                 name='check'
@@ -119,7 +134,10 @@ export default class ProfileInfoScreen extends Component {
                         </View>
                         <View style={styles.profileMenu}>
                             <View style={{flex: 3}}>
-                                <Text style={styles.profileMenuText}>Contact Information</Text>
+                                <TouchableOpacity
+                                    onPress={this.navigateToScreen('Contact')}>
+                                    <Text style={styles.profileMenuText}>Contact Information</Text>
+                                </TouchableOpacity>                            
                             </View>
                             <FAIcon
                                 name='check'
@@ -145,7 +163,6 @@ const styles = StyleSheet.create({
         paddingBottom: 30
     },
     profContainer: {
-        
     },
     stepsContainer: {
         paddingHorizontal: 15,
@@ -153,7 +170,8 @@ const styles = StyleSheet.create({
     },
     name: {
         fontSize: 30,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        color: colors.black
     },
     profileMenuFirst: {
         borderTopWidth: 1,
@@ -169,7 +187,7 @@ const styles = StyleSheet.create({
     },
     profImage: {
         height: 240,
-        maxWidth: '100%'
+        maxWidth: '100%',
     },
     profileMenuText: {
         fontSize: 20,

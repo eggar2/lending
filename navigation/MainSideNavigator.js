@@ -18,6 +18,7 @@ import ShareLinksScreen from '../screens/ShareLinksScreen';
 import IdScreen from '../screens/IdScreen';
 import ProfileInfoScreen from '../screens/ProfileInfoScreen';
 import WorkInfoScreen from '../screens/WorkInfoScreen';
+import ContactInfoScreen from '../screens/ContactInfoScreen';
 
 const RootStack = createStackNavigator(
     {   
@@ -34,7 +35,6 @@ const LendingStack = createStackNavigator(
         Register: RegisterScreen,
         Verification: VerificationScreen,
         Verified: VerifiedScreen,
-        PersonalInfo: PersonalInfoScreen,
         About: AboutScreen,
         Settings: SettingsScreen,
     },
@@ -46,6 +46,8 @@ const ProfileInfoStack = createStackNavigator(
         ProfileInfo: ProfileInfoScreen,
         Identification: IdScreen,
         WorkInfo: WorkInfoScreen,
+        PersonalInfo: PersonalInfoScreen,
+        Contact: ContactInfoScreen,
     },
 );
 

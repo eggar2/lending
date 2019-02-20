@@ -58,7 +58,10 @@ export default class ProfileScreen extends Component {
                     <View style={styles.nameImageContainer}>
                         <View style={{flex: 3}}>
                             <Text style={styles.name}>{this.state.profName}</Text>
-                            <Text style={styles.viewProf}>{this.state.profDetails}</Text>
+                            <TouchableOpacity
+                                onPress={this.navigateToScreen('ProfileInfo')}>
+                                <Text style={styles.viewProf}>{this.state.profDetails}</Text>
+                            </TouchableOpacity>
                         </View>
 
                         <TouchableOpacity onPress={this.navigateToScreen('ProfileInfo')} >
@@ -112,7 +115,10 @@ export default class ProfileScreen extends Component {
                         </View>
                         <View style={styles.profileMenu}>
                             <View style={{flex: 3}}>
-                                <Text style={styles.profileMenuText}>Settings</Text>
+                                <TouchableOpacity
+                                    onPress={this.navigateToScreen('Settings')}>
+                                    <Text style={styles.profileMenuText}>Settings</Text>
+                                </TouchableOpacity> 
                             </View>
                             <Icon
                                 name={Platform.OS === 'ios' ? 'ios-settings' : 'md-settings'}
@@ -124,7 +130,7 @@ export default class ProfileScreen extends Component {
                                 <TouchableOpacity
                                     onPress={this.navigateToScreen('About')}>
                                     <Text style={styles.profileMenuText}>About Us</Text>
-                                </TouchableOpacity>                                                                                                          
+                                </TouchableOpacity>                                                          
                             </View>
                             <Icon
                                 name={Platform.OS === 'ios' ? 'ios-help-circle-outline' : 'md-help-circle-outline'}

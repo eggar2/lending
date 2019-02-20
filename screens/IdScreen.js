@@ -226,10 +226,12 @@ export default class IdScreen extends React.Component {
                                     <Text style={styles.buttonText}>Positive ID Photo</Text>
                                 </TouchableOpacity>
                                 <View style={styles.imageUploadPreview}>
-                                    <AutoHeightImage
-                                        width={(dimensions.width / 2) - 25}
-                                        source={{ uri: this.state.imagePosId }}
-                                    />
+                                    {this.state.imagePosId && (
+                                        <AutoHeightImage
+                                            width={(dimensions.width / 2) - 25}
+                                            source={{ uri: this.state.imagePosId }}
+                                        />
+                                    )}
                                 </View>
                             </View>
                             <View style={[styles.twoColumnWrapperItem, { paddingLeft: 5 }]}>
@@ -237,10 +239,13 @@ export default class IdScreen extends React.Component {
                                     <Text style={styles.buttonText}>Handheld ID Photo</Text>
                                 </TouchableOpacity>
                                 <View style={styles.imageUploadPreview}>
-                                    <AutoHeightImage
-                                        width={(dimensions.width / 2) - 25}
-                                        source={{ uri: this.state.imageHandheldId }}
-                                    />
+                                    {this.state.imageHandheldId && (
+                                        <AutoHeightImage
+                                            width={(dimensions.width / 2) - 25}
+                                            source={{ uri: this.state.imageHandheldId }}
+                                        />
+                                    )}
+
                                 </View>
                             </View>
                         </View>

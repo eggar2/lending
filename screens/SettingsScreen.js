@@ -25,7 +25,7 @@ export default class PersonalInfoScreen extends Component {
         },
         headerLeft: (
             <TouchableHighlight
-                onPress={() => { navigation.navigate('Home'); }}
+                onPress={() => { navigation.navigate('Profile'); }}
                 underlayColor={colors.gray01}
                 style={{marginLeft: 10, paddingHorizontal: 10}} >
                 <Icon
@@ -45,20 +45,6 @@ export default class PersonalInfoScreen extends Component {
     }
 
     render() {
-
-        let profImage;
-
-        if(this.state.profInfoImg) {
-            profImage = <Image 
-                style={styles.profImage}
-                source={{uri: this.state.profinfoImg}}
-            />
-        } else {
-            profImage = <Image 
-                style={styles.profImage}
-                source={{uri: 'http://placehold.it/720x420'}}
-            />
-        }
 
         return (
             <View style={styles.mainContainer}>
