@@ -13,7 +13,6 @@ import { NavigationActions } from 'react-navigation';
 import Icon from "react-native-vector-icons/Ionicons";
 import colors from '../assets/colors';
 import * as Progress from 'react-native-progress';
-import { NavigationActions } from 'react-navigation';
 
 export default class ProfileScreen extends Component {
 
