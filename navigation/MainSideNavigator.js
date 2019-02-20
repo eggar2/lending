@@ -20,6 +20,9 @@ import ProfileInfoScreen from '../screens/ProfileInfoScreen';
 import WorkInfoScreen from '../screens/WorkInfoScreen';
 import ContactInfoScreen from '../screens/ContactInfoScreen';
 
+// ID Steps
+import IdStep1Screen from '../screens/id_steps/IdStep1Screen';
+
 const RootStack = createStackNavigator(
     {   
         Home: HomeScreen,
@@ -51,11 +54,19 @@ const ProfileInfoStack = createStackNavigator(
     },
 );
 
+// PROFILE 
+const IdentificationStack = createStackNavigator(
+    {
+        IdStep1: IdStep1Screen,
+    },
+);
+
 const MyDrawerNavigator = createDrawerNavigator({
     Tab: MainTabNavigator,
     Main: RootStack,
     Lending: LendingStack,
-    ProfileInfo: ProfileInfoStack
+    ProfileInfo: ProfileInfoStack,
+    IdSteps: IdentificationStack
 }, {
     contentComponent: SideMenu,
     drawerWidth: 300,

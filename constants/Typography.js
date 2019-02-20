@@ -18,6 +18,12 @@ export default {
         fontWeight: '700',
         color: colors.gray04,
     },
+    textNormalLarger: {
+        fontSize: 30
+    },
+    textNormalLarge: {
+        fontSize: 20
+    },
     textNormal: {
         fontSize: 15
     },

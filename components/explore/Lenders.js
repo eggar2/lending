@@ -3,12 +3,14 @@ import {
     ScrollView,
     StyleSheet,
     TouchableOpacity,
-    Image,
     View,
     Text,
+    Platform
 } from 'react-native';
 import colors from '../../assets/colors';
+import typo from '../../constants/Typography';
 import iPhoneSize from '../../helpers/utils';
+import AutoHeightImage from 'react-native-auto-height-image';
 
 const size = iPhoneSize();
 let cardSize = 120;
@@ -31,13 +33,13 @@ export default class Lenders extends Component {
                 key={`lander-item-${index}`}
             >   
                 <View style={styles.lenderWrapper}>
-                    <Image
+                    <AutoHeightImage
+                        width={115}
                         source={lender.logo}
                         style={styles.image}
                     />
                     <View style={styles.lenderDetailWrapper}>
-                        <Text style={styles.lenderName}>{lender.name}</Text>
-                        <Text style={styles.lenderDesc}>{lender.description}</Text>
+                        <Text style={[typo.headerTitle, {fontWeight: '700', fontSize: 14}]}>{lender.name}</Text>
                     </View>
                 </View>
             </TouchableOpacity>
@@ -65,26 +67,30 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'column',
         width: cardSize,
-        height: cardSize,
+        // height: cardSize,
         marginRight: cardMargin,
         marginLeft: cardMargin,
         padding: 5,
     },
-    image: {
-        width: '100%',
-        height: 30,
-    },
     lenderWrapper: {
         borderWidth: 0,
-        // borderColor: colors.gray01,
-        elevation: 5,
+        ...Platform.select({
+            ios: {
+                shadowColor: '#666',
+                shadowOffset: { height: -3 },
+                shadowOpacity: 0.1,
+                shadowRadius: 3,
+            },
+            android: {
+                elevation: 5,
+            },
+        })
     },
     lenderDetailWrapper: {
         backgroundColor: colors.gray01,
-        padding: 5,
-    },
-    lenderName: {
-        fontSize: 15
+        paddingVertical: 10,
+        paddingHorizontal: 5,
+        width: 115
     },
     lenderDesc: {
         fontSize: 12,

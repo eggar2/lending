@@ -91,7 +91,7 @@ export default class ProfileInfoScreen extends Component {
                     <View style={styles.stepsContainer}>
                         <View style={[styles.profileMenu, styles.profileMenuFirst]}>
                             <View style={{flex: 3}}>
-                                <TouchableOpacity onPress={this.navigateToScreen('Identification')} >
+                                <TouchableOpacity onPress={this.navigateToScreen('IdStep1')} >
                                     <Text style={styles.profileMenuText}>Identification</Text>
                                 </TouchableOpacity>
                             </View>

@@ -39,7 +39,7 @@ export default class PaymentGatewayScreen extends React.Component {
                             <View style={[columns.threeColumnWrapperItem]}>
                                 <AutoHeightImage
                                     width={80}
-                                    source={require('../assets/images/credit-card.jpg')}
+                                    source={require('../assets/images/payment/credit-card.jpg')}
                                 />
                             </View>
                             <View style={[columns.twoColumnWrapperItem, styles.paymentTitle]}>
@@ -59,7 +59,7 @@ export default class PaymentGatewayScreen extends React.Component {
                             <View style={[columns.threeColumnWrapperItem]}>
                                 <AutoHeightImage
                                     width={80}
-                                    source={require('../assets/images/gcash.jpg')}
+                                    source={require('../assets/images/payment/gcash.jpg')}
                                 />
                             </View>
                             <View style={[columns.twoColumnWrapperItem, styles.paymentTitle]}>
@@ -79,7 +79,7 @@ export default class PaymentGatewayScreen extends React.Component {
                             <View style={[columns.threeColumnWrapperItem]}>
                                 <AutoHeightImage
                                     width={80}
-                                    source={require('../assets/images/cliqq.png')}
+                                    source={require('../assets/images/payment/cliqq.png')}
                                 />
                             </View>
                             <View style={[columns.twoColumnWrapperItem, styles.paymentTitle]}>

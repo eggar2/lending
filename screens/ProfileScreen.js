@@ -69,41 +69,50 @@ export default class ProfileScreen extends Component {
                         </TouchableOpacity>
 
                     </View>
-                    <View style={styles.progress}>
-                        <View style={styles.incContainer}>
-                            <Text style={styles.incInfoHeader}>Just 4 steps</Text>
-                            <Text style={styles.incInfo}>{this.state.incInfo}</Text>
+                    <TouchableOpacity
+                        onPress={this.navigateToScreen('ProfileInfo')}>
+                        <View style={styles.progress}>
+                            <View style={styles.incContainer}>
+                                <Text style={styles.incInfoHeader}>Just 4 steps</Text>
+                                <Text style={styles.incInfo}>{this.state.incInfo}</Text>
+                            </View>
+                            <Progress.Bar 
+                                progress={0.25} 
+                                borderWidth={0} 
+                                borderRadius={0} 
+                                width={null} 
+                                height={10}
+                                color='#429cf4'
+                                unfilledColor='#c6e0fb'
+                            />
+                            <Text style={styles.defaultText}>{this.state.profSteps}</Text>
                         </View>
-                        <Progress.Bar 
-                            progress={0.25} 
-                            borderWidth={0} 
-                            borderRadius={0} 
-                            width={null} 
-                            height={10}
-                            color='#429cf4'
-                            unfilledColor='#c6e0fb'
-                        />
-                        <Text style={styles.defaultText}>{this.state.profSteps}</Text>
-                    </View>
+                    </TouchableOpacity>
                     <View style={styles.stepsContainer}>
-                        <View style={styles.profileMenu}>
-                            <View style={{flex: 3}}>
-                                <Text style={styles.profileMenuText}>Notifications</Text>
+                        <TouchableOpacity
+                            onPress={this.navigateToScreen('Notifications')}>
+                            <View style={styles.profileMenu}>
+                                <View style={{flex: 3}}>
+                                    <Text style={styles.profileMenuText}>Notifications</Text>
+                                </View>
+                                <Icon
+                                    name={Platform.OS === 'ios' ? 'ios-notifications-outline' : 'md-notifications-outline'}
+                                    color='#827F80'
+                                    size={26} />
                             </View>
-                            <Icon
-                                name={Platform.OS === 'ios' ? 'ios-notifications-outline' : 'md-notifications-outline'}
-                                color='#827F80'
-                                size={26} />
-                        </View>
-                        <View style={styles.profileMenu}>
-                            <View style={{flex: 3}}>
-                                <Text style={styles.profileMenuText}>Loan Record</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            onPress={this.navigateToScreen('Loans')}>
+                            <View style={styles.profileMenu}>
+                                <View style={{flex: 3}}>
+                                    <Text style={styles.profileMenuText}>Loan Record</Text>
+                                </View>
+                                <Icon
+                                    name={Platform.OS === 'ios' ? 'ios-folder-open' : 'md-folder-open'}
+                                    color='#827F80'
+                                    size={26} />
                             </View>
-                            <Icon
-                                name={Platform.OS === 'ios' ? 'ios-folder-open' : 'md-folder-open'}
-                                color='#827F80'
-                                size={26} />
-                        </View>
+                        </TouchableOpacity>
                         <View style={styles.profileMenu}>
                             <View style={{flex: 3}}>
                                 <Text style={styles.profileMenuText}>Invite Your Fiends</Text>
