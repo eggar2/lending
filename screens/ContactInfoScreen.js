@@ -6,7 +6,9 @@ import {
     View,
     TouchableHighlight,
     Platform,
-    TouchableOpacity
+    TouchableOpacity,
+    Picker,
+    ScrollView
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import colors from '../assets/colors';
@@ -49,11 +51,27 @@ export default class ContactInfoScreen extends Component {
     render() {
 
         return (
-            <View style={styles.mainContainer}>
+            <ScrollView>
                 <View style={styles.content}>
                     <View style={styles.parentFriendView}>
                         <View>
-                            <Text style={styles.contactText}>Parent</Text>
+                            <Text style={styles.contactText}>First Contact</Text>
+                            <View style={{borderBottomWidth: 1, borderColor: "#ddd"}}>
+                                <Picker
+                                    selectedValue={this.state.language}
+                                    style={styles.dropDown}
+                                    itemStyle={styles.dropDownItem}
+                                    prompt='Relation'
+                                    onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})}>
+                                    <Picker.Item label="Spouse" value="spouse" />
+                                    <Picker.Item label="Parents" value="parents" />
+                                    <Picker.Item label="Children" value="children" />
+                                    <Picker.Item label="Brothers/Sisters" value="brothers-sisters" />
+                                    <Picker.Item label="Relatives" value="relatives" />
+                                    <Picker.Item label="Friends" value="friends" />
+                                    <Picker.Item label="Colleagues" value="colleagues" />
+                                </Picker>
+                            </View>
                             <TextInput
                                 style={styles.input}
                                 onChangeText={(text) => this.setState({parentName: text})}
@@ -63,10 +81,24 @@ export default class ContactInfoScreen extends Component {
                                 onChangeText={(text) => this.setState({parentTel: text})}
                                 placeholder="Tel" />
                         </View>
-                    </View>
-                    <View style={styles.parentFriendView}>
-                        <View>
-                            <Text style={styles.contactText}>Friend</Text>
+                        <View style={{marginTop: 20}}>
+                            <Text style={styles.contactText}>Second Contact</Text>
+                            <View style={{borderBottomWidth: 1, borderColor: "#ddd"}}>
+                                <Picker
+                                    selectedValue={this.state.language}
+                                    style={styles.dropDown}
+                                    itemStyle={styles.dropDownItem}
+                                    prompt='Relation'
+                                    onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})}>
+                                    <Picker.Item label="Spouse" value="spouse" />
+                                    <Picker.Item label="Parents" value="parents" />
+                                    <Picker.Item label="Children" value="children" />
+                                    <Picker.Item label="Brothers/Sisters" value="brothers-sisters" />
+                                    <Picker.Item label="Relatives" value="relatives" />
+                                    <Picker.Item label="Friends" value="friends" />
+                                    <Picker.Item label="Colleagues" value="colleagues" />
+                                </Picker>
+                            </View>
                             <TextInput
                                 style={styles.input}
                                 onChangeText={(text) => this.setState({friendName: text})}
@@ -82,11 +114,11 @@ export default class ContactInfoScreen extends Component {
                             style={styles.buttonStyle2}
                             onPress={this.confirm}  >
 
-                            <Text style={styles.buttonText}>Confirm</Text>
+                            <Text style={styles.buttonText}>Next</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
-            </View>
+            </ScrollView>
         );
     }
 }
@@ -97,28 +129,28 @@ const styles = StyleSheet.create({
         flex: 1
     },
     content: {
-        flex: 1,
         padding: 20
-
     },
     contactText: {
-        fontSize: 20,
+        fontSize: 18,
         fontWeight: '600',
         color: colors.black,
-        marginBottom: 5
     },
     parentFriendView: {
-        flex: 2
+
     },
     buttonContainer2: {
         flex: 1,
-        justifyContent: 'flex-end'
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 40
     },
     buttonStyle2: {
         backgroundColor: '#1B9AF7',
         alignItems: 'center',
-	    padding: 10,
-        borderRadius: 10,
+        width: 150,
+	    padding: 15,
+        borderRadius: 50,
         ...Platform.select({
             ios: {
               shadowColor: '#666',
@@ -138,11 +170,19 @@ const styles = StyleSheet.create({
     },
     input: {
         color: colors.gray04,
-        fontWeight: 'bold',
-        fontSize: 18,
-        padding: 12,
+        fontSize: 17,
+        padding: 10,
         borderBottomWidth: 1,
-        borderColor: '#999'
+        borderColor: '#ddd'
+    },
+    dropDown: {
+        height: 50, 
+        width: "100%", 
+        paddingHorizontal: 12,
+    },
+    dropDownItem: {
+        fontSize: 18,
+        color: colors.gray04
     }
     
 })
