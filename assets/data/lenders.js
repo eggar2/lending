@@ -1,28 +1,28 @@
 const lendersList = [
     {
-        name: 'Lender 1',
+        name: '3 Jewels Lending Corporation',
         description: 'Lender description here',
-        logo: require('./photos/lender_logo.jpg'), 
+        logo: require('../images/lendster_logo_new.png'), 
     },
     {
-        name: 'Lender 2',
+        name: '3 Jewels Lending Corporation',
         description: 'Lender description here',
-        logo: require('./photos/lender_logo.jpg'),
+        logo: require('../images/lendster_logo_new.png'),
     },
     {
-        name: 'Lender 3',
+        name: '3 Jewels Lending Corporation',
         description: 'Lender description here',
-        logo: require('./photos/lender_logo.jpg'),
+        logo: require('../images/lendster_logo_new.png'),
     },
     {
-        name: 'Lender 4',
+        name: '3 Jewels Lending Corporation',
         description: 'Lender description here',
-        logo: require('./photos/lender_logo.jpg'),
+        logo: require('../images/lendster_logo_new.png'),
     },
     {
-        name: 'Lender 5',
+        name: '3 Jewels Lending Corporation',
         description: 'Lender description here',
-        logo: require('./photos/lender_logo.jpg'),
+        logo: require('../images/lendster_logo_new.png'),
     },
 ];
 

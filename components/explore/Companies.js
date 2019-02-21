@@ -4,13 +4,14 @@ import {
     ScrollView,
     StyleSheet,
     TouchableOpacity,
-    Image,
     View,
     Text,
+    Dimensions
 } from 'react-native';
 import colors from '../../assets/colors';
 import HeartButton from '../buttons/HeartButton';
 import Stars from '../Stars';
+import AutoHeightImage from 'react-native-auto-height-image';
 
 export default class Companies extends Component {
 
@@ -20,6 +21,7 @@ export default class Companies extends Component {
 
     get Companies() {
         const { companies } = this.props;
+        const dimensions = Dimensions.get('window');
         return companies.map((company, index) => (
             <TouchableOpacity
                 key={index}
@@ -33,10 +35,10 @@ export default class Companies extends Component {
                             selectedColor={colors.pink}
                         />
                     </View>
-                    <Image
-                        style={styles.image}
-                        resizeMode="contain"
+                    <AutoHeightImage
+                        width={(dimensions.width / 2) - 35}
                         source={company.photo}
+                        style={styles.companyImage}
                     />
                     <View style={styles.listingDetail}>
                         <Text style={styles.listingTitle} numberOfLines={2} >
@@ -82,7 +84,7 @@ const styles = StyleSheet.create({
     companyWrapper: {
         height: undefined,
         width: '50%',
-        marginBottom: 20
+        marginBottom: 20,
     },
     addToFavoriteBtn: {
         position: 'absolute',
@@ -90,10 +92,9 @@ const styles = StyleSheet.create({
         top: 7,
         zIndex: 2,
     },
-    image: {
-        width: '100%',
-        height: 100,
+    companyImage: {
         marginBottom: 7,
+        alignItems: 'center',
     },
     listingDetail: {
         paddingHorizontal: 15,

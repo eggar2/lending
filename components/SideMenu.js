@@ -91,6 +91,21 @@ class SideMenu extends Component {
                                 Settings
                             </Text>
                         </View>
+                        <View style={styles.navSectionStyle}>
+                            <Text style={styles.navItemStyle} onPress={this.navigatePush('PaymentGateway')}>
+                                Payment Gateway
+                            </Text>
+                        </View>
+                        <View style={styles.navSectionStyle}>
+                            <Text style={styles.navItemStyle} onPress={this.navigatePush('ShareLinks')}>
+                                Share Links
+                            </Text>
+                        </View>
+                        <View style={styles.navSectionStyle}>
+                            <Text style={styles.navItemStyle} onPress={this.navigateToScreen('WorkInfo')}>
+                                Work Information
+                            </Text>
+                        </View>
                         <View style={styles.navSectionStyle}></View>
                     </View>
                 </ScrollView>

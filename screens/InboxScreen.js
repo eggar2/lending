@@ -1,17 +1,31 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
     Text,
-    View
+    View,
+    StyleSheet,
+    ScrollView
 } from 'react-native';
 
-class InboxScreen extends Component {
+export default class InboxScreen extends React.Component {
+
+    static navigationOptions = {
+        title: 'Inbox',
+    }
+
     render() {
         return (
-            <View style={{ padding: 50 }}>
-                <Text>Inbox</Text>
-            </View>
+            <ScrollView style={styles.container}>
+                <View>
+                    <Text>Inbox Screen</Text>
+                </View>
+            </ScrollView>
         );
     }
 }
 
-export default InboxScreen;
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        padding: 20,
+    }, 
+})

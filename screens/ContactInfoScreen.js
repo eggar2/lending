@@ -12,6 +12,19 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import colors from '../assets/colors';
+import { TextField } from 'react-native-material-textfield'; //https://github.com/n4kz/react-native-material-textfield
+import IOSPicker from 'react-native-ios-picker'; //https://github.com/sanpyaelin/react-native-ios-picker/blob/HEAD/readme.md#style
+
+
+const data = [
+    {name: 'Spouse', code: 'spouse'},
+    {name: 'Parents', code: 'parents'},
+    {name: 'Children', code: 'children'},
+    {name: 'Brothers/Sisters', code: 'brothers-sisters'},
+    {name: 'Relatives', code: 'relatives'},
+    {name: 'Friends', code: 'friends'},
+    {name: 'Colleagues', code: 'colleagues'}
+]
 
 export default class ContactInfoScreen extends Component {
 
@@ -41,11 +54,16 @@ export default class ContactInfoScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
-        parentName: "",
-        parentTel: "",
-        friendName: "",
-        friendTel: ""
+        contactName1: "",
+        contactTel1: "",
+        contactName2: "",
+        contactTel2: "",
+        selectedValue: ""
         }
+    }
+
+    change(d, i) {
+        this.setState({selectedValue: data[i].name});
     }
 
     render() {
@@ -54,59 +72,73 @@ export default class ContactInfoScreen extends Component {
             <ScrollView>
                 <View style={styles.content}>
                     <View style={styles.parentFriendView}>
-                        <View>
+                        <View style={{flex: 1}}>
                             <Text style={styles.contactText}>First Contact</Text>
-                            <View style={{borderBottomWidth: 1, borderColor: "#ddd"}}>
-                                <Picker
-                                    selectedValue={this.state.language}
-                                    style={styles.dropDown}
-                                    itemStyle={styles.dropDownItem}
-                                    prompt='Relation'
-                                    onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})}>
-                                    <Picker.Item label="Spouse" value="spouse" />
-                                    <Picker.Item label="Parents" value="parents" />
-                                    <Picker.Item label="Children" value="children" />
-                                    <Picker.Item label="Brothers/Sisters" value="brothers-sisters" />
-                                    <Picker.Item label="Relatives" value="relatives" />
-                                    <Picker.Item label="Friends" value="friends" />
-                                    <Picker.Item label="Colleagues" value="colleagues" />
-                                </Picker>
-                            </View>
-                            <TextInput
-                                style={styles.input}
-                                onChangeText={(text) => this.setState({parentName: text})}
-                                placeholder="Name" />
-                            <TextInput
-                                style={styles.input}
-                                onChangeText={(text) => this.setState({parentTel: text})}
-                                placeholder="Tel" />
+                            <IOSPicker 
+                                style={styles.pickerStyle}
+                                textStyle={styles.pickerText}
+                                selectedValue={this.state.selectedValue}
+                                mode='modal'
+                                onValueChange={(d, i)=> this.change(d, i)}>
+                                { 
+                                    data.map((item, index)=>
+                                    <Picker.Item key={index} label={item.name} value={item.code} />
+                                    )
+                                }
+                            </IOSPicker>
+                            <TextField
+                                label='Name'
+                                value={this.state.contactName1}
+                                tintColor={colors.green01}
+                                containerStyle={{marginVertical: 0}}
+                                onChangeText={this.handleIdNumberChange}
+                                error={this.state.isError}
+                                labelTextStyle={{ paddingLeft: 10 }}
+                                inputContainerStyle={{paddingLeft: 10}}
+                            />
+                            <TextField
+                                label='Cellphone Number'
+                                value={this.state.contactTel1}
+                                tintColor={colors.green01}
+                                onChangeText={this.handleIdNumberChange}
+                                error={this.state.isError}
+                                labelTextStyle={{ paddingLeft: 10 }}
+                                inputContainerStyle={{paddingLeft: 10}}
+                            />                           
                         </View>
                         <View style={{marginTop: 20}}>
                             <Text style={styles.contactText}>Second Contact</Text>
-                            <View style={{borderBottomWidth: 1, borderColor: "#ddd"}}>
-                                <Picker
-                                    selectedValue={this.state.language}
-                                    style={styles.dropDown}
-                                    itemStyle={styles.dropDownItem}
-                                    prompt='Relation'
-                                    onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})}>
-                                    <Picker.Item label="Spouse" value="spouse" />
-                                    <Picker.Item label="Parents" value="parents" />
-                                    <Picker.Item label="Children" value="children" />
-                                    <Picker.Item label="Brothers/Sisters" value="brothers-sisters" />
-                                    <Picker.Item label="Relatives" value="relatives" />
-                                    <Picker.Item label="Friends" value="friends" />
-                                    <Picker.Item label="Colleagues" value="colleagues" />
-                                </Picker>
-                            </View>
-                            <TextInput
-                                style={styles.input}
-                                onChangeText={(text) => this.setState({friendName: text})}
-                                placeholder="Name" />
-                            <TextInput
-                                style={styles.input}
-                                onChangeText={(text) => this.setState({friendTel: text})}
-                                placeholder="Tel" />
+                            <IOSPicker 
+                                style={styles.pickerStyle}
+                                textStyle={styles.pickerText}
+                                selectedValue={this.state.selectedValue}
+                                mode='modal'
+                                onValueChange={(d, i)=> this.change(d, i)}>
+                                { 
+                                    data.map((item, index)=>
+                                    <Picker.Item key={index} label={item.name} value={item.code} />
+                                    )
+                                }
+                            </IOSPicker>
+                            <TextField
+                                label='Name'
+                                value={this.state.contactName1}
+                                tintColor={colors.green01}
+                                onChangeText={this.handleIdNumberChange}
+                                error={this.state.isError}
+                                labelTextStyle={{ paddingLeft: 10 }}
+                                inputContainerStyle={{paddingLeft: 10}}
+                            />
+
+                            <TextField
+                                label='Cellphone Number'
+                                value={this.state.contactTel1}
+                                tintColor={colors.green01}
+                                onChangeText={this.handleIdNumberChange}
+                                error={this.state.isError}
+                                labelTextStyle={{ paddingLeft: 10 }}
+                                inputContainerStyle={{paddingLeft: 10}}
+                            />
                         </View>
                     </View>
                     <View style={styles.buttonContainer2}>
@@ -136,8 +168,11 @@ const styles = StyleSheet.create({
         fontWeight: '600',
         color: colors.black,
     },
-    parentFriendView: {
-
+    phoneContainer: {
+        borderBottomWidth: 1,
+        borderColor: '#ddd',
+        flexDirection: 'row',
+        alignItems: 'center',
     },
     buttonContainer2: {
         flex: 1,
@@ -175,14 +210,22 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderColor: '#ddd'
     },
-    dropDown: {
-        height: 50, 
-        width: "100%", 
-        paddingHorizontal: 12,
+    inputPhone: {
+        color: colors.gray04,
+        fontSize: 17,
+        padding: 10,
     },
-    dropDownItem: {
-        fontSize: 18,
-        color: colors.gray04
+    pickerStyle: {
+        borderTopWidth: 0,
+        borderBottomWidth: 1,
+        borderColor: '#ddd',
+        padding: 10,
+        marginTop: 10
+    },
+    pickerText: {
+        fontSize: 16,
+        color: colors.gray04,
+        textTransform: 'capitalize'
     }
     
 })

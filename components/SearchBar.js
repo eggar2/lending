@@ -73,5 +73,10 @@ const styles = StyleSheet.create({
         marginTop: 5,
         marginLeft: 44,
         color: colors.gray02,
+        ...Platform.select({
+            ios: {
+                height: 30
+            },
+        })
     },
 });

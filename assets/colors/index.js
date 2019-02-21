@@ -17,6 +17,7 @@ export default {
     brown01: '#ad8763',
     brown02: '#7d4918',
     blue: '#4995cd',
+    blue02: '#1B9AF7',
     blueGreen: '#008489',
     pink: '#FF5A5F',
 };

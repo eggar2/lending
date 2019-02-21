@@ -7,9 +7,10 @@ import {
     Image,
     TouchableOpacity
 } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import colors from '../assets/colors';
 import { NavigationActions } from 'react-navigation';
+import { Icon } from 'expo';
+import FAIcon from 'react-native-vector-icons/FontAwesome';
+import colors from '../assets/colors';
 
 export default class ProfileInfoScreen extends Component {
 
@@ -24,6 +25,34 @@ export default class ProfileInfoScreen extends Component {
           profInfoDesc: 'June 2018',
           profInfoImg: ''
         }
+    }
+    
+    static navigationOptions = ({ navigation }) => ({
+        headerLeft: (
+            <TouchableOpacity
+                onPress={() => { navigation.navigate('Profile'); }}
+                style={{ marginLeft: 10, paddingHorizontal: 10 }} >
+                <Icon.Ionicons
+                    name={'md-arrow-back'}
+                    size={26} />
+            </TouchableOpacity>
+        ),
+        headerRight: (
+            <TouchableOpacity
+                onPress={() => { navigation.navigate('Profile'); }}
+                style={{ marginLeft: 10, paddingHorizontal: 10 }} >
+                <Icon.Ionicons
+                    name={'ios-create'}
+                    size={26} />
+            </TouchableOpacity>
+        ),
+    });
+
+    navigateToScreen = (route) => () => {
+        const navigateAction = NavigationActions.navigate({
+            routeName: route
+        });
+        this.props.navigation.dispatch(navigateAction);
     }
 
     navigateToScreen = (route) => () => {
@@ -62,11 +91,17 @@ export default class ProfileInfoScreen extends Component {
                     <View style={styles.stepsContainer}>
                         <View style={[styles.profileMenu, styles.profileMenuFirst]}>
                             <View style={{flex: 3}}>
-                                <TouchableOpacity
-                                    onPress={this.navigateToScreen('Identification')}>
+                                <TouchableOpacity onPress={this.navigateToScreen('IdStep1')} >
                                     <Text style={styles.profileMenuText}>Identification</Text>
                                 </TouchableOpacity>
                             </View>
+                            <FAIcon
+                                name='check'
+                                type='font-awesome'
+                                color='#827F80'
+                                size={25}
+                                iconStyle={{marginBottom: 15, flex: 1}}
+                            />
                         </View>
                         <View style={styles.profileMenu}>
                             <View style={{flex: 3}}>
@@ -75,11 +110,27 @@ export default class ProfileInfoScreen extends Component {
                                     <Text style={styles.profileMenuText}>Personal Information</Text>
                                 </TouchableOpacity>
                             </View>
+                            <FAIcon
+                                name='check'
+                                type='font-awesome'
+                                color='#827F80'
+                                size={25}
+                                iconStyle={{marginBottom: 15, flex: 1}}
+                            />
                         </View>
                         <View style={styles.profileMenu}>
                             <View style={{flex: 3}}>
-                                <Text style={styles.profileMenuText}>Work Information</Text>
+                                <TouchableOpacity onPress={this.navigateToScreen('WorkInfo')} >
+                                    <Text style={styles.profileMenuText}>Work Information</Text>
+                                </TouchableOpacity>
                             </View>
+                            <FAIcon
+                                name='check'
+                                type='font-awesome'
+                                color='#827F80'
+                                size={25}
+                                iconStyle={{marginBottom: 15, flex: 1}}
+                            />
                         </View>
                         <View style={styles.profileMenu}>
                             <View style={{flex: 3}}>
@@ -88,6 +139,13 @@ export default class ProfileInfoScreen extends Component {
                                     <Text style={styles.profileMenuText}>Contact Information</Text>
                                 </TouchableOpacity>                            
                             </View>
+                            <FAIcon
+                                name='check'
+                                type='font-awesome'
+                                color='#827F80'
+                                size={25}
+                                iconStyle={{marginBottom: 15, flex: 1}}
+                            />
                         </View>
                     </View>
                 </View>

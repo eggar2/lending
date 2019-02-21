@@ -34,7 +34,7 @@ export default class HomeScreen extends React.Component {
           contentContainerStyle={styles.scrollViewContent}
         >
           <Text style={styles.heading}>Companies that can help you</Text>
-          <View style={styles.lenders}>
+          <View style={styles.lendersContainer}>
             <Lenders lenders={lendersList} />
           </View>
 
@@ -73,11 +73,12 @@ const styles = StyleSheet.create({
   scrollview: {
     paddingTop: 100,
   },
-  lenders: {
-    flex: 1
+  lendersContainer: {
+    flex: 1,
+    paddingVertical: 10
   },
   scrollViewContent: {
-    paddingBottom: 100,
+    paddingBottom: 120,
   },
   heading: {
     fontSize: 22,
@@ -94,19 +95,19 @@ const styles = StyleSheet.create({
   },
   companiesWrapper: {
     marginTop: 20,
-    paddingHorizontal: 10
+    paddingHorizontal: 20
   },
   buttonStyle: {
     backgroundColor: '#fff',
     alignItems: 'center',
-    padding: 10,
+    padding: 15,
     borderRadius: 5,
     marginHorizontal: 20,
     marginBottom: 20,
     ...Platform.select({
       ios: {
-        shadowColor: '#666',
-        shadowOffset: { height: -3 },
+        shadowColor: '#000',
+        shadowOffset: { height: 1 },
         shadowOpacity: 0.1,
         shadowRadius: 3,
       },

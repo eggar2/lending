@@ -8,14 +8,12 @@ import SavedScreen from '../screens/SavedScreen';
 import LoansScreen from '../screens/LoansScreen';
 import InboxScreen from '../screens/InboxScreen';
 import ProfileScreen from '../screens/ProfileScreen';
-import IdScreen from '../screens/IdScreen';
 import LoanDetailScreen from '../screens/LoanDetailScreen';
 import PaymentGatewayScreen from '../screens/PaymentGatewayScreen';
+import NotificationScreen from '../screens/NotificationScreen';
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
-  Identification: IdScreen,
-  Profile: ProfileScreen,
 });
 
 // EXPLORE
@@ -26,7 +24,7 @@ HomeStack.navigationOptions = {
       focused={focused}
       name={
         Platform.OS === 'ios'
-          ? `ios-search${focused ? '' : '-outline'}`
+          ? 'ios-search'
           : 'md-search'
       }
     />
@@ -45,7 +43,7 @@ SavedStack.navigationOptions = {
       focused={focused}
       name={
         Platform.OS === 'ios'
-          ? `ios-heart${focused ? '' : '-outline'}`
+          ? 'ios-heart'
           : 'md-heart'
       }
     />
@@ -87,6 +85,7 @@ InboxStack.navigationOptions = {
 // PROFILE 
 const ProfileStack = createStackNavigator({
   Profile: ProfileScreen,
+  Notifications: NotificationScreen,
 });
 
 ProfileStack.navigationOptions = {
