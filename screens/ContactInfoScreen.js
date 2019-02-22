@@ -12,17 +12,17 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import colors from '../assets/colors';
+import { TextField } from 'react-native-material-textfield'; //https://github.com/n4kz/react-native-material-textfield
+import IOSPicker from 'react-native-ios-picker'; //https://github.com/sanpyaelin/react-native-ios-picker/blob/HEAD/readme.md#style
+import RNPickerSelect from 'react-native-picker-select';
+
 
 export default class ContactInfoScreen extends Component {
 
     static navigationOptions = ({ navigation }) => ({
-        title: 'Contact Information',
+        
         headerStyle: {
             shadowOpacity: 0
-        },
-        headerTitleStyle: {
-            alignSelf: 'center',
-            textAlign: 'center',
         },
         headerLeft: (
             <TouchableHighlight
@@ -40,73 +40,109 @@ export default class ContactInfoScreen extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-        parentName: "",
-        parentTel: "",
-        friendName: "",
-        friendTel: ""
+        this.state = {      
+            contactRelation : [
+                {label: 'Spouse', value: 'spouse'},
+                {label: 'Parents', value: 'parents'},
+                {label: 'Children', value: 'children'},
+                {label: 'Brothers/Sisters', value: 'brothers-sisters'},
+                {label: 'Relatives', value: 'relatives'},
+                {label: 'Friends', value: 'friends'},
+                {label: 'Colleagues', value: 'colleagues'}
+            ],
+            contactName1: "",
+            contactTel1: "",
+            contactName2: "",
+            contactTel2: "",
+            selectedValue1: "",
+            selectedValue2: ""
         }
     }
 
+    contactRelationChange1 = (value, index) => {
+        this.setState({
+            selectedValue1: value,
+        });
+    }
+
+    contactRelationChange2 = (value, index) => {
+        this.setState({
+            selectedValue2: value,
+        });
+    }
+
     render() {
+
+        const placeholder = {
+            label:'Relationship',
+            value: null,
+            color: '#777'
+        };
 
         return (
             <ScrollView>
                 <View style={styles.content}>
                     <View style={styles.parentFriendView}>
-                        <View>
+                        <Text style={styles.titleText}>Contact Information</Text>
+                        <View style={{flex: 1}}>
                             <Text style={styles.contactText}>First Contact</Text>
-                            <View style={{borderBottomWidth: 1, borderColor: "#ddd"}}>
-                                <Picker
-                                    selectedValue={this.state.language}
-                                    style={styles.dropDown}
-                                    itemStyle={styles.dropDownItem}
-                                    prompt='Relation'
-                                    onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})}>
-                                    <Picker.Item label="Spouse" value="spouse" />
-                                    <Picker.Item label="Parents" value="parents" />
-                                    <Picker.Item label="Children" value="children" />
-                                    <Picker.Item label="Brothers/Sisters" value="brothers-sisters" />
-                                    <Picker.Item label="Relatives" value="relatives" />
-                                    <Picker.Item label="Friends" value="friends" />
-                                    <Picker.Item label="Colleagues" value="colleagues" />
-                                </Picker>
-                            </View>
-                            <TextInput
-                                style={styles.input}
-                                onChangeText={(text) => this.setState({parentName: text})}
-                                placeholder="Name" />
-                            <TextInput
-                                style={styles.input}
-                                onChangeText={(text) => this.setState({parentTel: text})}
-                                placeholder="Tel" />
+                            <RNPickerSelect
+                                placeholder={placeholder}
+                                useNativeAndroidPickerStyle={false}
+                                items={this.state.contactRelation}
+                                onValueChange={this.contactRelationChange1}
+                                style={pickerSelectStyles}
+                                value={this.state.selectedValue1}
+                            />
+                            <TextField
+                                label='Name'
+                                value={this.state.contactName1}
+                                tintColor={colors.green01}
+                                containerStyle={{marginVertical: 0}}
+                                onChangeText={this.handleIdNumberChange}
+                                error={this.state.isError}
+                                labelTextStyle={{ paddingLeft: 10 }}
+                                inputContainerStyle={{paddingLeft: 10}}
+                            />
+                            <TextField
+                                label='Cellphone Number'
+                                value={this.state.contactTel1}
+                                tintColor={colors.green01}
+                                onChangeText={this.handleIdNumberChange}
+                                error={this.state.isError}
+                                labelTextStyle={{ paddingLeft: 10 }}
+                                inputContainerStyle={{paddingLeft: 10}}
+                            />                           
                         </View>
-                        <View style={{marginTop: 20}}>
+                        <View style={{marginTop: 30}}>
                             <Text style={styles.contactText}>Second Contact</Text>
-                            <View style={{borderBottomWidth: 1, borderColor: "#ddd"}}>
-                                <Picker
-                                    selectedValue={this.state.language}
-                                    style={styles.dropDown}
-                                    itemStyle={styles.dropDownItem}
-                                    prompt='Relation'
-                                    onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})}>
-                                    <Picker.Item label="Spouse" value="spouse" />
-                                    <Picker.Item label="Parents" value="parents" />
-                                    <Picker.Item label="Children" value="children" />
-                                    <Picker.Item label="Brothers/Sisters" value="brothers-sisters" />
-                                    <Picker.Item label="Relatives" value="relatives" />
-                                    <Picker.Item label="Friends" value="friends" />
-                                    <Picker.Item label="Colleagues" value="colleagues" />
-                                </Picker>
-                            </View>
-                            <TextInput
-                                style={styles.input}
-                                onChangeText={(text) => this.setState({friendName: text})}
-                                placeholder="Name" />
-                            <TextInput
-                                style={styles.input}
-                                onChangeText={(text) => this.setState({friendTel: text})}
-                                placeholder="Tel" />
+                            <RNPickerSelect
+                                placeholder={placeholder}
+                                useNativeAndroidPickerStyle={false}
+                                items={this.state.contactRelation}
+                                onValueChange={this.contactRelationChange2}
+                                style={pickerSelectStyles}
+                                value={this.state.selectedValue2}
+                            />
+                            <TextField
+                                label='Name'
+                                value={this.state.contactName1}
+                                tintColor={colors.green01}
+                                onChangeText={this.handleIdNumberChange}
+                                error={this.state.isError}
+                                labelTextStyle={{ paddingLeft: 10 }}
+                                inputContainerStyle={{paddingLeft: 10}}
+                            />
+
+                            <TextField
+                                label='Cellphone Number'
+                                value={this.state.contactTel1}
+                                tintColor={colors.green01}
+                                onChangeText={this.handleIdNumberChange}
+                                error={this.state.isError}
+                                labelTextStyle={{ paddingLeft: 10 }}
+                                inputContainerStyle={{paddingLeft: 10}}
+                            />
                         </View>
                     </View>
                     <View style={styles.buttonContainer2}>
@@ -131,13 +167,22 @@ const styles = StyleSheet.create({
     content: {
         padding: 20
     },
+    titleText: {
+        fontSize: 25,
+        fontWeight: '600',
+        marginBottom: 10
+
+    },
     contactText: {
-        fontSize: 18,
+        fontSize: 17,
         fontWeight: '600',
         color: colors.black,
     },
-    parentFriendView: {
-
+    phoneContainer: {
+        borderBottomWidth: 1,
+        borderColor: '#ddd',
+        flexDirection: 'row',
+        alignItems: 'center',
     },
     buttonContainer2: {
         flex: 1,
@@ -170,19 +215,47 @@ const styles = StyleSheet.create({
     },
     input: {
         color: colors.gray04,
-        fontSize: 17,
+        fontSize: 16,
         padding: 10,
-        borderBottomWidth: 1,
+        borderBottomWidth: 0.5,
         borderColor: '#ddd'
     },
-    dropDown: {
-        height: 50, 
-        width: "100%", 
-        paddingHorizontal: 12,
+    inputPhone: {
+        color: colors.gray04,
+        fontSize: 16,
+        padding: 10,
     },
-    dropDownItem: {
-        fontSize: 18,
-        color: colors.gray04
+    pickerStyle: {
+        borderTopWidth: 0,
+        borderBottomWidth: 1,
+        borderColor: '#ddd',
+        padding: 10,
+    },
+    pickerText: {
+        fontSize: 16,
+        color: colors.gray04,
+        textTransform: 'capitalize'
     }
     
-})
+});
+
+const pickerSelectStyles = StyleSheet.create({
+    inputIOS: {
+        fontSize: 16,
+        paddingVertical: 12,
+        paddingHorizontal: 10,
+        borderBottomWidth: 1,
+        borderColor: '#ddd',
+        color: 'black',
+        paddingRight: 30,
+    },
+    inputAndroid: {
+        fontSize: 16,
+        paddingHorizontal: 10,
+        paddingVertical: 8,
+        borderBottomWidth: 0.5,
+        borderColor: '#ddd',
+        color: 'black',
+        paddingRight: 30,
+    },
+});

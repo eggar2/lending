@@ -20,6 +20,7 @@ export default class ProfileScreen extends Component {
         header: null,
     };
     
+    
     constructor(props) {
         super(props);
         this.state = {
