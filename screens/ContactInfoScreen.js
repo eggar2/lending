@@ -14,28 +14,15 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import colors from '../assets/colors';
 import { TextField } from 'react-native-material-textfield'; //https://github.com/n4kz/react-native-material-textfield
 import IOSPicker from 'react-native-ios-picker'; //https://github.com/sanpyaelin/react-native-ios-picker/blob/HEAD/readme.md#style
+import RNPickerSelect from 'react-native-picker-select';
 
-
-const data = [
-    {name: 'Spouse', code: 'spouse'},
-    {name: 'Parents', code: 'parents'},
-    {name: 'Children', code: 'children'},
-    {name: 'Brothers/Sisters', code: 'brothers-sisters'},
-    {name: 'Relatives', code: 'relatives'},
-    {name: 'Friends', code: 'friends'},
-    {name: 'Colleagues', code: 'colleagues'}
-]
 
 export default class ContactInfoScreen extends Component {
 
     static navigationOptions = ({ navigation }) => ({
-        title: 'Contact Information',
+        
         headerStyle: {
             shadowOpacity: 0
-        },
-        headerTitleStyle: {
-            alignSelf: 'center',
-            textAlign: 'center',
         },
         headerLeft: (
             <TouchableHighlight
@@ -53,39 +40,60 @@ export default class ContactInfoScreen extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-        contactName1: "",
-        contactTel1: "",
-        contactName2: "",
-        contactTel2: "",
-        selectedValue: ""
+        this.state = {      
+            contactRelation : [
+                {label: 'Spouse', value: 'spouse'},
+                {label: 'Parents', value: 'parents'},
+                {label: 'Children', value: 'children'},
+                {label: 'Brothers/Sisters', value: 'brothers-sisters'},
+                {label: 'Relatives', value: 'relatives'},
+                {label: 'Friends', value: 'friends'},
+                {label: 'Colleagues', value: 'colleagues'}
+            ],
+            contactName1: "",
+            contactTel1: "",
+            contactName2: "",
+            contactTel2: "",
+            selectedValue1: "",
+            selectedValue2: ""
         }
     }
 
-    change(d, i) {
-        this.setState({selectedValue: data[i].name});
+    contactRelationChange1 = (value, index) => {
+        this.setState({
+            selectedValue1: value,
+        });
+    }
+
+    contactRelationChange2 = (value, index) => {
+        this.setState({
+            selectedValue2: value,
+        });
     }
 
     render() {
+
+        const placeholder = {
+            label:'Relationship',
+            value: null,
+            color: '#777'
+        };
 
         return (
             <ScrollView>
                 <View style={styles.content}>
                     <View style={styles.parentFriendView}>
+                        <Text style={styles.titleText}>Contact Information</Text>
                         <View style={{flex: 1}}>
                             <Text style={styles.contactText}>First Contact</Text>
-                            <IOSPicker 
-                                style={styles.pickerStyle}
-                                textStyle={styles.pickerText}
-                                selectedValue={this.state.selectedValue}
-                                mode='modal'
-                                onValueChange={(d, i)=> this.change(d, i)}>
-                                { 
-                                    data.map((item, index)=>
-                                    <Picker.Item key={index} label={item.name} value={item.code} />
-                                    )
-                                }
-                            </IOSPicker>
+                            <RNPickerSelect
+                                placeholder={placeholder}
+                                useNativeAndroidPickerStyle={false}
+                                items={this.state.contactRelation}
+                                onValueChange={this.contactRelationChange1}
+                                style={pickerSelectStyles}
+                                value={this.state.selectedValue1}
+                            />
                             <TextField
                                 label='Name'
                                 value={this.state.contactName1}
@@ -106,20 +114,16 @@ export default class ContactInfoScreen extends Component {
                                 inputContainerStyle={{paddingLeft: 10}}
                             />                           
                         </View>
-                        <View style={{marginTop: 20}}>
+                        <View style={{marginTop: 30}}>
                             <Text style={styles.contactText}>Second Contact</Text>
-                            <IOSPicker 
-                                style={styles.pickerStyle}
-                                textStyle={styles.pickerText}
-                                selectedValue={this.state.selectedValue}
-                                mode='modal'
-                                onValueChange={(d, i)=> this.change(d, i)}>
-                                { 
-                                    data.map((item, index)=>
-                                    <Picker.Item key={index} label={item.name} value={item.code} />
-                                    )
-                                }
-                            </IOSPicker>
+                            <RNPickerSelect
+                                placeholder={placeholder}
+                                useNativeAndroidPickerStyle={false}
+                                items={this.state.contactRelation}
+                                onValueChange={this.contactRelationChange2}
+                                style={pickerSelectStyles}
+                                value={this.state.selectedValue2}
+                            />
                             <TextField
                                 label='Name'
                                 value={this.state.contactName1}
@@ -163,8 +167,14 @@ const styles = StyleSheet.create({
     content: {
         padding: 20
     },
+    titleText: {
+        fontSize: 25,
+        fontWeight: '600',
+        marginBottom: 10
+
+    },
     contactText: {
-        fontSize: 18,
+        fontSize: 17,
         fontWeight: '600',
         color: colors.black,
     },
@@ -205,14 +215,14 @@ const styles = StyleSheet.create({
     },
     input: {
         color: colors.gray04,
-        fontSize: 17,
+        fontSize: 16,
         padding: 10,
-        borderBottomWidth: 1,
+        borderBottomWidth: 0.5,
         borderColor: '#ddd'
     },
     inputPhone: {
         color: colors.gray04,
-        fontSize: 17,
+        fontSize: 16,
         padding: 10,
     },
     pickerStyle: {
@@ -220,7 +230,6 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderColor: '#ddd',
         padding: 10,
-        marginTop: 10
     },
     pickerText: {
         fontSize: 16,
@@ -228,4 +237,25 @@ const styles = StyleSheet.create({
         textTransform: 'capitalize'
     }
     
-})
+});
+
+const pickerSelectStyles = StyleSheet.create({
+    inputIOS: {
+        fontSize: 16,
+        paddingVertical: 12,
+        paddingHorizontal: 10,
+        borderBottomWidth: 1,
+        borderColor: '#ddd',
+        color: 'black',
+        paddingRight: 30,
+    },
+    inputAndroid: {
+        fontSize: 16,
+        paddingHorizontal: 10,
+        paddingVertical: 8,
+        borderBottomWidth: 0.5,
+        borderColor: '#ddd',
+        color: 'black',
+        paddingRight: 30,
+    },
+});
