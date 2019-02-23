@@ -52,13 +52,6 @@ export default class IdStep1Screen extends React.Component {
         selectedType: 'sss'
     };
 
-    navigateToScreen = (route) => () => {
-        const navigateAction = NavigationActions.navigate({
-            routeName: route
-        });
-        this.props.navigation.dispatch(navigateAction);
-    }
-
     handleIdNumberChange = (idnumber) => {
         this.setState({ idnumber });
         this.setState({ isError: '' });

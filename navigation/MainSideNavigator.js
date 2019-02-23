@@ -50,8 +50,8 @@ const ProfileInfoStack = createStackNavigator(
     {
         ProfileInfo: ProfileInfoScreen,
         Identification: IdScreen,
+        // PersonalInfo: PersonalInfoScreen,
         WorkInfo: WorkInfoScreen,
-        PersonalInfo: PersonalInfoScreen,
         Contact: ContactInfoScreen,
     },
 );
@@ -65,13 +65,20 @@ const IdentificationStack = createStackNavigator(
     },
 );
 
+// PERSONAL
+const PersonalInfoStack = createStackNavigator(
+    {
+        PersonalInfo: PersonalInfoScreen,
+    },
+);
+
 const MyDrawerNavigator = createDrawerNavigator({
     Tab: MainTabNavigator,
     Main: RootStack,
     Lending: LendingStack,
     ProfileInfo: ProfileInfoStack,
     IdSteps: IdentificationStack,
-    IdSteps: IdentificationStack,
+    PersonalInfoStack: PersonalInfoStack,
 }, {
     contentComponent: SideMenu,
     drawerWidth: 300,
