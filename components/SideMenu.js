@@ -106,6 +106,11 @@ class SideMenu extends Component {
                                 Work Information
                             </Text>
                         </View>
+                        <View style={styles.navSectionStyle}>
+                            <Text style={styles.navItemStyle} onPress={this.navigateToScreen('Contact')}>
+                                Contact Information
+                            </Text>
+                        </View>
                         <View style={styles.navSectionStyle}></View>
                     </View>
                 </ScrollView>

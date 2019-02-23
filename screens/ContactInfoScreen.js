@@ -94,25 +94,45 @@ export default class ContactInfoScreen extends Component {
                                 style={pickerSelectStyles}
                                 value={this.state.selectedValue1}
                             />
-                            <TextField
-                                label='Name'
-                                value={this.state.contactName1}
-                                tintColor={colors.green01}
-                                containerStyle={{marginVertical: 0}}
-                                onChangeText={this.handleIdNumberChange}
-                                error={this.state.isError}
-                                labelTextStyle={{ paddingLeft: 10 }}
-                                inputContainerStyle={{paddingLeft: 10}}
-                            />
-                            <TextField
-                                label='Cellphone Number'
-                                value={this.state.contactTel1}
-                                tintColor={colors.green01}
-                                onChangeText={this.handleIdNumberChange}
-                                error={this.state.isError}
-                                labelTextStyle={{ paddingLeft: 10 }}
-                                inputContainerStyle={{paddingLeft: 10}}
-                            />                           
+                            <View>
+                                <TextField
+                                    label='Name'
+                                    value={this.state.contactName1}
+                                    tintColor={colors.green01}
+                                    containerStyle={{marginVertical: 0}}
+                                    onChangeText={this.handleIdNumberChange}
+                                    error={this.state.isError}
+                                    labelTextStyle={{ paddingLeft: 10 }}
+                                    inputContainerStyle={{paddingLeft: 10}}
+                                />
+                                <Icon
+                                    style={{
+                                        position: 'absolute',
+                                        right: 0,
+                                        top: 32
+                                    }}
+                                    name={Platform.OS === 'ios' ? 'ios-people' : 'md-people'}
+                                    size={26} />
+                            </View>
+                            <View>
+                                <Text style={{
+                                    position: 'absolute',
+                                    left: 0,
+                                    top: 35,
+                                    fontSize: 17
+                                }}>
+                                    +63
+                                </Text>
+                                <TextField
+                                    label='Cellphone Number'
+                                    value={this.state.contactTel1}
+                                    tintColor={colors.green01}
+                                    onChangeText={this.handleIdNumberChange}
+                                    error={this.state.isError}
+                                    labelTextStyle={{ paddingLeft: 40 }}
+                                    inputContainerStyle={{paddingLeft: 40}}
+                                /> 
+                            </View>                   
                         </View>
                         <View style={{marginTop: 30}}>
                             <Text style={styles.contactText}>Second Contact</Text>
@@ -124,25 +144,45 @@ export default class ContactInfoScreen extends Component {
                                 style={pickerSelectStyles}
                                 value={this.state.selectedValue2}
                             />
-                            <TextField
-                                label='Name'
-                                value={this.state.contactName1}
-                                tintColor={colors.green01}
-                                onChangeText={this.handleIdNumberChange}
-                                error={this.state.isError}
-                                labelTextStyle={{ paddingLeft: 10 }}
-                                inputContainerStyle={{paddingLeft: 10}}
-                            />
+                            <View>
+                                <TextField
+                                    label='Name'
+                                    value={this.state.contactName1}
+                                    tintColor={colors.green01}
+                                    onChangeText={this.handleIdNumberChange}
+                                    error={this.state.isError}
+                                    labelTextStyle={{ paddingLeft: 10 }}
+                                    inputContainerStyle={{paddingLeft: 10}}
+                                />
+                                <Icon
+                                    style={{
+                                        position: 'absolute',
+                                        right: 0,
+                                        top: 32
+                                    }}
+                                    name={Platform.OS === 'ios' ? 'ios-people' : 'md-people'}
+                                    size={26} />
+                            </View>
 
-                            <TextField
-                                label='Cellphone Number'
-                                value={this.state.contactTel1}
-                                tintColor={colors.green01}
-                                onChangeText={this.handleIdNumberChange}
-                                error={this.state.isError}
-                                labelTextStyle={{ paddingLeft: 10 }}
-                                inputContainerStyle={{paddingLeft: 10}}
-                            />
+                            <View>
+                                <Text style={{
+                                    position: 'absolute',
+                                    left: 0,
+                                    top: 35,
+                                    fontSize: 17
+                                }}>
+                                    +63
+                                </Text>
+                                <TextField
+                                    label='Cellphone Number'
+                                    value={this.state.contactTel2}
+                                    tintColor={colors.green01}
+                                    onChangeText={this.handleIdNumberChange}
+                                    error={this.state.isError}
+                                    labelTextStyle={{ paddingLeft: 40 }}
+                                    inputContainerStyle={{paddingLeft: 40}}
+                                /> 
+                            </View>
                         </View>
                     </View>
                     <View style={styles.buttonContainer2}>
@@ -241,7 +281,7 @@ const styles = StyleSheet.create({
 
 const pickerSelectStyles = StyleSheet.create({
     inputIOS: {
-        fontSize: 16,
+        fontSize: 17,
         paddingVertical: 12,
         paddingHorizontal: 10,
         borderBottomWidth: 1,
@@ -250,7 +290,7 @@ const pickerSelectStyles = StyleSheet.create({
         paddingRight: 30,
     },
     inputAndroid: {
-        fontSize: 16,
+        fontSize: 17,
         paddingHorizontal: 10,
         paddingVertical: 8,
         borderBottomWidth: 0.5,
