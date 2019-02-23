@@ -23,6 +23,7 @@ import AutoHeightImage from 'react-native-auto-height-image';
 import StepIndicator from 'react-native-step-indicator';
 import RNPickerSelect from 'react-native-picker-select';
 import { TextField } from 'react-native-material-textfield';
+import DatePicker from 'react-native-datepicker';
 
 const labels = ["1","2","3"];
 const customStyles = {
@@ -68,9 +69,13 @@ export default class WorkInfoScreen extends React.Component {
         imageProof: '',
         currentPosition: 1,
         employment : [
-            {label: 'Employed-Private', value: 'private'},
+            {label: 'Employed-BPO', value: 'employed-bpo'},
             {label: 'Employed-Goverment', value: 'government'},
-            {label: 'Self-Employed', value: 'self-employed'}
+            {label: 'Employed-Private', value: 'private'},
+            {label: 'Employed-OFW', value: 'ofw'},
+            {label: 'Professional', value: 'professional'},
+            {label: 'Self-Employed', value: 'self-employed'},
+            {label: 'Unemployed', value: 'unemployed'}
         ],
         companyNature: [
             {label: 'Business Process Outsourcing', value: 'bpo'},
@@ -79,24 +84,40 @@ export default class WorkInfoScreen extends React.Component {
         ],
         occupation: [
             {label: 'Staff', value: 'staff'},
-            {label: 'Manager', value: 'Manager'},
-            {label: 'Owner', value: 'owner'}
+            {label: 'Supervisor or Manager', value: 'supervisor-manager'},
+            {label: 'Executive or Director', value: 'executive-director'},
+            {label: 'Others', value: 'others'}
         ],
         salary: [
             {label: '0-5k', value: '0-5k'},
-            {label: '6k-10k', value: '6k-10k'},
-            {label: '11k-20k', value: '11k-20k'},
-            {label: '20k+', value: '20k+'}
+            {label: '5k-10k', value: '5k-10k'},
+            {label: '10k-15k', value: '10k-15k'},
+            {label: '15k-20k', value: '15k-20k'},
+            {label: '20k-25k', value: '20k-25k'},
+            {label: '25k-30k', value: '25k-30k'},
+            {label: '30k-35k', value: '30k-35k'}
+        ],
+        salaryType: [
+            {label: 'Bi-Monthly (5th and 20th)', value: '5th-20th'},
+            {label: 'Bi-Monthly (10th and 25th)', value: '10th-25th'},
+            {label: 'Bi-Monthly (15th and 30th)', value: '15th-30th'},
+            {label: 'Weekly (Weekday)', value: 'weekday'},
+            {label: 'Weekly (Friday)', value: 'friday'},
+            {label: 'Weekly (Weekend)', value: 'weekend'},
+            {label: 'Monthly (15th)', value: 'monthly'}            
         ],
         selectedEmployment: '',
         selectedCompanyNature: '',
         selectedOccupation: '',
         selectedSalary: '',
-        jobTitle: '',
+        selectedSalaryType: '',
+        companyName: '',
+        employmentDate: '',
+        businessAddress: '',
     };
 
     employmentChange = (value, index) => {
-        this.setState({ seletedEmployment: value, });
+        this.setState({ selectedEmployment: value, });
     }
 
     companyNatureChange = (value, index) => {
@@ -109,6 +130,9 @@ export default class WorkInfoScreen extends React.Component {
 
     salaryChange = (value, index) => {
         this.setState({ selectedSalary: value, });
+    }
+    salaryTypeChange = (value, index) => {
+        this.setState({ selectedSalaryType: value, });
     }
 
     handleimageProofOfEmployment = async () => {
@@ -133,110 +157,206 @@ export default class WorkInfoScreen extends React.Component {
 
         return (
             <ScrollView style={styles.container}>
-                <Text style={typo.textNormalLarger}>Apply</Text>
-                <View style={{ marginVertical: 20, }}>
-                    <StepIndicator
-                        stepCount = {3}
-                        customStyles={customStyles}
-                        currentPosition={this.state.currentPosition}
-                    />
+                <View style={{ marginBottom: 50 }}>
+                    <Text style={typo.textNormalLarger}>Apply</Text>
+                    <View style={{ marginVertical: 20, }}>
+                        <StepIndicator
+                            stepCount = {3}
+                            customStyles={customStyles}
+                            currentPosition={this.state.currentPosition}
+                        />
+                    </View>
+                    
+                    <Text style={styles.contactText}>Work Information</Text>
+
+                    <View style={styles.dropdownContainer}>
+                        <RNPickerSelect
+                            placeholder={{label: 'Employment Type', value: null, color: '#777'}}
+                            useNativeAndroidPickerStyle={false}
+                            items={this.state.employment}
+                            onValueChange={this.employmentChange}
+                            style={pickerSelectStyles}
+                            value={this.state.selectedEmployment}
+                        />
+                        <Icon
+                            style={{
+                                position: 'absolute',
+                                right: 0,
+                                top: 10
+                            }}
+                            name={Platform.OS === 'ios' ? 'ios-arrow-dropdown' : 'md-arrow-dropdown'}
+                            size={26} />
+                    </View>
+                    <View style={styles.dropdownContainer}>
+                        <RNPickerSelect
+                            placeholder={{label: 'Job Industry', value: null, color: '#777'}}
+                            useNativeAndroidPickerStyle={false}
+                            items={this.state.companyNature}
+                            onValueChange={this.companyNatureChange}
+                            style={pickerSelectStyles}
+                            value={this.state.selectedCompanyNature}
+                        />
+                        <Icon
+                            style={{
+                                position: 'absolute',
+                                right: 0,
+                                top: 10
+                            }}
+                            name={Platform.OS === 'ios' ? 'ios-arrow-dropdown' : 'md-arrow-dropdown'}
+                            size={26} />
+                    </View>
+                    <View style={styles.dropdownContainer}>
+                        <RNPickerSelect
+                            placeholder={{label: 'Occupancy', value: null, color: '#777'}}
+                            useNativeAndroidPickerStyle={false}
+                            items={this.state.occupation}
+                            onValueChange={this.occupationChange}
+                            style={pickerSelectStyles}
+                            value={this.state.selectedOccupation}
+                        />
+                        <Icon
+                            style={{
+                                position: 'absolute',
+                                right: 0,
+                                top: 10
+                            }}
+                            name={Platform.OS === 'ios' ? 'ios-arrow-dropdown' : 'md-arrow-dropdown'}
+                            size={26} />
+                    </View>
+                    <View>
+                        <TextField
+                            label='Company/Employer Name'
+                            value={this.state.companyName}
+                            tintColor={colors.green01}
+                            containerStyle={{marginVertical: 0}}
+                            onChangeText={ (value)=> {
+                                this.setState({ companyName: value })
+                            }}
+                            error={this.state.isError}
+                            labelTextStyle={{ paddingLeft: 10 }}
+                            inputContainerStyle={{paddingLeft: 10}}
+                        />
+                    </View>
+                    <View>
+                        <DatePicker
+                            style={{ width: '100%' }}
+                            date={this.state.employmentDate}
+                            mode="date"
+                            placeholder="Employment Date"
+                            format="MMM YYYY"
+                            minDate="1950-01-01"
+                            maxDate="2018-01-01"
+                            confirmBtnText="Confirm"
+                            cancelBtnText="Cancel"
+                            customStyles={{
+                                dateIcon: {
+                                    position: 'absolute',
+                                    right: 15,
+                                    top: 10,
+                                    marginLeft: 0
+                                },
+                                dateInput: {
+                                    paddingHorizontal: 12,
+                                    marginTop: 30,
+                                    borderWidth : 0,
+                                    borderBottomWidth: 1,
+                                    borderBottomColor: colors.gray06,
+                                    alignItems: 'flex-start'
+                                },
+                                dateText: {
+                                    fontSize: 16, 
+                                    fontWeight: '400', 
+                                    paddingBottom: 10
+                                },
+                                placeholderText: {
+                                    fontSize: 16,
+                                    fontWeight: '400',
+                                    paddingBottom: 10
+                                }
+                            }}
+                            onDateChange={(date) => { this.setState({ employmentDate: date }) }}
+                        />
+                    </View>
+                    <View style={{marginTop: 30}}>
+                        <RNPickerSelect
+                            placeholder={{label: 'Monthly Income (PHP)', value: null, color: '#777'}}
+                            useNativeAndroidPickerStyle={false}
+                            items={this.state.salary}
+                            onValueChange={this.salaryChange}
+                            style={pickerSelectStyles}
+                            value={this.state.selectedSalary}
+                        />
+                        <Icon
+                            style={{
+                                position: 'absolute',
+                                right: 0,
+                                top: 10
+                            }}
+                            name={Platform.OS === 'ios' ? 'ios-arrow-dropdown' : 'md-arrow-dropdown'}
+                            size={26} />
+                    </View>
+                    <View style={styles.dropdownContainer}>
+                        <RNPickerSelect
+                            placeholder={{label: 'Salary Date', value: null, color: '#777'}}
+                            useNativeAndroidPickerStyle={false}
+                            items={this.state.salaryType}
+                            onValueChange={this.salaryTypeChange}
+                            style={pickerSelectStyles}
+                            value={this.state.selectedSalaryType}
+                        />
+                        <Icon
+                            style={{
+                                position: 'absolute',
+                                right: 0,
+                                top: 10
+                            }}
+                            name={Platform.OS === 'ios' ? 'ios-arrow-dropdown' : 'md-arrow-dropdown'}
+                            size={26} />
+                    </View>
+                    <View>
+                        <Text style={{
+                            position: 'absolute',
+                            left: 0,
+                            top: 35,
+                            fontSize: 17,
+                            paddingLeft: 12
+                        }}>
+                            +63
+                        </Text>
+                        <TextField
+                            label='Cellphone Number'
+                            value={this.state.contactTel1}
+                            tintColor={colors.green01}
+                            onChangeText={this.handleIdNumberChange}
+                            error={this.state.isError}
+                            labelTextStyle={{ paddingLeft: 52 }}
+                            inputContainerStyle={{paddingLeft: 52}}
+                        /> 
+                    </View>
+                    <View>
+                        <TextField
+                            label='Business Address'
+                            value={this.state.companyName}
+                            tintColor={colors.green01}
+                            containerStyle={{marginVertical: 0}}
+                            onChangeText={ (value)=> {
+                                this.setState({ businessAddress: value })
+                            }}
+                            error={this.state.isError}
+                            labelTextStyle={{ paddingLeft: 10 }}
+                            inputContainerStyle={{paddingLeft: 10}}
+                        />
+                    </View>
+
+                    <View style={styles.buttonContainer2}>
+                        <TouchableOpacity
+                            style={styles.buttonStyle2}
+                            onPress={{}}  >
+                            <Text style={styles.buttonText}>Next</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
                 
-                <Text style={styles.contactText}>Work Information</Text>
-
-                <View style={styles.dropdownContainer}>
-                    <RNPickerSelect
-                        placeholder={{label: 'Employment', value: null, color: '#777'}}
-                        useNativeAndroidPickerStyle={false}
-                        items={this.state.employment}
-                        onValueChange={this.employmentChange}
-                        style={pickerSelectStyles}
-                        value={this.state.selectedEmployment}
-                    />
-                    <Icon
-                        style={{
-                            position: 'absolute',
-                            right: 0,
-                            top: 10
-                        }}
-                        name={Platform.OS === 'ios' ? 'ios-arrow-dropdown' : 'md-arrow-dropdown'}
-                        size={26} />
-                </View>
-                <View style={styles.dropdownContainer}>
-                    <RNPickerSelect
-                        placeholder={{label: 'Company Nature', value: null, color: '#777'}}
-                        useNativeAndroidPickerStyle={false}
-                        items={this.state.companyNature}
-                        onValueChange={this.companyNatureChange}
-                        style={pickerSelectStyles}
-                        value={this.state.selectedCompanyNature}
-                    />
-                    <Icon
-                        style={{
-                            position: 'absolute',
-                            right: 0,
-                            top: 10
-                        }}
-                        name={Platform.OS === 'ios' ? 'ios-arrow-dropdown' : 'md-arrow-dropdown'}
-                        size={26} />
-                </View>
-                <View style={styles.dropdownContainer}>
-                    <RNPickerSelect
-                        placeholder={{label: 'Occupation', value: null, color: '#777'}}
-                        useNativeAndroidPickerStyle={false}
-                        items={this.state.occupation}
-                        onValueChange={this.occupationChange}
-                        style={pickerSelectStyles}
-                        value={this.state.selectedOccupation}
-                    />
-                    <Icon
-                        style={{
-                            position: 'absolute',
-                            right: 0,
-                            top: 10
-                        }}
-                        name={Platform.OS === 'ios' ? 'ios-arrow-dropdown' : 'md-arrow-dropdown'}
-                        size={26} />
-                </View>
-                <View>
-                    <TextField
-                        label='Job Title'
-                        value={this.state.jobTitle}
-                        tintColor={colors.green01}
-                        containerStyle={{marginVertical: 0}}
-                        onChangeText={ (value)=> {
-                            this.setState({ jobTitle: value })
-                        }}
-                        error={this.state.isError}
-                        labelTextStyle={{ paddingLeft: 10 }}
-                        inputContainerStyle={{paddingLeft: 10}}
-                    />
-                </View>
-                <View style={styles.dropdownContainer}>
-                    <RNPickerSelect
-                        placeholder={{label: 'Salary', value: null, color: '#777'}}
-                        useNativeAndroidPickerStyle={false}
-                        items={this.state.salary}
-                        onValueChange={this.salaryChange}
-                        style={pickerSelectStyles}
-                        value={this.state.selectedEmployment}
-                    />
-                    <Icon
-                        style={{
-                            position: 'absolute',
-                            right: 0,
-                            top: 10
-                        }}
-                        name={Platform.OS === 'ios' ? 'ios-arrow-dropdown' : 'md-arrow-dropdown'}
-                        size={26} />
-                </View>
-                <View style={styles.buttonContainer2}>
-                    <TouchableOpacity
-                        style={styles.buttonStyle2}
-                        onPress={{}}  >
-                        <Text style={styles.buttonText}>Next</Text>
-                    </TouchableOpacity>
-                </View>
 
             </ScrollView>
         );
