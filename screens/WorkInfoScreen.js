@@ -358,7 +358,7 @@ export default class WorkInfoScreen extends React.Component {
                     <View style={styles.buttonContainer2}>
                         <TouchableOpacity
                             style={styles.buttonStyle2}
-                            onPress={{}}  >
+                            onPress={() => {}}  >
                             <Text style={styles.buttonText}>Next</Text>
                         </TouchableOpacity>
                     </View>
