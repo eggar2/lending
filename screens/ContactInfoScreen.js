@@ -86,14 +86,25 @@ export default class ContactInfoScreen extends Component {
                         <Text style={styles.titleText}>Contact Information</Text>
                         <View style={{flex: 1}}>
                             <Text style={styles.contactText}>First Contact</Text>
-                            <RNPickerSelect
-                                placeholder={placeholder}
-                                useNativeAndroidPickerStyle={false}
-                                items={this.state.contactRelation}
-                                onValueChange={this.contactRelationChange1}
-                                style={pickerSelectStyles}
-                                value={this.state.selectedValue1}
-                            />
+                            <View>
+                                <RNPickerSelect
+                                    placeholder={placeholder}
+                                    useNativeAndroidPickerStyle={false}
+                                    items={this.state.contactRelation}
+                                    onValueChange={this.contactRelationChange1}
+                                    style={pickerSelectStyles}
+                                    value={this.state.selectedValue1}
+                                />
+                                <Icon
+                                    style={{
+                                        position: 'absolute',
+                                        right: 0,
+                                        top: 10
+                                    }}
+                                    name={Platform.OS === 'ios' ? 'ios-arrow-dropdown' : 'md-arrow-dropdown'}
+                                    size={26} />
+                            </View>
+                            
                             <View>
                                 <TextField
                                     label='Name'
@@ -136,14 +147,24 @@ export default class ContactInfoScreen extends Component {
                         </View>
                         <View style={{marginTop: 30}}>
                             <Text style={styles.contactText}>Second Contact</Text>
-                            <RNPickerSelect
-                                placeholder={placeholder}
-                                useNativeAndroidPickerStyle={false}
-                                items={this.state.contactRelation}
-                                onValueChange={this.contactRelationChange2}
-                                style={pickerSelectStyles}
-                                value={this.state.selectedValue2}
-                            />
+                            <View>
+                                <RNPickerSelect
+                                    placeholder={placeholder}
+                                    useNativeAndroidPickerStyle={false}
+                                    items={this.state.contactRelation}
+                                    onValueChange={this.contactRelationChange2}
+                                    style={pickerSelectStyles}
+                                    value={this.state.selectedValue2}
+                                />
+                                <Icon
+                                    style={{
+                                        position: 'absolute',
+                                        right: 0,
+                                        top: 10
+                                    }}
+                                    name={Platform.OS === 'ios' ? 'ios-arrow-dropdown' : 'md-arrow-dropdown'}
+                                    size={26} />
+                            </View>
                             <View>
                                 <TextField
                                     label='Name'
