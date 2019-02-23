@@ -21,6 +21,7 @@ export default {
     blue02: '#1B9AF7',
     blueGreen: '#008489',
     pink: '#FF5A5F',
+    red: 'red'
 };
 
 

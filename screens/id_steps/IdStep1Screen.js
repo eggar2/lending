@@ -27,7 +27,7 @@ export default class IdStep1Screen extends React.Component {
                 style={{ marginLeft: 10, paddingHorizontal: 10 }}
             >
                 <Icon.Ionicons
-                    name={'md-arrow-round-back'}
+                    name={'md-arrow-back'}
                     size={26}
                 />
             </TouchableOpacity>
