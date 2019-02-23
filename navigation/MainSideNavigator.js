@@ -20,6 +20,7 @@ import ProfileInfoScreen from '../screens/ProfileInfoScreen';
 import WorkInfoScreen from '../screens/WorkInfoScreen';
 import ContactInfoScreen from '../screens/ContactInfoScreen';
 import ContactModScreen from '../screens/ContactModScreen';
+import BankAccountScreen from '../screens/BankAccountScreen';
 
 // ID Steps
 import IdStep1Screen from '../screens/id_steps/IdStep1Screen';
@@ -44,6 +45,7 @@ const LendingStack = createStackNavigator(
         Verified: VerifiedScreen,
         About: AboutScreen,
         Settings: SettingsScreen,
+        Bank: BankAccountScreen,
     },
 );
 

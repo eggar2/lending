@@ -14,9 +14,36 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import FAIcon from 'react-native-vector-icons/FontAwesome';
 import colors from '../assets/colors';
 import typo from '../constants/Typography';
+import StepIndicator from 'react-native-step-indicator';
 import { TextField } from 'react-native-material-textfield';
 import DatePicker from 'react-native-datepicker';
 import RNPickerSelect from 'react-native-picker-select';
+
+const labels = ["1","2","3"];
+const customStyles = {
+  stepIndicatorSize: 20,
+  currentStepIndicatorSize:20,
+  separatorStrokeWidth: 2,
+  currentStepStrokeWidth: 3,
+  stepStrokeCurrentColor: '#0085FE',
+  stepStrokeWidth: 3,
+  stepStrokeFinishedColor: '#0085FE',
+  stepStrokeUnFinishedColor: '#aaaaaa',
+  separatorFinishedColor: '#0085FE',
+  separatorUnFinishedColor: '#aaaaaa',
+  stepIndicatorFinishedColor: '#0085FE',
+  stepIndicatorUnFinishedColor: '#ffffff',
+  stepIndicatorCurrentColor: '#ffffff',
+  stepIndicatorLabelFontSize: 13,
+  currentStepIndicatorLabelFontSize: 13,
+  stepIndicatorLabelCurrentColor: '#0085FE',
+  stepIndicatorLabelFinishedColor: '#ffffff',
+  stepIndicatorLabelUnFinishedColor: '#aaaaaa',
+  labelColor: '#999999',
+  labelSize: 13,
+  currentStepLabelColor: '#fe7013',
+}
+
 
 export default class PersonalInfoScreen extends React.Component {
 
@@ -40,6 +67,7 @@ export default class PersonalInfoScreen extends React.Component {
 
     state = {
         fname: '',
+        currentPosition: 1,
         isFnameError: '',
         mname: '',
         isMnameError: '',
@@ -149,11 +177,22 @@ export default class PersonalInfoScreen extends React.Component {
         return { label: placeholder, color: colors.blueGreen };
     }
 
+    onPageChange(position){
+        this.setState({currentPosition: position});
+    }
+
     render() {
         return (
             <ScrollView style={styles.container}>
 
                 <Text style={typo.textNormalLarger}>Apply</Text>
+                <View style={{ marginVertical: 20 }}>
+                    <StepIndicator
+                        stepCount = {3}
+                        customStyles={customStyles}
+                        currentPosition={this.state.currentPosition}
+                    />
+                </View>
                 <Text style={typo.headerTitleBold}>Personal Information</Text>
 
                 <View style={styles.inputWrapper}>
