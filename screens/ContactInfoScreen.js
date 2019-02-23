@@ -13,7 +13,7 @@ import {
 import Icon from 'react-native-vector-icons/Ionicons';
 import colors from '../assets/colors';
 import { TextField } from 'react-native-material-textfield'; //https://github.com/n4kz/react-native-material-textfield
-import IOSPicker from 'react-native-ios-picker'; //https://github.com/sanpyaelin/react-native-ios-picker/blob/HEAD/readme.md#style
+// import IOSPicker from 'react-native-ios-picker'; //https://github.com/sanpyaelin/react-native-ios-picker/blob/HEAD/readme.md#style
 import RNPickerSelect from 'react-native-picker-select';
 
 

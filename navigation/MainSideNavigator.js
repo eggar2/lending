@@ -23,6 +23,7 @@ import ContactInfoScreen from '../screens/ContactInfoScreen';
 // ID Steps
 import IdStep1Screen from '../screens/id_steps/IdStep1Screen';
 import IdStep2Screen from '../screens/id_steps/IdStep2Screen';
+import IdStep3Screen from '../screens/id_steps/IdStep3Screen';
 
 const RootStack = createStackNavigator(
     {   
@@ -55,11 +56,12 @@ const ProfileInfoStack = createStackNavigator(
     },
 );
 
-// PROFILE 
+// IDENTIFICATION 
 const IdentificationStack = createStackNavigator(
     {
         IdStep1: IdStep1Screen,
         IdStep2: IdStep2Screen,
+        IdStep3: IdStep3Screen,
     },
 );
 
@@ -68,7 +70,8 @@ const MyDrawerNavigator = createDrawerNavigator({
     Main: RootStack,
     Lending: LendingStack,
     ProfileInfo: ProfileInfoStack,
-    IdSteps: IdentificationStack
+    IdSteps: IdentificationStack,
+    IdSteps: IdentificationStack,
 }, {
     contentComponent: SideMenu,
     drawerWidth: 300,
