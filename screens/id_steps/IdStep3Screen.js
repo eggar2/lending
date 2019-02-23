@@ -39,8 +39,7 @@ export default class IdStep3Screen extends React.Component {
 
     handleNext = () => {
         if (this.state.idPhoto) {
-            // this.props.navigation.navigate('IdStep3');
-            // console.log('proceed to Personal Info');
+            this.props.navigation.navigate('PersonalInfo');
         } else {
             this.setState({ showError: true });
         }

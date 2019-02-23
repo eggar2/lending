@@ -112,6 +112,11 @@ class SideMenu extends Component {
                             </Text>
                         </View>
                         <View style={styles.navSectionStyle}>
+                            <Text style={styles.navItemStyle} onPress={this.navigateToScreen('ContactModerator')}>
+                                Contact Moderator
+                            </Text>
+                        </View>
+                        <View style={styles.navSectionStyle}>
                             <Text style={styles.navItemStyle} onPress={this.navigateToScreen('Bank')}>
                                 Bank Account
                             </Text>

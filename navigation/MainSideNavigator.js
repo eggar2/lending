@@ -19,6 +19,7 @@ import IdScreen from '../screens/IdScreen';
 import ProfileInfoScreen from '../screens/ProfileInfoScreen';
 import WorkInfoScreen from '../screens/WorkInfoScreen';
 import ContactInfoScreen from '../screens/ContactInfoScreen';
+import ContactModScreen from '../screens/ContactModScreen';
 import BankAccountScreen from '../screens/BankAccountScreen';
 
 // ID Steps
@@ -30,6 +31,7 @@ const RootStack = createStackNavigator(
     {   
         Home: HomeScreen,
         ShareLinks: ShareLinksScreen,
+        ContactModerator: ContactModScreen,
     },
 );
 
