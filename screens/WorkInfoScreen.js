@@ -53,15 +53,22 @@ const customStyles = {
 export default class WorkInfoScreen extends React.Component {
 
     static navigationOptions = ({ navigation }) => ({
-        title: 'Work Information',
-        headerLayoutPreset: 'center',
-        headerTitleStyle: {
-            flex: 1,
-            textAlign: 'center'
+        
+        headerStyle: {
+            shadowOpacity: 0
         },
-        headerRight: (
-            <Text>{''}</Text>
+        headerLeft: (
+            <TouchableHighlight
+                onPress={() => { navigation.navigate('ProfileInfo'); }}
+                underlayColor={colors.gray01}
+                style={{marginLeft: 10, paddingHorizontal: 10}} >
+                <Icon
+                    name={Platform.OS === 'ios' ? 'ios-arrow-round-back' : 'md-arrow-round-back'}
+                    size={26} />
+            </TouchableHighlight>
+            
         ),
+
     });
 
     state = {
