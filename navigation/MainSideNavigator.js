@@ -22,6 +22,7 @@ import ContactInfoScreen from '../screens/ContactInfoScreen';
 
 // ID Steps
 import IdStep1Screen from '../screens/id_steps/IdStep1Screen';
+import IdStep2Screen from '../screens/id_steps/IdStep2Screen';
 
 const RootStack = createStackNavigator(
     {   
@@ -58,6 +59,7 @@ const ProfileInfoStack = createStackNavigator(
 const IdentificationStack = createStackNavigator(
     {
         IdStep1: IdStep1Screen,
+        IdStep2: IdStep2Screen,
     },
 );
 
