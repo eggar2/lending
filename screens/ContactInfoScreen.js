@@ -15,6 +15,7 @@ import colors from '../assets/colors';
 import { TextField } from 'react-native-material-textfield'; //https://github.com/n4kz/react-native-material-textfield
 // import IOSPicker from 'react-native-ios-picker'; //https://github.com/sanpyaelin/react-native-ios-picker/blob/HEAD/readme.md#style
 import RNPickerSelect from 'react-native-picker-select';
+import { NavigationActions } from 'react-navigation';
 
 
 export default class ContactInfoScreen extends Component {
@@ -26,7 +27,7 @@ export default class ContactInfoScreen extends Component {
         },
         headerLeft: (
             <TouchableHighlight
-                onPress={() => { navigation.navigate('ProfileInfo'); }}
+                onPress={() => { navigation.navigate('PersonalInfo'); }}
                 underlayColor={colors.gray01}
                 style={{marginLeft: 10, paddingHorizontal: 10}} >
                 <Icon
@@ -70,6 +71,13 @@ export default class ContactInfoScreen extends Component {
             selectedValue2: value,
         });
     }
+
+    navigateToScreen = (route) => () => {
+		const navigateAction = NavigationActions.navigate({
+			routeName: route
+		});
+		this.props.navigation.dispatch(navigateAction);
+	}
 
     render() {
 
@@ -209,7 +217,7 @@ export default class ContactInfoScreen extends Component {
                     <View style={styles.buttonContainer2}>
                         <TouchableOpacity
                             style={styles.buttonStyle2}
-                            onPress={this.confirm}  >
+                            onPress={this.navigateToScreen('WorkInfo')}  >
 
                             <Text style={styles.buttonText}>Next</Text>
                         </TouchableOpacity>
