@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
         width: 200, 
         alignSelf: 'center',
         position: 'absolute',
-        bottom: 50
+        bottom: 15
     },
     preIcon: {
         position: 'absolute',

@@ -23,7 +23,7 @@ export default class IdStep2Screen extends React.Component {
 
     handleimageidPhoto = async () => {
 
-        if ( this.ifPermissionGranted() ){
+        if (this.ifPermissionGranted()) {
             const result = await ImagePicker.launchCameraAsync({
                 allowsEditing: true,
                 aspect: [4, 3],
@@ -36,15 +36,15 @@ export default class IdStep2Screen extends React.Component {
                 this.setState({ showError });
             }
         }
-        
+
     }
 
     handleNext = () => {
 
-        if( this.state.idPhoto ){
+        if (this.state.idPhoto) {
             this.props.navigation.navigate('IdStep3');
-        }else{
-            this.setState({showError: true});
+        } else {
+            this.setState({ showError: true });
         }
 
     }
@@ -68,23 +68,23 @@ export default class IdStep2Screen extends React.Component {
 
                 <View style={styles.inputWrapper}>
                     {!this.state.idPhoto && (
-                    <View style={idscreen.idPlaceholder}>
+                        <View style={idscreen.idPlaceholder}>
 
-                    </View>
+                        </View>
                     )}
                     <View style={idscreen.imageWrapper}>
                         {this.state.idPhoto && (
-                        <AutoHeightImage
-                            style={idscreen.idImage}
-                            width={(dimensions.width) - 40}
-                            source={{ uri: this.state.idPhoto }}
-                        />
+                            <AutoHeightImage
+                                style={idscreen.idImage}
+                                width={(dimensions.width) - 40}
+                                source={{ uri: this.state.idPhoto }}
+                            />
                         )}
                     </View>
-                    <TouchableOpacity 
+                    <TouchableOpacity
                         onPress={this.handleimageidPhoto}
                         style={[
-                            idscreen.idPhotoIconWrapper, 
+                            idscreen.idPhotoIconWrapper,
                             this.state.idPhoto ? idscreen.hasPhoto : idscreen.noPhoto,
                         ]}>
                         <FAIcon
@@ -93,7 +93,7 @@ export default class IdStep2Screen extends React.Component {
                             color={colors.white}
                             size={35}
                             style={[
-                                idscreen.idPhotoIcon, 
+                                idscreen.idPhotoIcon,
                                 this.state.idPhoto ? { opacity: 0.3 } : { opacity: 1 }
                             ]}
                         />
@@ -101,18 +101,17 @@ export default class IdStep2Screen extends React.Component {
                 </View>
 
                 {this.state.showError && (
-                <Text style={[typo.textNormal, typo.textAlignCenter, { color: colors.red, paddingTop: 20 }]}>Please select an ID photo</Text>
+                    <Text style={[typo.textNormal, typo.textAlignCenter, { color: colors.red, paddingTop: 20 }]}>Please select an ID photo</Text>
                 )}
 
-                <View style={{marginTop: 20}}>
+                <View style={{ marginTop: 20 }}>
                     <Text style={[typo.textNormal, typo.textAlignCenter]}>Please make sure your photo meets the requirements below, otherwise you will have to resubmit.</Text>
-                    <View style={{marginTop: 10, paddingHorizontal: 50}}>
-                        <Text style={[typo.textNormal, {color: colors.orange}]}>• Face is clear and the text is readable</Text>
-                        <Text style={[typo.textNormal, {color: colors.orange}]}>• ID type matches what you selected</Text>
-                        <Text style={[typo.textNormal, {color: colors.orange}]}>• ID is not expired</Text>
+                    <View style={{ marginTop: 10, paddingHorizontal: 30 }}>
+                        <Text style={[typo.textNormal, { color: colors.orange }]}>• Face is clear and the text is readable</Text>
+                        <Text style={[typo.textNormal, { color: colors.orange }]}>• ID type matches what you selected</Text>
+                        <Text style={[typo.textNormal, { color: colors.orange }]}>• ID is not expired</Text>
                     </View>
                 </View>
-
 
                 <TouchableOpacity
                     onPress={this.handleNext}

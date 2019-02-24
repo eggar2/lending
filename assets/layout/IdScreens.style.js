@@ -12,7 +12,7 @@ export default {
         width: 200,
         alignSelf: 'center',
         position: 'absolute',
-        bottom: 50
+        bottom: 15
     },
     idPhotoIconWrapper: {
         position: 'absolute',
