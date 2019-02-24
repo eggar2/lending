@@ -159,7 +159,7 @@ export default class PersonalInfoScreen extends React.Component {
         }
         
         console.log('proceed to next screen');
-        // this.props.navigation.navigate('IdStep2');
+        this.props.navigation.navigate('Contact');
     }
 
     getCaretIcon = () => {

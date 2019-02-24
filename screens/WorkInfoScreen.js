@@ -13,17 +13,14 @@ import {
     Platform
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import InputField from '../components/form/InputField';
-import RadioInput from '../components/form/RadioInput';
 import colors from '../assets/colors';
-import columns from '../assets/layout/Columns.style';
 import typo from '../constants/Typography';
 import { ImagePicker } from 'expo';
-import AutoHeightImage from 'react-native-auto-height-image';
 import StepIndicator from 'react-native-step-indicator';
 import RNPickerSelect from 'react-native-picker-select';
 import { TextField } from 'react-native-material-textfield';
 import DatePicker from 'react-native-datepicker';
+import { NavigationActions } from 'react-navigation';
 
 const labels = ["1","2","3"];
 const customStyles = {
@@ -59,7 +56,7 @@ export default class WorkInfoScreen extends React.Component {
         },
         headerLeft: (
             <TouchableHighlight
-                onPress={() => { navigation.navigate('ProfileInfo'); }}
+                onPress={() => { navigation.navigate('Contact'); }}
                 underlayColor={colors.gray01}
                 style={{marginLeft: 10, paddingHorizontal: 10}} >
                 <Icon
@@ -157,6 +154,13 @@ export default class WorkInfoScreen extends React.Component {
     onPageChange(position){
         this.setState({currentPosition: position});
     }
+
+    navigateToScreen = (route) => () => {
+		const navigateAction = NavigationActions.navigate({
+			routeName: route
+		});
+		this.props.navigation.dispatch(navigateAction);
+	}
 
     render() {
 
@@ -358,7 +362,7 @@ export default class WorkInfoScreen extends React.Component {
                     <View style={styles.buttonContainer2}>
                         <TouchableOpacity
                             style={styles.buttonStyle2}
-                            onPress={() => {}}  >
+                            onPress={this.navigateToScreen('Bank')}  >
                             <Text style={styles.buttonText}>Next</Text>
                         </TouchableOpacity>
                     </View>
