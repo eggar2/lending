@@ -91,7 +91,7 @@ export default class IdStep3Screen extends React.Component {
 
                 <View style={{ marginTop: 20 }}>
                     <Text style={[typo.textNormal, typo.textAlignCenter]}>Please make sure your photo meets the requirements below, otherwise you will have to resubmit.</Text>
-                    <View style={{ marginTop: 10, paddingHorizontal: 50 }}>
+                    <View style={{ marginTop: 10, paddingHorizontal: 30 }}>
                         <Text style={[typo.textNormal, { color: colors.orange }]}>• Your face is not covered</Text>
                         <Text style={[typo.textNormal, { color: colors.orange }]}>• ID type matches what you selected</Text>
                         <Text style={[typo.textNormal, { color: colors.orange }]}>• The photo is clear on your ID</Text>

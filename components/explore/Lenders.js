@@ -51,7 +51,7 @@ export default class Lenders extends Component {
             <ScrollView
                 contentContainerStyle={styles.wrapper}
                 horizontal={true}
-                showHorizontalScrollIndicator={false}
+                showsHorizontalScrollIndicator={false}
             >
                 {this.Lenders}
             </ScrollView>
@@ -71,6 +71,7 @@ const styles = StyleSheet.create({
         marginRight: cardMargin,
         marginLeft: cardMargin,
         padding: 5,
+        marginRight: 10,
     },
     lenderWrapper: {
         borderWidth: 0,

@@ -75,7 +75,8 @@ const styles = StyleSheet.create({
   },
   lendersContainer: {
     flex: 1,
-    paddingVertical: 10
+    paddingVertical: 10,
+    marginBottom: 10
   },
   scrollViewContent: {
     paddingBottom: 120,
