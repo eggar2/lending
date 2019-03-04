@@ -22,7 +22,7 @@ export default class SearchBar extends Component {
                     />
                     <TextInput
                         style={styles.textInput}
-                        placeholder="Search for a Company"
+                        placeholder="Search Lending Company"
                     />
                 </View>
             </View>
