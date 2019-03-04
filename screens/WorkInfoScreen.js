@@ -12,32 +12,132 @@ import {
     TouchableOpacity,
     Platform
 } from 'react-native';
-import InputField from '../components/form/InputField';
-import RadioInput from '../components/form/RadioInput';
+import Icon from 'react-native-vector-icons/Ionicons';
 import colors from '../assets/colors';
-import columns from '../assets/layout/Columns.style';
 import typo from '../constants/Typography';
 import { ImagePicker } from 'expo';
-import AutoHeightImage from 'react-native-auto-height-image';
+import StepIndicator from 'react-native-step-indicator';
+import RNPickerSelect from 'react-native-picker-select';
+import { TextField } from 'react-native-material-textfield';
+import DatePicker from 'react-native-datepicker';
+import { NavigationActions } from 'react-navigation';
+
+const labels = ["1","2","3"];
+const customStyles = {
+  stepIndicatorSize: 20,
+  currentStepIndicatorSize:20,
+  separatorStrokeWidth: 2,
+  currentStepStrokeWidth: 3,
+  stepStrokeCurrentColor: '#0085FE',
+  stepStrokeWidth: 3,
+  stepStrokeFinishedColor: '#0085FE',
+  stepStrokeUnFinishedColor: '#aaaaaa',
+  separatorFinishedColor: '#0085FE',
+  separatorUnFinishedColor: '#aaaaaa',
+  stepIndicatorFinishedColor: '#0085FE',
+  stepIndicatorUnFinishedColor: '#ffffff',
+  stepIndicatorCurrentColor: '#ffffff',
+  stepIndicatorLabelFontSize: 13,
+  currentStepIndicatorLabelFontSize: 13,
+  stepIndicatorLabelCurrentColor: '#0085FE',
+  stepIndicatorLabelFinishedColor: '#ffffff',
+  stepIndicatorLabelUnFinishedColor: '#aaaaaa',
+  labelColor: '#999999',
+  labelSize: 13,
+  currentStepLabelColor: '#fe7013',
+}
 
 export default class WorkInfoScreen extends React.Component {
 
     static navigationOptions = ({ navigation }) => ({
-        title: 'Work Information',
-        headerLayoutPreset: 'center',
-        headerTitleStyle: {
-            flex: 1,
-            textAlign: 'center'
+        
+        headerStyle: {
+            shadowOpacity: 0
         },
-        headerRight: (
-            <Text>{''}</Text>
+        headerLeft: (
+            <TouchableHighlight
+                onPress={() => { navigation.navigate('Contact'); }}
+                underlayColor={colors.gray01}
+                style={{marginLeft: 10, paddingHorizontal: 10}} >
+                <Icon
+                    name={Platform.OS === 'ios' ? 'ios-arrow-round-back' : 'md-arrow-round-back'}
+                    size={26} />
+            </TouchableHighlight>
+            
         ),
+
     });
 
     state = {
         paydate: '',
-        imageProof: ''
+        imageProof: '',
+        currentPosition: 1,
+        employment : [
+            {label: 'Employed-BPO', value: 'employed-bpo'},
+            {label: 'Employed-Goverment', value: 'government'},
+            {label: 'Employed-Private', value: 'private'},
+            {label: 'Employed-OFW', value: 'ofw'},
+            {label: 'Professional', value: 'professional'},
+            {label: 'Self-Employed', value: 'self-employed'},
+            {label: 'Unemployed', value: 'unemployed'}
+        ],
+        companyNature: [
+            {label: 'Business Process Outsourcing', value: 'bpo'},
+            {label: 'IT Services', value: 'it-services'},
+            {label: 'Law Firm', value: 'law-firm'}
+        ],
+        occupation: [
+            {label: 'Staff', value: 'staff'},
+            {label: 'Supervisor or Manager', value: 'supervisor-manager'},
+            {label: 'Executive or Director', value: 'executive-director'},
+            {label: 'Others', value: 'others'}
+        ],
+        salary: [
+            {label: '0-5k', value: '0-5k'},
+            {label: '5k-10k', value: '5k-10k'},
+            {label: '10k-15k', value: '10k-15k'},
+            {label: '15k-20k', value: '15k-20k'},
+            {label: '20k-25k', value: '20k-25k'},
+            {label: '25k-30k', value: '25k-30k'},
+            {label: '30k-35k', value: '30k-35k'}
+        ],
+        salaryType: [
+            {label: 'Bi-Monthly (5th and 20th)', value: '5th-20th'},
+            {label: 'Bi-Monthly (10th and 25th)', value: '10th-25th'},
+            {label: 'Bi-Monthly (15th and 30th)', value: '15th-30th'},
+            {label: 'Weekly (Weekday)', value: 'weekday'},
+            {label: 'Weekly (Friday)', value: 'friday'},
+            {label: 'Weekly (Weekend)', value: 'weekend'},
+            {label: 'Monthly (15th)', value: 'monthly'}            
+        ],
+        selectedEmployment: '',
+        selectedCompanyNature: '',
+        selectedOccupation: '',
+        selectedSalary: '',
+        selectedSalaryType: '',
+        companyName: '',
+        employmentDate: '',
+        businessAddress: '',
     };
+
+    employmentChange = (value, index) => {
+        this.setState({ selectedEmployment: value, });
+    }
+
+    companyNatureChange = (value, index) => {
+        this.setState({ selectedCompanyNature: value, });
+    }
+
+    occupationChange = (value, index) => {
+        this.setState({ selectedOccupation: value, });
+    }
+
+    salaryChange = (value, index) => {
+        this.setState({ selectedSalary: value, });
+    }
+    salaryTypeChange = (value, index) => {
+        this.setState({ selectedSalaryType: value, });
+    }
 
     handleimageProofOfEmployment = async () => {
         const result = await ImagePicker.launchImageLibraryAsync({
@@ -51,191 +151,223 @@ export default class WorkInfoScreen extends React.Component {
         }
     }
 
+    onPageChange(position){
+        this.setState({currentPosition: position});
+    }
+
+    navigateToScreen = (route) => () => {
+		const navigateAction = NavigationActions.navigate({
+			routeName: route
+		});
+		this.props.navigation.dispatch(navigateAction);
+	}
+
     render() {
 
         const dimensions = Dimensions.get('window');
 
         return (
             <ScrollView style={styles.container}>
-
-                <View style={styles.inputWrapper}>
-                    <InputField
-                        labelText="Company Name"
-                        labelTextSize={16}
-                        labelTextWeight="400"
-                        labelColor={colors.lightBlack}
-                        textColor={colors.lightBlack}
-                        placeholder={'Company Name'}
-                        defaultValue={''}
-                        borderBottomColor={colors.gray06}
-                        inputType="text"
-                        inputStyle={{ fontSize: 18, fontWeight: '400', paddingBottom: 5 }}
-                        onChangeText={() => {}}
-                        showCheckmark={false}
-                    />
-                </View>
-
-                <View style={styles.inputWrapper}>
-                    <InputField
-                        labelText="Company Address"
-                        labelTextSize={16}
-                        labelTextWeight="400"
-                        labelColor={colors.lightBlack}
-                        textColor={colors.lightBlack}
-                        placeholder={'Company Address'}
-                        defaultValue={''}
-                        borderBottomColor={colors.gray06}
-                        inputType="text"
-                        inputStyle={{ fontSize: 18, fontWeight: '400', paddingBottom: 5 }}
-                        onChangeText={() => { }}
-                        showCheckmark={true}
-                    />
-                </View>
-
-                <View style={styles.inputWrapper}>
-                    <InputField
-                        labelText="Street, City/Town and Province"
-                        labelTextSize={16}
-                        labelTextWeight="400"
-                        labelColor={colors.lightBlack}
-                        textColor={colors.lightBlack}
-                        placeholder={'Street, City/Town and Province'}
-                        defaultValue={''}
-                        borderBottomColor={colors.gray06}
-                        inputType="text"
-                        inputStyle={{ fontSize: 18, fontWeight: '400', paddingBottom: 5 }}
-                        onChangeText={() => { }}
-                        showCheckmark={false}
-                    />
-                </View>
-
-                <View style={styles.inputWrapper}>
-                    <InputField
-                        labelText="Job Title"
-                        labelTextSize={16}
-                        labelTextWeight="400"
-                        labelColor={colors.lightBlack}
-                        textColor={colors.lightBlack}
-                        placeholder={'Job Title'}
-                        defaultValue={''}
-                        borderBottomColor={colors.gray06}
-                        inputType="text"
-                        inputStyle={{ fontSize: 18, fontWeight: '400', paddingBottom: 5 }}
-                        onChangeText={() => { }}
-                        showCheckmark={false}
-                    />
-                </View>
-
-                <View style={styles.inputWrapper}>
-                    <InputField
-                        labelText="Year Worked In Current Company"
-                        labelTextSize={16}
-                        labelTextWeight="400"
-                        labelColor={colors.lightBlack}
-                        textColor={colors.lightBlack}
-                        placeholder={'Year Worked In Current Company'}
-                        defaultValue={''}
-                        borderBottomColor={colors.gray06}
-                        inputType="text"
-                        inputStyle={{ fontSize: 18, fontWeight: '400', paddingBottom: 5 }}
-                        onChangeText={() => { }}
-                        showCheckmark={false}
-                    />
-                </View>
-
-                <View style={styles.inputWrapper}>
-                    <InputField
-                        labelText="What is your bank name?"
-                        labelTextSize={16}
-                        labelTextWeight="400"
-                        labelColor={colors.lightBlack}
-                        textColor={colors.lightBlack}
-                        placeholder={'What is your bank name?'}
-                        defaultValue={''}
-                        borderBottomColor={colors.gray06}
-                        inputType="text"
-                        inputStyle={{ fontSize: 18, fontWeight: '400', paddingBottom: 5 }}
-                        onChangeText={() => { }}
-                        showCheckmark={false}
-                    />
-                </View>
-
-                <View style={styles.inputWrapper}>
-                    <InputField
-                        labelText="What is your bank account number?"
-                        labelTextSize={16}
-                        labelTextWeight="400"
-                        labelColor={colors.lightBlack}
-                        textColor={colors.lightBlack}
-                        placeholder={'What is your bank account number?'}
-                        defaultValue={''}
-                        borderBottomColor={colors.gray06}
-                        inputType="text"
-                        inputStyle={{ fontSize: 18, fontWeight: '400', paddingBottom: 5 }}
-                        onChangeText={() => { }}
-                        showCheckmark={false}
-                    />
-                </View>
-
-                <View style={styles.inputWrapper}>
-                    <View style={[columns.twoColumnWrapper, styles.payDateWrapper]}>
-                        <View style={[columns.threeColumnWrapperItem, {width: '24%'}]}>
-                            <Text style={{ fontSize: 18, color: colors.lightBlack, paddingTop: 5 }}>Pay Date</Text>
-                        </View>
-                        <View style={[columns.threeColumnWrapperItem, {width: '38%'}]}>
-                            <View style={styles.typePickerWrapper}>
-                                <Picker
-                                    selectedValue={this.state.type}
-                                    style={styles.typePicker}
-                                    onValueChange={(itemValue, itemIndex) =>
-                                        this.setState({ type: itemValue })
-                                    }>
-                                    <Picker.Item label="1st" value="1" />
-                                    <Picker.Item label="2nd" value="2" />
-                                    <Picker.Item label="3rd" value="3" />
-                                </Picker>
-                            </View>
-                        </View>
-                        <View style={[columns.threeColumnWrapperItem, {width: '38%'}]}>
-                            <View style={styles.typePickerWrapper}>
-                                <Picker
-                                    selectedValue={this.state.type}
-                                    style={styles.typePicker}
-                                    onValueChange={(itemValue, itemIndex) =>
-                                        this.setState({ type: itemValue })
-                                    }>
-                                    <Picker.Item label="1st" value="1" />
-                                    <Picker.Item label="2nd" value="2" />
-                                    <Picker.Item label="3rd" value="3" />
-                                </Picker>
-                            </View>
-                        </View>
-                    </View>
-                </View>
-
-                <View style={[styles.inputWrapper]}>
-                    <TouchableOpacity
-                        onPress={this.handleimageProofOfEmployment}>    
-                        <View>    
-                            <Text style={{ fontSize: 18, color: colors.lightBlack }}>Upload Clear Proof of Employment</Text>
-                            <Text style={{ fontSize: 18, color: colors.pink }}>Such as Company ID or COE</Text>
-                        </View> 
-                    </TouchableOpacity>
-                </View>
-
-                <View style={[styles.inputWrapper, {paddingBottom: 20}]}>
-                    <View style={styles.imageUploadPreview}>
-                        <AutoHeightImage
-                            width={(dimensions.width) - 25}
-                            source={{ uri: this.state.imagePosId }}
+                <View style={{ marginBottom: 50 }}>
+                    <Text style={typo.textNormalLarger}>Apply</Text>
+                    <View style={{ marginVertical: 20, }}>
+                        <StepIndicator
+                            stepCount = {3}
+                            customStyles={customStyles}
+                            currentPosition={this.state.currentPosition}
                         />
                     </View>
-                    <TouchableOpacity
-                        style={styles.buttonStyle2}
-                        onPress={() => {}}>
-                        <Text style={styles.buttonText}>Confirm</Text>
-                    </TouchableOpacity>
+                    
+                    <Text style={styles.contactText}>Work Information</Text>
+
+                    <View style={styles.dropdownContainer}>
+                        <RNPickerSelect
+                            placeholder={{label: 'Employment Type', value: null, color: '#777'}}
+                            useNativeAndroidPickerStyle={false}
+                            items={this.state.employment}
+                            onValueChange={this.employmentChange}
+                            style={pickerSelectStyles}
+                            value={this.state.selectedEmployment}
+                        />
+                        <Icon
+                            style={{
+                                position: 'absolute',
+                                right: 0,
+                                top: 10
+                            }}
+                            name={Platform.OS === 'ios' ? 'ios-arrow-dropdown' : 'md-arrow-dropdown'}
+                            size={26} />
+                    </View>
+                    <View style={styles.dropdownContainer}>
+                        <RNPickerSelect
+                            placeholder={{label: 'Job Industry', value: null, color: '#777'}}
+                            useNativeAndroidPickerStyle={false}
+                            items={this.state.companyNature}
+                            onValueChange={this.companyNatureChange}
+                            style={pickerSelectStyles}
+                            value={this.state.selectedCompanyNature}
+                        />
+                        <Icon
+                            style={{
+                                position: 'absolute',
+                                right: 0,
+                                top: 10
+                            }}
+                            name={Platform.OS === 'ios' ? 'ios-arrow-dropdown' : 'md-arrow-dropdown'}
+                            size={26} />
+                    </View>
+                    <View style={styles.dropdownContainer}>
+                        <RNPickerSelect
+                            placeholder={{label: 'Occupancy', value: null, color: '#777'}}
+                            useNativeAndroidPickerStyle={false}
+                            items={this.state.occupation}
+                            onValueChange={this.occupationChange}
+                            style={pickerSelectStyles}
+                            value={this.state.selectedOccupation}
+                        />
+                        <Icon
+                            style={{
+                                position: 'absolute',
+                                right: 0,
+                                top: 10
+                            }}
+                            name={Platform.OS === 'ios' ? 'ios-arrow-dropdown' : 'md-arrow-dropdown'}
+                            size={26} />
+                    </View>
+                    <View>
+                        <TextField
+                            label='Company/Employer Name'
+                            value={this.state.companyName}
+                            tintColor={colors.green01}
+                            containerStyle={{marginVertical: 0}}
+                            onChangeText={ (value)=> {
+                                this.setState({ companyName: value })
+                            }}
+                            error={this.state.isError}
+                            labelTextStyle={{ paddingLeft: 10 }}
+                            inputContainerStyle={{paddingLeft: 10}}
+                        />
+                    </View>
+                    <View>
+                        <DatePicker
+                            style={{ width: '100%' }}
+                            date={this.state.employmentDate}
+                            mode="date"
+                            placeholder="Employment Date"
+                            format="MMM YYYY"
+                            minDate="1950-01-01"
+                            maxDate="2018-01-01"
+                            confirmBtnText="Confirm"
+                            cancelBtnText="Cancel"
+                            customStyles={{
+                                dateIcon: {
+                                    position: 'absolute',
+                                    right: 15,
+                                    top: 10,
+                                    marginLeft: 0
+                                },
+                                dateInput: {
+                                    paddingHorizontal: 12,
+                                    marginTop: 30,
+                                    borderWidth : 0,
+                                    borderBottomWidth: 1,
+                                    borderBottomColor: colors.gray06,
+                                    alignItems: 'flex-start'
+                                },
+                                dateText: {
+                                    fontSize: 16, 
+                                    fontWeight: '400', 
+                                    paddingBottom: 10
+                                },
+                                placeholderText: {
+                                    fontSize: 16,
+                                    fontWeight: '400',
+                                    paddingBottom: 10
+                                }
+                            }}
+                            onDateChange={(date) => { this.setState({ employmentDate: date }) }}
+                        />
+                    </View>
+                    <View style={{marginTop: 30}}>
+                        <RNPickerSelect
+                            placeholder={{label: 'Monthly Income (PHP)', value: null, color: '#777'}}
+                            useNativeAndroidPickerStyle={false}
+                            items={this.state.salary}
+                            onValueChange={this.salaryChange}
+                            style={pickerSelectStyles}
+                            value={this.state.selectedSalary}
+                        />
+                        <Icon
+                            style={{
+                                position: 'absolute',
+                                right: 0,
+                                top: 10
+                            }}
+                            name={Platform.OS === 'ios' ? 'ios-arrow-dropdown' : 'md-arrow-dropdown'}
+                            size={26} />
+                    </View>
+                    <View style={styles.dropdownContainer}>
+                        <RNPickerSelect
+                            placeholder={{label: 'Salary Date', value: null, color: '#777'}}
+                            useNativeAndroidPickerStyle={false}
+                            items={this.state.salaryType}
+                            onValueChange={this.salaryTypeChange}
+                            style={pickerSelectStyles}
+                            value={this.state.selectedSalaryType}
+                        />
+                        <Icon
+                            style={{
+                                position: 'absolute',
+                                right: 0,
+                                top: 10
+                            }}
+                            name={Platform.OS === 'ios' ? 'ios-arrow-dropdown' : 'md-arrow-dropdown'}
+                            size={26} />
+                    </View>
+                    <View>
+                        <Text style={{
+                            position: 'absolute',
+                            left: 0,
+                            top: 35,
+                            fontSize: 17,
+                            paddingLeft: 12
+                        }}>
+                            +63
+                        </Text>
+                        <TextField
+                            label='Cellphone Number'
+                            value={this.state.contactTel1}
+                            tintColor={colors.green01}
+                            onChangeText={this.handleIdNumberChange}
+                            error={this.state.isError}
+                            labelTextStyle={{ paddingLeft: 52 }}
+                            inputContainerStyle={{paddingLeft: 52}}
+                        /> 
+                    </View>
+                    <View>
+                        <TextField
+                            label='Business Address'
+                            value={this.state.companyName}
+                            tintColor={colors.green01}
+                            containerStyle={{marginVertical: 0}}
+                            onChangeText={ (value)=> {
+                                this.setState({ businessAddress: value })
+                            }}
+                            error={this.state.isError}
+                            labelTextStyle={{ paddingLeft: 10 }}
+                            inputContainerStyle={{paddingLeft: 10}}
+                        />
+                    </View>
+
+                    <View style={styles.buttonContainer2}>
+                        <TouchableOpacity
+                            style={styles.buttonStyle2}
+                            onPress={this.navigateToScreen('Bank')}  >
+                            <Text style={styles.buttonText}>Next</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
+                
 
             </ScrollView>
         );
@@ -265,29 +397,65 @@ const styles = StyleSheet.create({
         paddingTop: 0,
         height: 30
     },
+    buttonContainer2: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 40
+    },
     buttonStyle2: {
         backgroundColor: '#1B9AF7',
         alignItems: 'center',
-        padding: 10,
-        borderRadius: 10,
+        width: 150,
+	    padding: 15,
+        borderRadius: 50,
         ...Platform.select({
             ios: {
-                shadowColor: '#666',
-                shadowOffset: { height: -3 },
-                shadowOpacity: 0.1,
-                shadowRadius: 3,
+              shadowColor: '#666',
+              shadowOffset: { height: -3 },
+              shadowOpacity: 0.1,
+              shadowRadius: 3,
             },
             android: {
-                elevation: 2,
+              elevation: 2,
             },
-        })
+          })
     },
     buttonText: {
-        color: '#fff',
+	    color: '#fff',
         fontSize: 20,
         fontWeight: 'bold'
     },
     imageUploadPreview: {
         marginBottom: 20
+    },
+    dropdownContainer: {
+        marginTop: 15
+    },
+    contactText: {
+        fontSize: 17,
+        fontWeight: '600',
+        color: colors.black,
     }
+});
+
+const pickerSelectStyles = StyleSheet.create({
+    inputIOS: {
+        fontSize: 17,
+        paddingVertical: 12,
+        paddingHorizontal: 10,
+        borderBottomWidth: 1,
+        borderColor: '#ddd',
+        color: 'black',
+        paddingRight: 30,
+    },
+    inputAndroid: {
+        fontSize: 17,
+        paddingHorizontal: 10,
+        paddingVertical: 8,
+        borderBottomWidth: 0.5,
+        borderColor: '#ddd',
+        color: 'black',
+        paddingRight: 30,
+    },
 });

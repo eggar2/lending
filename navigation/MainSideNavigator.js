@@ -19,14 +19,19 @@ import IdScreen from '../screens/IdScreen';
 import ProfileInfoScreen from '../screens/ProfileInfoScreen';
 import WorkInfoScreen from '../screens/WorkInfoScreen';
 import ContactInfoScreen from '../screens/ContactInfoScreen';
+import ContactModScreen from '../screens/ContactModScreen';
+import BankAccountScreen from '../screens/BankAccountScreen';
 
 // ID Steps
 import IdStep1Screen from '../screens/id_steps/IdStep1Screen';
+import IdStep2Screen from '../screens/id_steps/IdStep2Screen';
+import IdStep3Screen from '../screens/id_steps/IdStep3Screen';
 
 const RootStack = createStackNavigator(
     {   
         Home: HomeScreen,
         ShareLinks: ShareLinksScreen,
+        ContactModerator: ContactModScreen,
     },
 );
 
@@ -40,6 +45,7 @@ const LendingStack = createStackNavigator(
         Verified: VerifiedScreen,
         About: AboutScreen,
         Settings: SettingsScreen,
+        Bank: BankAccountScreen,
     },
 );
 
@@ -48,16 +54,25 @@ const ProfileInfoStack = createStackNavigator(
     {
         ProfileInfo: ProfileInfoScreen,
         Identification: IdScreen,
+        // PersonalInfo: PersonalInfoScreen,
         WorkInfo: WorkInfoScreen,
-        PersonalInfo: PersonalInfoScreen,
         Contact: ContactInfoScreen,
     },
 );
 
-// PROFILE 
+// IDENTIFICATION 
 const IdentificationStack = createStackNavigator(
     {
         IdStep1: IdStep1Screen,
+        IdStep2: IdStep2Screen,
+        IdStep3: IdStep3Screen,
+    },
+);
+
+// PERSONAL
+const PersonalInfoStack = createStackNavigator(
+    {
+        PersonalInfo: PersonalInfoScreen,
     },
 );
 
@@ -66,7 +81,8 @@ const MyDrawerNavigator = createDrawerNavigator({
     Main: RootStack,
     Lending: LendingStack,
     ProfileInfo: ProfileInfoStack,
-    IdSteps: IdentificationStack
+    IdSteps: IdentificationStack,
+    PersonalInfoStack: PersonalInfoStack,
 }, {
     contentComponent: SideMenu,
     drawerWidth: 300,

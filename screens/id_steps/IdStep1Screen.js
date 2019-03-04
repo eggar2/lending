@@ -15,7 +15,7 @@ import typo from '../../constants/Typography';
 import { Icon } from 'expo';
 import FAIcon from 'react-native-vector-icons/FontAwesome';
 import { TextField } from 'react-native-material-textfield'; //https://github.com/n4kz/react-native-material-textfield
-import IOSPicker from 'react-native-ios-picker'; //https://github.com/sanpyaelin/react-native-ios-picker/blob/HEAD/readme.md#style
+import { Dropdown } from 'react-native-material-dropdown';
 
 export default class IdStep1Screen extends React.Component {
 
@@ -27,7 +27,7 @@ export default class IdStep1Screen extends React.Component {
                 style={{ marginLeft: 10, paddingHorizontal: 10 }}
             >
                 <Icon.Ionicons
-                    name={'md-arrow-round-back'}
+                    name={'md-arrow-back'}
                     size={26}
                 />
             </TouchableOpacity>
@@ -37,11 +37,19 @@ export default class IdStep1Screen extends React.Component {
     state = {
         idnumber: '',
         isError: '',
-        idType: [
-            { name: 'SSS', code: 'sss' }, 
-            { name: 'UMID', code: 'umid' }, 
+        typeOptions: [
+            {
+                label: 'SSS',
+                value: 'sss',
+            }, {
+                label: 'UMID',
+                value: 'umid',
+            }, {
+                label: "Driver's License",
+                value: "license",
+            }
         ],
-        selectedIdType: 'SSS'
+        selectedType: 'sss'
     };
 
     handleIdNumberChange = (idnumber) => {
@@ -49,16 +57,16 @@ export default class IdStep1Screen extends React.Component {
         this.setState({ isError: '' });
     }
 
-    handleIdTypeChange = (value, index) => {
-        // console.log(item);
-        console.log(index);
-        // this.setState({ idnumber });
+    handleIdTypeChange = (data) => {
+        console.log(data);
     }
 
     handleNext = () => {
         if( this.state.idnumber == '' ){
             const isError = 'The field is required';
             this.setState({isError});
+        }else{
+            this.props.navigation.navigate('IdStep2');
         }
     }
 
@@ -68,18 +76,21 @@ export default class IdStep1Screen extends React.Component {
             <View style={styles.container}>
                 <Text style={typo.textNormalLarger}>Apply</Text>
 
-                <View style={styles.inputWrapper}>
-                    <IOSPicker
-                        style={styles.pickerStyle}
-                        selectedValue={this.state.selectedIdType}
-                        mode={'modal'}
-                        onValueChange={this.handleIdTypeChange}>
-                        {
-                            this.state.idType.map((item, index) =>
-                                <Picker.Item key={index} label={item.name} value={item.name} />
-                            )
-                        }
-                    </IOSPicker>
+                <View style={[styles.inputWrapper, styles.pickerStyle]}>
+                    <Dropdown
+                        label='ID Type'
+                        data={this.state.typeOptions}
+                        value={this.state.selectedType}
+                        selectedItemColor={colors.green02}
+                        overlayStyle={{
+                            backgroundColor: 'rgba(52, 52, 52, 0.8)'
+                        }}
+                        containerStyle={{
+                            paddingLeft: 35,
+                        }}
+                        onChangeText={this.handleIdTypeChange}
+                        inputContainerStyle={{ borderBottomColor: 'transparent' }}
+                    />
                     <FAIcon
                         name='id-card-o'
                         type='font-awesome'
@@ -87,18 +98,11 @@ export default class IdStep1Screen extends React.Component {
                         size={18}
                         style={styles.preIcon}
                     />
-                    <FAIcon
-                        name='chevron-down'
-                        type='font-awesome'
-                        color={colors.gray04}
-                        size={18}
-                        style={styles.preIconRight}
-                    />
                 </View>
 
                 <View style={styles.inputWrapper}>
                     <TextField
-                        label='Your ID Number 123'
+                        label='Your ID Number'
                         value={this.state.idnumber}
                         tintColor={colors.green01}
                         onChangeText={this.handleIdNumberChange}
@@ -139,19 +143,19 @@ const styles = StyleSheet.create({
         marginTop: 20
     },
     pickerStyle: {
-        borderTopWidth: 0,
+        padding: 0,
+        borderBottomColor: colors.gray05,
         borderBottomWidth: 1,
         marginTop: 25,
         marginBottom: -10,
-        paddingLeft: 35,
-        zIndex: 99,
+        height: 65
     }, 
     buttonWrapper: 
     { 
         width: 200, 
         alignSelf: 'center',
         position: 'absolute',
-        bottom: 50
+        bottom: 15
     },
     preIcon: {
         position: 'absolute',
